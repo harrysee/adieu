@@ -32,22 +32,41 @@ class User:
                     break
         self.name = name
 
-    # 나이 입력
-    def set_age(self):
-        self.age = input('생년월일 ex(20040810) : ')
-
     # 비밀번호 입력
     def set_pw(self):
         self.pw = input('비밀번호 입력 : ')
-    
+
+    # 나이 입력
+    def set_age(self):
+        while True:
+            age = input('생일 ex(20040810) : ')
+            if age.isdigit() == True:
+                self.age = age
+                break
+            else:
+                print('잘못 입력했습니다. 다시 입력하세요')
+
     # 성별 입력 
     def set_gender(self):
-        self.gender = input('성별 입력 (w/m) : ')
+        while True:
+            gender = input('성별 w/m : ')
+            if gender == 'w' or gender == 'm':
+                self.gender = gender
+                break
+            else:
+                print('잘못 입력했습니다. 다시 입력하세요')
 
     
     # 전화번호 입력
     def set_number(self):
-        self.number = input('전화번호 입력(-없이) : ')
+        while True:
+            number = input('전화번호 (숫자만) : ')
+
+            if number.isdigit() == True:
+                self.number = number
+                break
+            else:
+                print('잘못 입력했습니다. 다시 입력하세요')
 
     # 신청한 동물들 보기
     def show_picklist(self):

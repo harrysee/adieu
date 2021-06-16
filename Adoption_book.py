@@ -9,7 +9,7 @@ class Adoption_book:
         # 처음 객체 생성 시 무조건 로그인
         self.test()
         while self.set_user() == -1:
-            print('-로그인 실패-')# 회원가입이랑 로그인 둘다 안되었을 때
+            print('-로그인 실패-')   # 회원가입이랑 로그인 둘다 안되었을 때
 
 
     # 새로 로그인
@@ -73,11 +73,12 @@ class Adoption_book:
         select = input('자세히보기 (없으면 엔터) >> ')
         while select !='':
             # 번호가 다를 경우
-            select = int(select)
-            if select-1 not in range(len(self.animals)) :
-                print('잘못입력했습니다. 다시 입력하세요.')
+            if (int(select-1) not in range(len(self.animals))) or (select.isdigit()==False) :
+                print('잘못입력했습니다. 해당되는 번호를 입력하세요.')
                 select = input('자세히보기 (그만보기: 엔터) >> ')
                 continue
+            # 선택한 동물 정보 보여주기
+            select = int(select)
             print(f'*** {self.animals[select-1].pat_name}의 정보 ***')
             print(self.animals[select-1])  # 선택한 동물의 자세한 정보 보여주기
             select = input('자세히보기 (그만보기: 엔터) >> ')
@@ -115,7 +116,7 @@ class Adoption_book:
         vina = User(self.users)
         vina.name = 'vina'
         vina.pw = '1234'
-        vina.age = '040810'
+        vina.age = '991115'
         vina.gender = 'w'
         vina.number = '01025825852'
         self.users.append(vina)
@@ -152,6 +153,15 @@ class Adoption_book:
         꼬꼬.pat_age = 6
         꼬꼬.pat_gender = 'm'
         꼬꼬.etc = '병아리 옆구리 부상을 입음'
+
+        # 사용자 2 - nono
+        nara = User(self.users)
+        nara.name = 'nara'
+        nara.pw = 'na2419'
+        nara.age = '04'
+        nara.gender = 'w'
+        nara.number = '01042514263'
+        self.users.append(nono)
 
         # 등록하기
         self.animals.append(토깽이)

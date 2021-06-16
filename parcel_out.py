@@ -2,12 +2,13 @@ class Parcel_out:
     def __init__(self):
         self.species =''   #동물의 종류
         self.pat_name =''#동물의 이름
-        self.pat_age =1 #동물의 나이
+        self.pat_age = 1 #동물의 나이
         self.pat_gender ='' #동물의 성별
         self.etc ='' #분양동물 기타사항
 
         #입양신청자 리스트
         self.applys = []
+
     #동물 정보 입력
     def set_pat(self):
         self.pat_name = input('분양할 동물의 이름을 입력하세요 : ')

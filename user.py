@@ -3,7 +3,7 @@ class User:
     def __init__(self, us): # 원래 등록된 user들 가져오기
         self.name =""
         self.pw = ''
-        self.age = ''
+        self.age = 000000
         self.gender = 'w'
         self.number = ''
 
@@ -14,7 +14,7 @@ class User:
     def set_all(self):
         self.set_name(self.us)  # user 객체 보내기 :이름 입력받기
         self.set_pw()  # 비밀번호 설정
-        self.set_age()  # 나이
+        self.set_age()  # 생년월일
         self.set_gender()  # 성별
         self.set_number()  # 전화번호
 
@@ -40,7 +40,7 @@ class User:
     def set_age(self):
         while True:
             age = input('생일 ex(20040810) : ')
-            if age.isdigit() == True:
+            if len(age) == 8:
                 self.age = age
                 break
             else:
@@ -85,6 +85,8 @@ class User:
             # 올린 동물들 이름과 종류만
             print(f'{i + 1}. {up.pat_name}-{up.species}')
             print(f'신청한 사람 >> {up.applys}')    # 올렸던 동물들에 신청한 사람들 확인
+            if input('신청한 사람 정보 보기(y/n) >> ') =='y':
+                print(up)   # 신청한 사람 정보 출력
 
     # 사용자 정보 확인
     def __str__(self):

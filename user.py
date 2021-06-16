@@ -51,14 +51,20 @@ class User:
 
     # 신청한 동물들 보기
     def show_picklist(self):
+        if len(self.pick_list)==0:
+            print('[ 없음 ]')
+            return
         for i,pick in enumerate(self.pick_list):
-            print(f'{i+1}. {pick.pet_name} : {pick.species}')
+            print(f'{i+1}. {pick.pat_name} : {pick.species}')
 
     # 올린 게시물 보기
     def show_uplist(self):
+        if len(self.up_list) == 0:
+            print('[ 없음 ]')
+            return
         for i, up in enumerate(self.up_list):
             # 올린 동물들 이름과 종류만
-            print(f'{i + 1}. {up.pet_name}-{up.species}')
+            print(f'{i + 1}. {up.pat_name}-{up.species}')
             print(f'신청한 사람 >> {up.applys}')    # 올렸던 동물들에 신청한 사람들 확인
 
     # 사용자 정보 확인

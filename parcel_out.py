@@ -16,7 +16,6 @@ class Parcel_out:
         self.species = input('분양할 동물 종을 입력하세요 : ')
         self.etc = input('분양할 동물의 기타사항을 입력하세요 : ')
 
-        #분양게시물 올리기
 
     def __str__(self):
         return (f'이름:{self.pat_name}\t나이:{self.pat_age}\t성별:{self.pat_gender}\t종류:{self.species}\t기타사항:{self.etc}')

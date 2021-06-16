@@ -1,5 +1,6 @@
 from Adoption_book import Adoption_book
 def print_menu():
+    print('-------- 가이드 --------')
     print('1. 로그아웃 및 로그인')
     print('2. 게시물 둘러보기')
     print('3. 동물종류별 검색')

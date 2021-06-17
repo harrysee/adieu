@@ -73,7 +73,7 @@ class Adoption_book:
         select = input('자세히보기 (없으면 엔터) >> ')
         while select !='':
             # 번호가 다를 경우
-            if (int(select-1) not in range(len(self.animals))) or (select.isdigit()==False) :
+            if (select.isdigit() == False) or (int(select) - 1 not in range(len(self.animals))):
                 print('잘못입력했습니다. 해당되는 번호를 입력하세요.')
                 select = input('자세히보기 (그만보기: 엔터) >> ')
                 continue
@@ -137,7 +137,7 @@ class Adoption_book:
         행복이.pat_gender = 'w'
         행복이.etc = '우리집 고양이 츄르를 좋아해'
 
-        # 사용자 2- nono
+        # 사용자 2
         nono = User(self.users)
         nono.name = 'nono'
         nono.pw = 'nnnn'
@@ -154,14 +154,81 @@ class Adoption_book:
         꼬꼬.pat_gender = 'm'
         꼬꼬.etc = '병아리 옆구리 부상을 입음'
 
-        # 사용자 2 - nono
+        # 사용자 3
         nara = User(self.users)
         nara.name = 'nara'
         nara.pw = 'na2419'
         nara.age = '04'
         nara.gender = 'w'
         nara.number = '01042514263'
-        self.users.append(nono)
+        self.users.append(nara)
+
+        # 사용자 4
+        alex = User(self.users)
+        alex.name = 'alex'
+        alex.pw = '0101'
+        alex.age = '860708'
+        alex.gender = 'm'
+        alex.number = '01032415768'
+        self.users.append(alex)
+
+        # alex - 게시물1
+        햄토리 = Parcel_out()
+        햄토리.species = '햄스터'
+        햄토리.pat_name = '햄토리'
+        햄토리.pat_age = 1
+        햄토리.pat_gender = 'w'
+        햄토리.etc = '해바라기 씨를 좋아함'
+
+        # alex - 게시물2
+        몽이 = Parcel_out()
+        몽이.species = '앵무새'
+        몽이.pat_name = '몽이'
+        몽이.pat_age = 2
+        몽이.pat_gender = 'w'
+        몽이.etc = '"안녕"과 "사랑해"를 할 수 있음'
+
+        # 사용자 5
+        daniel = User(self.users)
+        daniel.name = 'daniel'
+        daniel.pw = '0308'
+        daniel.age = '20000308'
+        daniel.gender = 'w'
+        daniel.number = '01098792433'
+        self.users.append(daniel)
+
+        # daniel - 게시물1
+        보리 = Parcel_out()
+        보리.species = '강아지'
+        보리.pat_name = '보리'
+        보리.pat_age = 6
+        보리.pat_gender = 'm'
+        보리.etc = '관절이 좋지 않으니 주의 바람'
+
+        # 사용자 6
+        hoon = User(self.users)
+        hoon.name = 'hoon'
+        hoon.pw = '20040118'
+        hoon.age = '1118'
+        hoon.gender = 'm'
+        hoon.number = '01049852736'
+        self.users.append(hoon)
+
+        # hoon - 게시물1
+        포키 = Parcel_out()
+        포키.species = '거북이'
+        포키.pat_name = '포키'
+        포키.pat_age = 9
+        포키.pat_gender = 'w'
+        포키.etc = '옛날에 등딱지를 다쳐서 흉터가 있음'
+
+        # hoon - 게시물2
+        휴지 = Parcel_out()
+        휴지.species = '고양이'
+        휴지.pat_name = '휴지'
+        휴지.pat_age = 1
+        휴지.pat_gender = 'm'
+        휴지.etc = '길 고양이이며, 피부병이 있었지만 지금은 완치함, 사람들을 좋아함'
 
         # 등록하기
         self.animals.append(토깽이)
@@ -170,6 +237,16 @@ class Adoption_book:
         vina.up_list.append(행복이)
         self.animals.append(꼬꼬)
         nono.up_list.append(꼬꼬)
+        self.animals.append(햄토리)
+        alex.up_list.append(햄토리)
+        self.animals.append(몽이)
+        alex.up_list.append(몽이)
+        self.animals.append(보리)
+        daniel.up_list.append(보리)
+        self.animals.append(포키)
+        hoon.up_list.append(포키)
+        self.animals.append(휴지)
+        hoon.up_list.append(휴지)
 
         # 신청하기
         꼬꼬.applys.append(vina.name)

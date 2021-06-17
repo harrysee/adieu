@@ -1,6 +1,7 @@
 from datetime import date
+
 class User:
-    def __init__(self, us): # 원래 등록된 user들 가져오기
+    def __init__(self, us): #원래 등록된 user들 가져오기
         self.name =""
         self.pw = ''
         self.age = 000000
@@ -8,23 +9,33 @@ class User:
         self.number = ''
 
         self.us = us
-        self.up_list = [] # 올린 게시물
-        self.pick_list = []   # 신청한 게시물
+        # 올린 게시물
+        self.up_list = []
+        # 신청한 게시물
+        self.pick_list = []
 
     def set_all(self):
-        self.set_name(self.us)  # user 객체 보내기 :이름 입력받기
-        self.set_pw()  # 비밀번호 설정
-        self.set_age()  # 생년월일
-        self.set_gender()  # 성별
-        self.set_number()  # 전화번호
+        #user 객체 보내기 :이름 입력받기
+        self.set_name(self.us)
+        #비밀번호 설정
+        self.set_pw()
+        #생년월일
+        self.set_age()
+        #성별
+        self.set_gender()
+        #전화번호
+        self.set_number()
 
     # 이름 입력
-    def set_name(self, users):  # 매개변수로 이름
+    def set_name(self, users): #매개변수로 이름
         # 중복 체크
         stop = False
-        while stop==False: # 중복되는 이름이 없으면 나옴
+        # 중복되는 이름이 없으면 나옴
+        while stop==False:
             stop = True
-            name = input('이름 입력 : ')  # 이름
+            # 이름
+            name = input('이름 입력 : ')
+
             for u in users: # 있는지 찾기
                 if name == u.name:
                     print('- 이름이 중복됩니다 -')

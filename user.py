@@ -84,6 +84,10 @@ class User:
         for i, up in enumerate(self.up_list):
             # 올린 동물들 이름과 종류만
             print(f'{i + 1}. {up.pat_name}-{up.species}')
+            # 신청한 사람 없을경우
+            if len(up.applys) == 0:
+                print('[ 신청한 사람이 없습니다 ]')
+                continue
             print(f'신청한 사람 >> {up.applys}')    # 올렸던 동물들에 신청한 사람들 확인
             if input('신청한 사람 정보 보기(y/n) >> ') =='y':
                 print(up)   # 신청한 사람 정보 출력

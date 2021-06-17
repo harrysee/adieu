@@ -7,9 +7,9 @@ class Adoption_book:
         self.users = []   # 저장된 유저들
         #현재 유저
         # 처음 객체 생성 시 무조건 로그인
-        self.test()
+        self.test() # 테스트 코드
         while self.set_user() == -1:
-            print('-로그인 실패-')   # 회원가입이랑 로그인 둘다 안되었을 때
+            print('- 로그인 실패 -')   # 회원가입이랑 로그인 둘다 안되었을 때
 
 
     # 새로 로그인
@@ -67,13 +67,13 @@ class Adoption_book:
 
         # 동물의 기본적인 이름 - 종류 번호붙여서 출력
         for i, a in enumerate(self.animals):
-            print(f'{i+1}. {a.species} - {a.pat_name}\n\t 설명 : {a.etc}')
+            print(f'{i+1}. {a.species} - {a.pat_name}')
         
         # 자세히 보고 싶은 동물 선택하면 동물의 정보 출력
         select = input('자세히보기 (없으면 엔터) >> ')
         while select !='':
             # 번호가 다를 경우
-            if (int(select-1) not in range(len(self.animals))) or (select.isdigit()==False) :
+            if (select.isdigit() != True) or (int(select)-1 not in range(len(self.animals))) :
                 print('잘못입력했습니다. 해당되는 번호를 입력하세요.')
                 select = input('자세히보기 (그만보기: 엔터) >> ')
                 continue
@@ -112,7 +112,8 @@ class Adoption_book:
 
     # test하기 위한 기본 사용자들
     def test(self):
-        # 사용자 1
+        #########사용자들######
+        # 사용자 1 - vina
         vina = User(self.users)
         vina.name = 'vina'
         vina.pw = '1234'
@@ -121,6 +122,52 @@ class Adoption_book:
         vina.number = '01025825852'
         self.users.append(vina)
 
+        # 사용자 2- nono
+        nono = User(self.users)
+        nono.name = 'nono'
+        nono.pw = 'nnnn'
+        nono.age = '060912'
+        nono.gender = 'w'
+        nono.number = '01042514263'
+        self.users.append(nono)
+
+        # 사용자 3 - nono
+        nara = User(self.users)
+        nara.name = 'nara'
+        nara.pw = 'na2419'
+        nara.age = '04'
+        nara.gender = 'w'
+        nara.number = '01042514263'
+        self.users.append(nono)
+
+        # 사용자 5 - daniel
+        daniel = User(self.users)
+        daniel.name = 'daniel'
+        daniel.pw = '0308'
+        daniel.age = '20000308'
+        daniel.gender = 'w'
+        daniel.number = '01098792433'
+        self.users.append(daniel)
+
+        # 사용자 4 - alex
+        alex = User(self.users)
+        alex.name = 'alex'
+        alex.pw = '0101'
+        alex.age = '860708'
+        alex.gender = 'm'
+        alex.number = '01032415768'
+        self.users.append(alex)
+
+        # 사용자 6 - hoon
+        hoon = User(self.users)
+        hoon.name = 'hoon'
+        hoon.pw = '20040118'
+        hoon.age = '1118'
+        hoon.gender = 'm'
+        hoon.number = '01049852736'
+        self.users.append(hoon)
+
+        #######게시물 올리기#####
         # vina - 게시물1
         토깽이 = Parcel_out()
         토깽이.species = '토끼'
@@ -137,15 +184,6 @@ class Adoption_book:
         행복이.pat_gender = 'w'
         행복이.etc = '우리집 고양이 츄르를 좋아해'
 
-        # 사용자 2- nono
-        nono = User(self.users)
-        nono.name = 'nono'
-        nono.pw = 'nnnn'
-        nono.age = '060912'
-        nono.gender = 'w'
-        nono.number = '01042514263'
-        self.users.append(nono)
-
         # nono - 게시물1
         꼬꼬 = Parcel_out()
         꼬꼬.species = '병아리'
@@ -154,29 +192,91 @@ class Adoption_book:
         꼬꼬.pat_gender = 'm'
         꼬꼬.etc = '병아리 옆구리 부상을 입음'
 
-        # 사용자 2 - nono
-        nara = User(self.users)
-        nara.name = 'nara'
-        nara.pw = 'na2419'
-        nara.age = '04'
-        nara.gender = 'w'
-        nara.number = '01042514263'
-        self.users.append(nono)
+        # alex - 게시물1
+        햄토리 = Parcel_out()
+        햄토리.species = '햄스터'
+        햄토리.pat_name = '햄토리'
+        햄토리.pat_age = 1
+        햄토리.pat_gender = 'w'
+        햄토리.etc = '해바라기 씨를 좋아함'
 
-        # 등록하기
+        # alex - 게시물2
+        몽이 = Parcel_out()
+        몽이.species = '앵무새'
+        몽이.pat_name = '몽이'
+        몽이.pat_age = 2
+        몽이.pat_gender = 'w'
+        몽이.etc = '"안녕"과 "사랑해"를 할 수 있음'
+
+        # daniel - 게시물1
+        보리 = Parcel_out()
+        보리.species = '강아지'
+        보리.pat_name = '보리'
+        보리.pat_age = 6
+        보리.pat_gender = 'm'
+        보리.etc = '관절이 좋지 않으니 주의 바람'
+
+        # hoon - 게시물1
+        포키 = Parcel_out()
+        포키.species = '거북이'
+        포키.pat_name = '포키'
+        포키.pat_age = 9
+        포키.pat_gender = 'w'
+        포키.etc = '옛날에 등딱지를 다쳐서 흉터가 있음'
+
+        # hoon - 게시물2
+        휴지 = Parcel_out()
+        휴지.species = '고양이'
+        휴지.pat_name = '휴지'
+        휴지.pat_age = 1
+        휴지.pat_gender = 'm'
+        휴지.etc = '길 고양이이며, 피부병이 있었지만 지금은 완치함, 사람들을 좋아함'
+
+        #########게시물 등록하기#######
         self.animals.append(토깽이)
         vina.up_list.append(토깽이)
         self.animals.append(행복이)
         vina.up_list.append(행복이)
         self.animals.append(꼬꼬)
         nono.up_list.append(꼬꼬)
+        self.animals.append(햄토리)
+        alex.up_list.append(햄토리)
+        self.animals.append(몽이)
+        alex.up_list.append(몽이)
+        self.animals.append(보리)
+        daniel.up_list.append(보리)
+        self.animals.append(포키)
+        hoon.up_list.append(포키)
+        self.animals.append(휴지)
+        hoon.up_list.append(휴지)
 
-        # 신청하기
+        ####### 신청하기 ########
         꼬꼬.applys.append(vina.name)
         vina.pick_list.append(꼬꼬)
+        꼬꼬.applys.append(daniel.name)
+        daniel.pick_list.append(꼬꼬)
 
         행복이.applys.append(nono.name)
         nono.pick_list.append(행복이)
+
+        햄토리.applys.append(nara.name)
+        nara.pick_list.append(햄토리)
+        몽이.applys.append(nara.name)
+        nara.pick_list.append(몽이)
+
+        보리.applys.append(hoon.name)
+        hoon.pick_list.append(보리)
+        보리.applys.append(nono.name)
+        nono.pick_list.append(보리)
+
+        휴지.applys.append(vina.name)
+        vina.pick_list.append(휴지)
+        휴지.applys.append(alex.name)
+        alex.pick_list.append(휴지)
+        휴지.applys.append(nara.name)
+        nara.pick_list.append(휴지)
+
+
 
 
 

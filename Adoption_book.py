@@ -105,7 +105,7 @@ class Adoption_book:
 ╰┈➤ '''))
 
         # 신청한 동물 인덱스에 있는 객체의 신청내역에 신청한 사용자의 이름을 넣는다
-        self.animals[select_apply].applys.append(self.now_user.name)
+        self.animals[select_apply].applys.append(self.now_user)
         # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.
         self.now_user.pick_list.append(self.animals[select_apply])
         print('‿︵‿︵‿︵୨˚̣̣̣͙୧ 신청되었습니다 ୨˚̣̣̣͙୧‿︵‿︵‿︵ ')
@@ -119,13 +119,13 @@ class Adoption_book:
 
     # 사용자 정보 확인 및 신청한 동물, 분양한 동물 확인
     def check(self):
-        print('╭──             ೋ사용자정보           ──╮')
+        print('╭──                   ೋ사용자정보              ──╮')
         print(self.now_user)
         print('  ✿ 등록한 게시물 ⚪ ༺⊰━━━━━━━━━━━━━━━─')
         self.now_user.show_uplist()
         print('  ✿ 입양신청한 반려동물 ⚪ ༺⊰━━━━━━━━━━─')
         self.now_user.show_picklist()
-        print('╰──                ೋ                ──╯')
+        print('╰──                    ೋ                     ──╯')
 
     # test하기 위한 기본 사용자들
     def test(self):
@@ -155,7 +155,7 @@ class Adoption_book:
         nara.age = '04'
         nara.gender = '여자'
         nara.number = '01042514263'
-        self.users.append(nono)
+        self.users.append(nara)
 
         # 사용자 5 - daniel
         daniel = User(self.users)
@@ -225,6 +225,7 @@ class Adoption_book:
         몽이.pat_gender = '암컷'
         몽이.etc = '"안녕"과 "사랑해"를 할 수 있음'
 
+
         # daniel - 게시물1
         보리 = Parcel_out()
         보리.species = '강아지'
@@ -255,7 +256,7 @@ class Adoption_book:
         휴지.pat_name = '휴지'
         휴지.pat_age = 1
         휴지.pat_gender = '수컷'
-        휴지.etc = '길 고양이이며, 피부병이 있었지만 지금은 완치함, 사람들을 좋아함'
+        휴지.etc = '길 고양이이며, 피부병이\n있었지만 지금은 완치함, 사람들을 좋아함'
 
         #########게시물 등록하기#######
         self.animals.append(토깽이)
@@ -278,29 +279,29 @@ class Adoption_book:
         hoon.up_list.append(휴지)
 
         ####### 신청하기 ########
-        꼬꼬.applys.append(vina.name)
+        꼬꼬.applys.append(vina)
         vina.pick_list.append(꼬꼬)
-        꼬꼬.applys.append(daniel.name)
+        꼬꼬.applys.append(daniel)
         daniel.pick_list.append(꼬꼬)
 
-        행복이.applys.append(nono.name)
+        행복이.applys.append(nono)
         nono.pick_list.append(행복이)
 
-        햄토리.applys.append(nara.name)
+        햄토리.applys.append(nara)
         nara.pick_list.append(햄토리)
-        몽이.applys.append(nara.name)
+        몽이.applys.append(nara)
         nara.pick_list.append(몽이)
 
-        보리.applys.append(hoon.name)
+        보리.applys.append(hoon)
         hoon.pick_list.append(보리)
-        보리.applys.append(nono.name)
+        보리.applys.append(nono)
         nono.pick_list.append(보리)
 
-        휴지.applys.append(vina.name)
+        휴지.applys.append(vina)
         vina.pick_list.append(휴지)
-        휴지.applys.append(alex.name)
+        휴지.applys.append(alex)
         alex.pick_list.append(휴지)
-        휴지.applys.append(nara.name)
+        휴지.applys.append(nara)
         nara.pick_list.append(휴지)
 
 

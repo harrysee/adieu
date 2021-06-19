@@ -92,13 +92,18 @@ class User:
         if len(self.up_list) == 0:
             print('     [ 없음 ]')
             return
+        apply_name =[]
         for i, up in enumerate(self.up_list):
+            apply_name.clear()
+            for a in up.applys:
+                apply_name.append(a.name)   # 이름만 가져오기
             # 올린 동물들 이름과 종류만
             print(f'   ꫀ {i + 1}. {up.pat_name}-{up.species}')
-            print(f'      ╰┈┈ ጿ 신청한 사람 → {up.applys}')  # 올렸던 동물들에 신청한 사람들 확인
+            print(f'      ╰┈┈ ጿ 신청한 사람 → {apply_name}')  # 올렸던 동물들에 신청한 사람들 확인
             if len(up.applys) == 0: continue
             if input('      ╰┈┈ ጿ 신청한 사람 정보 보기(y/n) → ') == 'y':
-                print('         ጿ ',up.applys)  # 신청한 사람 정보 출력
+                for d,ap in enumerate(up.applys):
+                    print(f'          ዽ {d+1}. {ap.name} | {ap.gender} ☎ {ap.number} ')  # 신청한 사람 정보 출력
 
     # 사용자 정보 확인
     def __str__(self):

@@ -3,16 +3,15 @@ from user import User
 
 class Adoption_book:
     def __init__(self):
-        self.animals=[]     # 등록된 동물들
+        self.animals = []     # 등록된 동물들
         self.users = []   # 저장된 유저들
         #현재 유저
         # 처음 객체 생성 시 무조건 로그인
-        self.test() # 테스트 코드
-        while self.set_user() == 0:
+        self.test()     # 테스트 코드
+        while self.set_user()==0:
             print('꒦꒷꒷꒦꒷꒷로그인 실패꒦꒷꒷꒦꒷꒦')   # 회원가입이랑 로그인 둘다 안되었을 때
 
-
-    # 새로 로그인
+    # 로그인
     def set_user(self):
         print('''
         〇
@@ -29,9 +28,9 @@ class Adoption_book:
             sainup_pw = input('비밀번호 입력 » ')
             
             #로그인 한 이름과 비밀번호가 일치하면 로그인 성공
-            for i in self.users:
-                if sainup_pw == i.pw and sainup_id == i.name:
-                    self.now_user = i
+            for user in self.users:
+                if sainup_pw == user.pw and sainup_id == user.name:
+                    self.now_user = user
                     print('°•°•°•°•°•°로그인 성공•°•°•°•°•°•')
                     return 1
             return 0
@@ -41,7 +40,8 @@ class Adoption_book:
             new.set_all()
             self.users.append(new)
             print('가입성공')
-            if self.set_user()==1: return 1
+            if self.set_user()==1:
+                return 1
             return 0
         else :
             print('꒦꒷꒷꒦꒷꒦입력 오류 > 다시입력하세요꒦꒷꒷꒦꒷꒦')
@@ -102,7 +102,7 @@ class Adoption_book:
     def put_animals(self):
         self.show_animals()
         select_apply = int(input('''╭┈─── 신청할 동물번호 :ྀ࿐ ˊˎ-
-╰┈➤ '''))
+╰┈➤ '''))-1
 
         # 신청한 동물 인덱스에 있는 객체의 신청내역에 신청한 사용자의 이름을 넣는다
         self.animals[select_apply].applys.append(self.now_user)
@@ -258,7 +258,7 @@ class Adoption_book:
         휴지.pat_gender = '수컷'
         휴지.etc = '길 고양이이며, 피부병이\n있었지만 지금은 완치함, 사람들을 좋아함'
 
-        #########게시물 등록하기#######
+        #######게시물 등록하기######
         self.animals.append(토깽이)
         vina.up_list.append(토깽이)
         self.animals.append(행복이)

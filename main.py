@@ -19,7 +19,8 @@ def main():
     while True:
         num = int(print_menu())  # 사용할 메뉴 선택
         if num==1:
-            user.set_user() # 새로 로그인
+            while user.set_user() == 0:
+                print('꒦꒷꒷꒦꒷꒷로그인 실패꒦꒷꒷꒦꒷꒦') # 새로 로그인
         elif num ==2:
             user.show_animals() # 게시물 둘러보기
         elif num ==3:

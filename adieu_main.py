@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter.ttk
 
+
 class adieuMain():
     def __init__(self, title):
         self.root = Tk()
@@ -48,9 +49,10 @@ class adieuMain():
         # scrollbar.config(command=self.animalView.yview)
         # self.animalView.config(yscrollcommand=scrollbar.set)
 
-        # 오른쪽 위 로그인
+        # 오른쪽 위 로그아웃, 사용자
         logout = Label(self.root,text="로그아웃",fg="#B96F00",bg="#FFC978",cursor="left_side")
         user = Label(self.root, text='사용자',fg= '#B96F00',bg="#FFC978",cursor="center_ptr")
+        logout.bind('<ButtonRelease-1>',self.logout_event)
 
         # 화면 보여주기
         self.animalView.pack(side='left')
@@ -58,16 +60,21 @@ class adieuMain():
         animalList.place(x=200, y=90)
         logout.place(x=600,y=15)
         user.place(x=660,y=15)
-        cartegoryFrame.place(x=25,y=150)
+        cartegoryFrame.place(x=50,y=150)
         search.place(x=15, y=90)
         logo.place(x=10,y=5)
         self.play()
 
-    def click_item(self,evnet):
+    def click_item(self,evnet): # item 클릭 시 실행
         selectedItem = self.animalView.focus()
         getValue = self.animalView.item(selectedItem).get('values')
         print(getValue)
 
+    def logout_event(self,evnet):
+        self.root.destroy()
+        from login import loginAdieu
+        loginAdieu("로그인화면")
+        
     def play(self):
         self.root.mainloop()
 

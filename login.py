@@ -1,13 +1,15 @@
 from tkinter import *
-
 from adieu_main import adieuMain
 
 
 class loginAdieu():
 
-    def __init__(self, root):
+    def __init__(self, title):
+        root = Tk()
+        root.title(title)
+        root.geometry('745x580')
+        root.configure(bg="#FFC978")
         self.root = root
-        print(self.root)
         # 프레임 설정
         self.mainFrame = Frame(self.root, bg='#FFC978')
         self.mainFrame.pack(expand=True)
@@ -27,7 +29,6 @@ class loginAdieu():
 
         self.loginBtn = Button(self.mainFrame,width=30, relief="flat", bd=10,
                                text="로그인",command=self.loginEvent, bg="#F0AD48",fg="#B96F00")
-
         # 화면 띄우기
         logo.pack(padx=10, pady=30)
         self.id.pack(padx=10, pady=5)
@@ -54,8 +55,5 @@ class loginAdieu():
 
 
 if __name__ == '__main__':
-    root = Tk()
-    root.title('start adieu')
-    root.geometry('745x580')
-    root.configure(bg="#FFC978")
-    l = loginAdieu(root)
+
+    l = loginAdieu("로그인 화면")

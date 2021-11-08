@@ -8,9 +8,10 @@ class adieuMain():
         self.root.title(title)
         self.root.geometry('745x580')
         self.root.configure(bg="#FFC978")
+        self.root.resizable(0, 0)
 
         # 동물검색
-        logo_img = PhotoImage(file='img/Adieu.png',width=182,height=87)
+        logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
         logo = Label(self.root,bg="#FFC978",image=logo_img)
 
         # 왼쪽 사이드
@@ -53,6 +54,7 @@ class adieuMain():
         logout = Label(self.root,text="로그아웃",fg="#B96F00",bg="#FFC978",cursor="left_side")
         user = Label(self.root, text='사용자',fg= '#B96F00',bg="#FFC978",cursor="center_ptr")
         logout.bind('<ButtonRelease-1>',self.logout_event)
+        user.bind('<ButtonRelease-1>',self.user_event)
 
         # 화면 보여주기
         self.animalView.pack(side='left')
@@ -72,8 +74,13 @@ class adieuMain():
 
     def logout_event(self,evnet):
         self.root.destroy()
-        from login import loginAdieu
-        loginAdieu("로그인화면")
+        from login import LoginAdieu
+        LoginAdieu("로그인화면")
+
+    def user_event(self,event):
+        self.root.destroy()
+        from sign_up import SignUp
+        SignUp('회원가입')
         
     def play(self):
         self.root.mainloop()

@@ -1,24 +1,26 @@
 from tkinter import *
 
 
-class SignUp():
+class EditUserInfo():
     def __init__(self, title):
-        bg_color='#FFC978'  # 배경색
+        bg_color = '#FFC978'  # 배경색
         self.root = Tk()
         self.root.title(title)
         self.root.geometry('745x580')
         self.root.configure(bg=bg_color)
-        self.root.resizable(0,0)
+        self.root.resizable(0, 0)
         # 왼쪽 사이드
         logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
-        logo = Label(self.root, bg=bg_color, image=logo_img)    # 로고
+        logo = Label(self.root, bg=bg_color, image=logo_img)  # 로고
         photo_img = PhotoImage(file='img/input_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
-        sign_up_btn = Button(self.root,cursor='hand2', width=16, text='회원가입',bg='#F0AD48',relief='flat',bd=10,fg='#B96F00') # 회원가입 버튼
-        cancel_btn = Button(self.root,cursor='hand2', width=16, text='취소',bg='#F0AD48',relief='flat',bd=10,fg='#B96F00')    # 취소 버튼
+        edit_btn = Button(self.root, cursor='hand2', width=16, text='정보수정', bg='#F0AD48', relief='flat', bd=10,
+                             fg='#B96F00')  # 회원가입 버튼
+        cancel_btn = Button(self.root, cursor='hand2', width=16, text='취소', bg='#F0AD48', relief='flat', bd=10,
+                            fg='#B96F00')  # 취소 버튼
 
         # 입력받기
-        inputFrame = Frame(self.root, bg=bg_color,width=430,height=400)
+        inputFrame = Frame(self.root, bg=bg_color, width=430, height=400)
         name = Entry(inputFrame, width=20, relief="flat", bd=13, fg="gray")
         age = Entry(inputFrame, width=25, relief="flat", bd=13, fg="gray")
         id = Entry(inputFrame, width=25, relief="flat", bd=13, fg="gray")
@@ -60,31 +62,31 @@ class SignUp():
 
         # 화면넣기
         inputFrame.place(x=290, y=80)
-        name.pack(pady=5,anchor='w')
-        age.pack(pady=5,anchor='w')
-        id.pack(pady=5,anchor='w')
-        pw.pack(pady=5,anchor='w')
-        pw_check.pack(pady=5,anchor='w')
-        zipcode.pack(pady=5,anchor='w')
-        call_number.pack(pady=5,anchor='w')
-        introduce.pack(pady=5,anchor='w')
-        photo.place(x=40,y=90)
-        sign_up_btn.place(x=65,y=330)
-        cancel_btn.place(x=65,y=385)
+        name.pack(pady=5, anchor='w')
+        age.pack(pady=5, anchor='w')
+        id.pack(pady=5, anchor='w')
+        pw.pack(pady=5, anchor='w')
+        pw_check.pack(pady=5, anchor='w')
+        zipcode.pack(pady=5, anchor='w')
+        call_number.pack(pady=5, anchor='w')
+        introduce.pack(pady=5, anchor='w')
+        photo.place(x=40, y=90)
+        edit_btn.place(x=65, y=330)
+        cancel_btn.place(x=65, y=385)
         logo.place(x=5, y=5)
         self.play()
 
-    def hintEvent(self,event):  # 눌렀을때 글자 넣을수 있게
+    def hintEvent(self, event):  # 눌렀을때 글자 넣을수 있게
         event.config(fg='black')
-        event.delete(0,END)
-        
+        event.delete(0, END)
+
     def signUpEvent(self):
         # 회원가입 버튼 눌렀을때
         # 아이디 중복 체크
         # 형식 체크
         # 비번 확인 체크
         pass
-    
+
     def cancelEvent(self):
         # 취소 - 시작화면으로 이동
         pass
@@ -92,6 +94,7 @@ class SignUp():
     def play(self):
         self.root.mainloop()
 
+
 if __name__ == '__main__':
-    SignUp('회원가입')
+    EditUserInfo('사용자 정보 수정화면')
 

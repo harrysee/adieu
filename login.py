@@ -2,13 +2,14 @@ from tkinter import *
 from adieu_main import adieuMain
 
 
-class loginAdieu():
+class LoginAdieu():
 
     def __init__(self, title):
         root = Tk()
         root.title(title)
         root.geometry('745x580')
         root.configure(bg="#FFC978")
+        root.resizable(0, 0)
         self.root = root
         # 프레임 설정
         self.mainFrame = Frame(self.root, bg='#FFC978')
@@ -49,11 +50,9 @@ class loginAdieu():
         self.root.destroy()
         adieuMain("메인")
 
-
     def play(self):
         self.root.mainloop()
 
 
 if __name__ == '__main__':
-
-    l = loginAdieu("로그인 화면")
+    l = LoginAdieu("로그인 화면")

@@ -1,6 +1,6 @@
 from tkinter import *
-from login import loginAdieu
-from sign_up import adieuMain
+from login import LoginAdieu
+from sign_up import SignUp
 
 class StartAdieu():
     def __init__(self, title):
@@ -30,11 +30,11 @@ class StartAdieu():
 
     def loginEvent(self):
         self.root.destroy()
-        loginAdieu("로그인")
+        LoginAdieu("로그인")
 
     def newloginEvent(self):
         self.root.destroy()
-        adieuMain("회원가입")
+        SignUp("회원가입")
 
     def play(self):
         self.root.mainloop()

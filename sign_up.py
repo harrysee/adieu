@@ -27,6 +27,10 @@ class SignUp():
         zipcode = Entry(inputFrame, width=30, relief="flat", bd=13, fg="gray")
         call_number = Entry(inputFrame, width=40, relief="flat", bd=13, fg="gray")
         introduce = Entry(inputFrame, width=40, relief="flat", bd=13, fg="gray")
+        self.gender_var = IntVar()  # 여기에 int 형으로 값을 저장한다
+        gender_w = Radiobutton(inputFrame, text="여자", value=1, variable=self.gender_var,bg= bg_color)
+        gender_m = Radiobutton(inputFrame, text="남자", value=2, variable=self.gender_var,bg= bg_color)
+        gender_w.select()  # 기본적으로 여자 선택
         inputList = [name, age, id, pw, pw_check, zipcode, call_number, introduce]  # 입력 받을 리스트
 
         # hint
@@ -60,14 +64,16 @@ class SignUp():
 
         # 화면넣기
         inputFrame.place(x=290, y=80)
-        name.pack(pady=5,anchor='w')
-        age.pack(pady=5,anchor='w')
-        id.pack(pady=5,anchor='w')
-        pw.pack(pady=5,anchor='w')
-        pw_check.pack(pady=5,anchor='w')
-        zipcode.pack(pady=5,anchor='w')
-        call_number.pack(pady=5,anchor='w')
-        introduce.pack(pady=5,anchor='w')
+        inputList[0].pack(pady=5,anchor='w')
+        inputList[1].pack(pady=5,anchor='w')
+        inputList[2].pack(pady=5,anchor='w')
+        inputList[3].pack(pady=5,anchor='w')
+        inputList[4].pack(pady=5,anchor='w')
+        inputList[5].pack(pady=5,anchor='w')
+        inputList[6].pack(pady=5,anchor='w')
+        inputList[7].pack(pady=5,anchor='w')
+        gender_w.pack(pady=5, anchor ='w')
+        gender_m.place(x=60, y=429)
         photo.place(x=40,y=90)
         sign_up_btn.place(x=65,y=330)
         cancel_btn.place(x=65,y=385)

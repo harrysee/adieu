@@ -36,11 +36,11 @@ class SellerInfo():
         apply_posts = LabelFrame(self.root, labelanchor='n',width=200, height=200,text="신청한 게시물",fg=text_color,bg=bg_color)
         writelist = Listbox(write_posts, selectmode='single', height=0)
         applylist = Listbox(apply_posts, selectmode='single', height=0)
-        testlist = [('강아지','또미'),('앵무새 ','탁구'),('고양이','축복이'),('고양이','행복이'),('거북이','독도'),('병아리','꼬꼬'),
-                    ('강아지','또미'),('앵무새 ','탁구'),('고양이','축복이'),('고양이','행복이'),('거북이','독도'),('병아리','꼬꼬'),
-                    ('강아지','또미'),('앵무새 ','탁구'),('고양이','축복이'),('고양이','행복이'),('거북이','독도'),('병아리','꼬꼬')]
-        writelist.bind("<ButtonRelease-1>",self.writeItemEvent)
-        applylist.bind("<ButtonRelease-1>",self.applyItemEvent)
+        testlist = [('강아지','또미'),('앵무새','탁구'),('고양이','축복이'),('고양이','행복이'),('거북이','독도'),('병아리','꼬꼬'),
+                    ('강아지','또미'),('앵무새','탁구'),('고양이','축복이'),('고양이','행복이'),('거북이','독도'),('병아리','꼬꼬'),
+                    ('강아지','또미'),('앵무새','탁구'),('고양이','축복이'),('고양이','행복이'),('거북이','독도'),('병아리','꼬꼬')]
+        writelist.bind("<Double-Button-1>",self.writeItemEvent)
+        applylist.bind("<Double-Button-1>",self.applyItemEvent)
 
         for i in testlist:
             writelist.insert(END,' '+ i[0]+'   :   '+i[1])
@@ -70,11 +70,11 @@ class SellerInfo():
         # 분양거절 - 시작화면으로 이동
         pass
 
-    def writeItemEvent(self):
+    def writeItemEvent(self,event):
         # 등록한 게시물 클릭했을때
         pass
     
-    def applyItemEvent(self):
+    def applyItemEvent(self,event):
         # 신청한 게시물 클릭했을때
         pass
 

@@ -5,19 +5,20 @@ from adieu_main import adieuMain
 class LoginAdieu():
 
     def __init__(self, title):
+        bg_color = '#FFC978'  # 배경색
         root = Tk()
         root.title(title)
         root.geometry('745x580')
-        root.configure(bg="#FFC978")
+        root.configure(bg=bg_color)
         root.resizable(0, 0)
         self.root = root
         # 프레임 설정
-        self.mainFrame = Frame(self.root, bg='#FFC978')
+        self.mainFrame = Frame(self.root, bg=bg_color)
         self.mainFrame.pack(expand=True)
         
         # logo 설정
         logo_img = PhotoImage(file='img/Adieu.png')
-        logo = Label(self.mainFrame, image=logo_img, bg="#FFC978", anchor='center')
+        logo = Label(self.mainFrame, image=logo_img, bg=bg_color, anchor='center')
 
         # id , password 입력칸 설정
         self.id = Entry(self.mainFrame, width=30,relief="flat",bd=10,fg="gray")

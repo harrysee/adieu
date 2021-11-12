@@ -1,32 +1,33 @@
 from tkinter import *
 import tkinter.ttk
 
-
 class adieuMain():
     def __init__(self, title):
+        self.TEXTCOLOR = '#B96F00'
+        self.BACKGROUND = '#FFC978'  # 배경색
         self.root = Tk()
         self.root.title(title)
         self.root.geometry('745x580')
-        self.root.configure(bg="#FFC978")
+        self.root.configure(bg=self.BACKGROUND)
         self.root.resizable(0, 0)
 
         # 동물검색
         logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
-        logo = Label(self.root,bg="#FFC978",image=logo_img)
+        logo = Label(self.root,bg=self.BACKGROUND,image=logo_img)
 
         # 왼쪽 사이드
-        cartegoryFrame = Frame(self.root, bg="#FFC978" )
+        cartegoryFrame = Frame(self.root, bg=self.BACKGROUND )
         for i in range(5):
-            text = Label(cartegoryFrame,text="동물이름"+str(i), fg='#B96F00',bg="#FFC978",pady=5,cursor="hand2"
+            text = Label(cartegoryFrame,text="동물이름"+str(i), fg=self.TEXTCOLOR,bg=self.BACKGROUND,pady=5,cursor="hand2"
                                                                                                     "")
             text.pack()
         photo_img = PhotoImage(file='img/search_img.png')
-        search = Label(self.root, image=photo_img,bg="#FFC978")
+        search = Label(self.root, image=photo_img,bg=self.BACKGROUND)
 
         # 오른쪽 사이드
-        animalList = Frame(self.root, width=900, height=900, bg="#FFC978")
+        animalList = Frame(self.root, width=900, height=900, bg=self.BACKGROUND)
         self.animalView = tkinter.ttk.Treeview(animalList,height= 20,columns=["species","name","age"])
-        self.animalView.bind("<ButtonRelease-1>",self.click_item)
+        self.animalView.bind("<Double-Button-1>",self.click_item)
         # treeView 사용 기본항목 포함 4개
         # scrollbar(animalList)
         # scrollbar.pack(side='right', fill="y")
@@ -51,8 +52,8 @@ class adieuMain():
         # self.animalView.config(yscrollcommand=scrollbar.set)
 
         # 오른쪽 위 로그아웃, 사용자
-        logout = Label(self.root,text="로그아웃",fg="#B96F00",bg="#FFC978",cursor="left_side")
-        user = Label(self.root, text='사용자',fg= '#B96F00',bg="#FFC978",cursor="center_ptr")
+        logout = Label(self.root,text="로그아웃",fg=self.TEXTCOLOR,bg=self.BACKGROUND,cursor="left_side")
+        user = Label(self.root, text='사용자',fg= self.TEXTCOLOR,bg=self.BACKGROUND,cursor="center_ptr")
         logout.bind('<ButtonRelease-1>',self.logout_event)
         user.bind('<ButtonRelease-1>',self.user_event)
 
@@ -74,8 +75,8 @@ class adieuMain():
 
     def logout_event(self,evnet):
         self.root.destroy()
-        from login import LoginAdieu
-        LoginAdieu("로그인화면")
+        from start import StartAdieu
+        StartAdieu("처음 화면")
 
     def user_event(self,event):
         self.root.destroy()

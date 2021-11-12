@@ -105,6 +105,7 @@ class User:
                 for d,ap in enumerate(up.applys):
                     print(f'          ዽ {d+1}. {ap.name} | {ap.gender} ☎ {ap.number} ')  # 신청한 사람 정보 출력
 
+
     # 사용자 정보 확인
     def __str__(self):
         # 사용자 정보로 수정

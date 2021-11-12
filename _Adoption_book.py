@@ -1,131 +1,124 @@
-from parcel_out import Parcel_out
-from user import User
+import json
+
+from _parcel_out import Parcel_out
+from _user import User
+from json_use import UseJSON as json
 
 class Adoption_book:
     def __init__(self):
-        self.animals = []     # 등록된 동물들
-        self.users = []   # 저장된 유저들
+        print('시작')
+        self.testi()
+        self.animals = json.get_animals_json(self)    # 등록된 동물들
+        self.users = json.get_user_json(self)     # 유저 데이터
         #현재 유저
         # 처음 객체 생성 시 무조건 로그인
-        self.test()     # 테스트 코드
-        while self.set_user()==0:
-            print('꒦꒷꒷꒦꒷꒷로그인 실패꒦꒷꒷꒦꒷꒦')   # 회원가입이랑 로그인 둘다 안되었을 때
+        # self.test()     # 테스트 코드
+        self.now_user = ''
+
+
+    def testi(self):
+        user = {}
+        user['d'] = {
+            "pw": 'new.pw',
+            'age': 00,
+            'gender': 'new.gender',
+            'call_number':'000000000',
+            'up_list': [],
+            'pick_list': []
+        }
+        json.set_user_json(self, user)
+        print('실행됨')
 
     # 로그인
-    def set_user(self):
-        print('''
-        〇
-         ｏ
-          °
-        　┳┳ ∩∩
-        　┃┃(･∀･)　☆　　★
-        ┏┻┻┷━Ｏ ┏┷┓┏┷┓
-        ┃Welcome┠┨★┠┨☆┃
-        ┗©━━©┛ ┗©┛┗©┛''')
-        s = input('*꧁ 회원가입 : 0 ༺༻ 로그인 : 1 ꧂*\n\t-ꦼ———▸  ')
-        if s =='1':
-            sainup_id = input('이름 입력 » ')
-            sainup_pw = input('비밀번호 입력 » ')
-            
-            #로그인 한 이름과 비밀번호가 일치하면 로그인 성공
-            for user in self.users:
-                if sainup_pw == user.pw and sainup_id == user.name:
-                    self.now_user = user
-                    print('°•°•°•°•°•°로그인 성공•°•°•°•°•°•')
-                    return 1
-            return 0
-        elif s == '0':
-            # 유저리스트에 가입한 유저객체 넣기
-            new = User(self.users)
-            new.set_all()
-            self.users.append(new)
-            print('가입성공')
-            if self.set_user()==1:
-                return 1
-            return 0
-        else :
-            print('꒦꒷꒷꒦꒷꒦입력 오류 > 다시입력하세요꒦꒷꒷꒦꒷꒦')
-            self.set_user()
-            
-    # 입양하고 싶은 동물 종류별 검색
-    def search_animal(self):
+    def login(self, name, pw):
+        #로그인 한 이름과 비밀번호가 일치하면 로그인 성공
+        if name in self.users and self.users[name][pw] == pw:
+            self.now_user = name   # 로그인 성공이면 true 리턴
+        return 0
+
+    def sign_up(self):
+        # 유저리스트 유저정보 넣기
+        new = User()
+        new.set_all()
+        self.users[new.name]= {
+            "pw" : new.pw,
+            'age' : new.age,
+            'gender': new.gender,
+            'call_number': new.number,
+            'up_list': [],
+            'pick_list' : []
+        }
+        json.set_user_json(self.users)
+        print('가입성공')
+        if new.name in self.users==1:
+            return 1    # 정상적으로 들어가면 트루
+        return 0
+
+
+    def get_animal_species(self):
         # 동물 종류 중복제거
         search_kind = set()
-        for a in self.animals:
-            search_kind.add(a.species)
+        for key in self.animals.keys():
+            search_kind.add(self.animals[key]['species'])
+        return search_kind
 
+    # 입양하고 싶은 동물 종류별 검색
+    def search_animal(self, select_kind):  # 선택한 동물종류 가져와서 검색하기
+        list = []
         # 동물 종류 보여주기
-        search_kind = list(search_kind)
-        for i, a in enumerate(search_kind):
-            print(f' εïз  {i + 1}. {a}')
-
-        # 해당되는 종의 동물 모두 출력
-        select = int(input('검색할 동물번호 » ')) - 1
-        for ani in self.animals:
-            if ani.species == search_kind[select]:
-                print('┍————————————— /ᐠ｡ꞈ｡ᐟ\ —————————————┑')
-                print(f'             {ani.pat_name}의 정보   ')
-                print(ani)  # 선택한 동물의 자세한 정보 보여주기
-                print('┕————————————————————————————————-┙')
+        for key in self.animals.keys:
+            if self.animals[key]['species'] == select_kind:
+                pair = (self.animals[key]['species'], key, self.animals[key]['pat_age'])
+                list.append(pair)
+        return list     # 검색한 리스트 반환
 
     # 입양할 동물들 목록 보여주기 - 종류 . 이름
-    def show_animals(self):
-        # 등록된 동물 없을 경우 추가할꺼냐고 묻기
+    def show_animals(self, animals):
+        animals_zip = list()
+        # 등록된 동물 없을 경우 none 리턴
         if len(self.animals)==0:
-            print('아직 등록된 동물이 없습니다')
-            if input('등록하시겠습니까? y/n » ')=='y':
-                self.up_animal()
-            return
+            return 'none'
 
         # 동물의 기본적인 이름 - 종류 번호붙여서 출력
-        for i, a in enumerate(self.animals):
-            print(f' εïз {i+1}. {a.species} - {a.pat_name}')
-        
-        # 자세히 보고 싶은 동물 선택하면 동물의 정보 출력
-        select = input('자세히보기 (없으면 엔터) » ')
-        while select !='':
-            # 번호가 다를 경우
-            if (select.isdigit() != True) or (int(select)-1 not in range(len(self.animals))) :
-                print('꒦꒷꒷꒦꒷꒦잘못입력했습니다. 해당되는 번호를 입력하세요.꒦꒷꒷꒦꒷꒦')
-                select = input('자세히보기 (그만보기: 엔터) » ')
-                continue
-            # 선택한 동물 정보 보여주기
-            select = int(select)
-            print('┍————————————— /ᐠ｡ꞈ｡ᐟ\ —————————————┑')
-            print(f'           {self.animals[select-1].pat_name}의 정보   ')
-            print(self.animals[select-1])  # 선택한 동물의 자세한 정보 보여주기
-            print('┕————————————————————————————————-┙')
+        for key in self.animals.keys():
+            pair = (self.animals[key]['species'],key,self.animals[key]['pat_age'])
+            animals_zip.append(pair)
+        return animals_zip  # 보여줄 목록 반환
 
-            select = input('자세히보기 (그만보기: 엔터) >> ')
+
+    def animal_info(self, select): # 자세히 보기 : 동물 이름가져와서 구하기
+        # 선택한 동물 정보 반환
+        return [select,
+                self.animals[select]['species'],
+                self.animals[select]['pat_age'],
+                self.animals[select]['pat_gender'],
+                self.animals[select]['pat_gender'],
+                self.animals[select]['user']]
 
     # 입양 신청하기
-    def put_animals(self):
-        self.show_animals()
-        select_apply = int(input('''╭┈─── 신청할 동물번호 :ྀ࿐ ˊˎ-
-╰┈➤ '''))-1
-
+    def put_animals(self,animalname):
         # 신청한 동물 인덱스에 있는 객체의 신청내역에 신청한 사용자의 이름을 넣는다
-        self.animals[select_apply].applys.append(self.now_user)
+        self.animals[animalname]['apply_users'].appand(self.now_user)
         # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.
-        self.now_user.pick_list.append(self.animals[select_apply])
-        print('‿︵‿︵‿︵୨˚̣̣̣͙୧ 신청되었습니다 ୨˚̣̣̣͙୧‿︵‿︵‿︵ ')
+        self.users[self.now_user]['pick_list'].append(animalname)
+        json.set_animals_json(self.animals)
+        json.set_user_json(self.users)(self.users)()
 
     # 게시물 등록
     def up_animal(self):
         new = Parcel_out()
         new.set_pat()
-        self.animals.append(new)
-        self.now_user.up_list.append(new) # 현재 사용자 객체의 올린 게시물 리스트에 게시물 올린거 추가
-
-    # 사용자 정보 확인 및 신청한 동물, 분양한 동물 확인
-    def check(self):
-        print('╭──                   ೋ사용자정보              ──╮')
-        print(self.now_user)
-        print('  ✿ 등록한 게시물 ⚪ ༺⊰━━━━━━━━━━━━━━━─')
-        self.now_user.show_uplist()
-        print('  ✿ 입양신청한 반려동물 ⚪ ༺⊰━━━━━━━━━━─')
-        self.now_user.show_picklist()
-        print('╰──                    ೋ                     ──╯')
+        self.animals[new.pat_name] = {
+            'species' : new.species,       # 종류
+            'pat_age' : new.pat_age,            # 나이
+            'user'    : self.now_user,
+            'pat_gender' : new.pat_gender, # 성별
+            'pat_etc' : new.etc,     # 기타사항
+            'apply_users' : [],     # 분양신청한 사용자들
+        }
+        self.users[self.now_user]['up_list'].append(new.pat_name) # 현재 사용자 객체의 올린 게시물 리스트에 게시물 올린거 추가
+        json.set_animals_json(self.animals)
+        json.set_user_json(self.users)(self.users)()
 
     # test하기 위한 기본 사용자들
     def test(self):
@@ -304,7 +297,8 @@ class Adoption_book:
         휴지.applys.append(nara)
         nara.pick_list.append(휴지)
 
-
+if __name__ == '__main__':
+    Adoption_book()
 
 
 

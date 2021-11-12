@@ -10,8 +10,6 @@ class Parcel_out:
         self.pat_gender =''
         # 분양동물 기타사항
         self.etc =''
-        #입양신청자 리스트
-        self.applys = []
 
     #동물 정보 입력
     def set_pat(self):

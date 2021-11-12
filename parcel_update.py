@@ -48,7 +48,6 @@ class ParceAdieuEdit():
         inputList[2].bind('<Button-1>', lambda x: self.hintEvent(event=age))
         inputList[3].bind('<Button-1>', lambda x: self.hintEvent(event=place))
         inputList[4].bind('<Button-1>', lambda x: self.hintEvent(event=add_infor))
-        inputList[5].bind('<Button-1>', lambda x: self.hintEvent(event=user_infor))
 
         # tab 이벤트
         inputList[0].bind('<FocusIn>', lambda x: self.hintEvent(event=name))
@@ -56,7 +55,6 @@ class ParceAdieuEdit():
         inputList[2].bind('<FocusIn>', lambda x: self.hintEvent(event=age))
         inputList[3].bind('<FocusIn>', lambda x: self.hintEvent(event=place))
         inputList[4].bind('<FocusIn>', lambda x: self.hintEvent(event=add_infor))
-        inputList[5].bind('<FocusIn>', lambda x: self.hintEvent(event=user_infor))
 
         # 화면에 출력
         inputFrame1.place(x=360, y=80)
@@ -87,4 +85,4 @@ class ParceAdieuEdit():
 
 
 if __name__ == '__main__':
-    ParceAdieuEdit('분양신청')
+    ParceAdieuEdit('분양게시물수정')

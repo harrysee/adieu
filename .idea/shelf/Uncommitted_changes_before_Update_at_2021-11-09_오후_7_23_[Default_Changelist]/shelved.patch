@@ -1,0 +1,935 @@
+Index: Adoption_book.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from parcel_out import Parcel_out\r\nfrom user import User\r\n\r\nclass Adoption_book:\r\n    def __init__(self):\r\n        self.animals=[]     # 등록된 동물들\r\n        self.users = []   # 저장된 유저들\r\n        #현재 유저\r\n        # 처음 객체 생성 시 무조건 로그인\r\n        self.test()\r\n        while self.set_user() == -1:\r\n            print('-로그인 실패-')   # 회원가입이랑 로그인 둘다 안되었을 때\r\n\r\n\r\n    # 새로 로그인\r\n    def set_user(self):\r\n        s = input('회원가입 : 0 | 로그인 : 1\\n>> ')\r\n        if s =='1':\r\n            sainup_id = input('이름 입력 : ')\r\n            sainup_pw = input('비밀번호 입력 : ')\r\n            \r\n            #로그인 한 이름과 비밀번호가 일치하면 로그인 성공\r\n            for i in self.users:\r\n                if sainup_pw == i.pw and sainup_id == i.name:\r\n                    self.now_user = i\r\n                    print('로그인 성공')\r\n                    return 0\r\n            return -1\r\n        elif s == '0':\r\n            # 유저리스트에 가입한 유저객체 넣기\r\n            new = User(self.users)\r\n            new.set_all()\r\n            self.users.append(new)\r\n            print('가입성공')\r\n            self.set_user()\r\n        else :\r\n            print('- 입력 오류 > 다시입력하세요 -')\r\n            self.set_user()\r\n            \r\n    # 입양하고 싶은 동물 종류별 검색\r\n    def search_animal(self):\r\n        # 동물 종류 중복제거\r\n        search_kind = set()\r\n        for a in self.animals:\r\n            search_kind.add(a.species)\r\n\r\n        # 동물 종류 보여주기\r\n        search_kind = list(search_kind)\r\n        for i, a in enumerate(search_kind):\r\n            print(f'{i + 1}. {a}')\r\n\r\n        # 해당되는 종의 동물 모두 출력\r\n        select = int(input('검색할 동물번호 >> ')) - 1\r\n        for ani in self.animals:\r\n            if ani.species == search_kind[select]:\r\n                print(f'*** {ani.pat_name}의 정보 ***')\r\n                print(ani)\r\n\r\n    # 입양할 동물들 목록 보여주기 - 종류 . 이름\r\n    def show_animals(self):\r\n        # 등록된 동물 없을 경우 추가할꺼냐고 묻기\r\n        if len(self.animals)==0:\r\n            print('아직 등록된 동물이 없습니다')\r\n            if input('등록하시겠습니까? y/n >> ')=='y':\r\n                self.up_animal()\r\n            return\r\n\r\n        # 동물의 기본적인 이름 - 종류 번호붙여서 출력\r\n        for i, a in enumerate(self.animals):\r\n            print(f'{i+1}. {a.species} - {a.pat_name}\\n\\t 설명 : {a.etc}')\r\n        \r\n        # 자세히 보고 싶은 동물 선택하면 동물의 정보 출력\r\n        select = input('자세히보기 (없으면 엔터) >> ')\r\n        while select !='':\r\n            # 번호가 다를 경우\r\n            if (select.isdigit() == False) or (int(select) - 1 not in range(len(self.animals))):\r\n                print('잘못입력했습니다. 해당되는 번호를 입력하세요.')\r\n                select = input('자세히보기 (그만보기: 엔터) >> ')\r\n                continue\r\n            # 선택한 동물 정보 보여주기\r\n            select = int(select)\r\n            print(f'*** {self.animals[select-1].pat_name}의 정보 ***')\r\n            print(self.animals[select-1])  # 선택한 동물의 자세한 정보 보여주기\r\n            select = input('자세히보기 (그만보기: 엔터) >> ')\r\n\r\n    # 입양 신청하기\r\n    def put_animals(self):\r\n        self.show_animals()\r\n        select_apply = int(input('신청할 동물번호 : '))\r\n\r\n        # 신청한 동물 인덱스에 있는 객체의 신청내역에 신청한 사용자의 이름을 넣는다\r\n        self.animals[select_apply].applys.append(self.now_user.name)\r\n        # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.\r\n        self.now_user.pick_list.append(self.animals[select_apply])\r\n        print('신청되었습니다 ! ')\r\n\r\n    # 게시물 등록\r\n    def up_animal(self):\r\n        new = Parcel_out()\r\n        new.set_pat()\r\n        self.animals.append(new)\r\n        self.now_user.up_list.append(new) # 현재 사용자 객체의 올린 게시물 리스트에 게시물 올린거 추가\r\n\r\n    # 사용자 정보 확인 및 신청한 동물, 분양한 동물 확인\r\n    def check(self):\r\n        print('===== 사용자 정보 =======')\r\n        print(self.now_user)\r\n        print('--------- 등록한 게시물 ---------')\r\n        self.now_user.show_uplist()\r\n        print('------- 입양신청한 반려동물 ------')\r\n        self.now_user.show_picklist()\r\n\r\n    # test하기 위한 기본 사용자들\r\n    def test(self):\r\n        # 사용자 1\r\n        vina = User(self.users)\r\n        vina.name = 'vina'\r\n        vina.pw = '1234'\r\n        vina.age = '991115'\r\n        vina.gender = 'w'\r\n        vina.number = '01025825852'\r\n        self.users.append(vina)\r\n\r\n        # vina - 게시물1\r\n        토깽이 = Parcel_out()\r\n        토깽이.species = '토끼'\r\n        토깽이.pat_name ='토깽이'\r\n        토깽이.pat_age = 5\r\n        토깽이.pat_gender = 'w'\r\n        토깽이.etc ='당근을 좋아함'\r\n\r\n        # vina - 게시물2\r\n        행복이 = Parcel_out()\r\n        행복이.species = '고양이'\r\n        행복이.pat_name = '행복이'\r\n        행복이.pat_age = 2\r\n        행복이.pat_gender = 'w'\r\n        행복이.etc = '우리집 고양이 츄르를 좋아해'\r\n\r\n        # 사용자 2\r\n        nono = User(self.users)\r\n        nono.name = 'nono'\r\n        nono.pw = 'nnnn'\r\n        nono.age = '060912'\r\n        nono.gender = 'w'\r\n        nono.number = '01042514263'\r\n        self.users.append(nono)\r\n\r\n        # nono - 게시물1\r\n        꼬꼬 = Parcel_out()\r\n        꼬꼬.species = '병아리'\r\n        꼬꼬.pat_name = '꼬꼬'\r\n        꼬꼬.pat_age = 6\r\n        꼬꼬.pat_gender = 'm'\r\n        꼬꼬.etc = '병아리 옆구리 부상을 입음'\r\n\r\n        # 사용자 3\r\n        nara = User(self.users)\r\n        nara.name = 'nara'\r\n        nara.pw = 'na2419'\r\n        nara.age = '04'\r\n        nara.gender = 'w'\r\n        nara.number = '01042514263'\r\n        self.users.append(nara)\r\n\r\n        # 사용자 4\r\n        alex = User(self.users)\r\n        alex.name = 'alex'\r\n        alex.pw = '0101'\r\n        alex.age = '860708'\r\n        alex.gender = 'm'\r\n        alex.number = '01032415768'\r\n        self.users.append(alex)\r\n\r\n        # alex - 게시물1\r\n        햄토리 = Parcel_out()\r\n        햄토리.species = '햄스터'\r\n        햄토리.pat_name = '햄토리'\r\n        햄토리.pat_age = 1\r\n        햄토리.pat_gender = 'w'\r\n        햄토리.etc = '해바라기 씨를 좋아함'\r\n\r\n        # alex - 게시물2\r\n        몽이 = Parcel_out()\r\n        몽이.species = '앵무새'\r\n        몽이.pat_name = '몽이'\r\n        몽이.pat_age = 2\r\n        몽이.pat_gender = 'w'\r\n        몽이.etc = '\"안녕\"과 \"사랑해\"를 할 수 있음'\r\n\r\n        # 사용자 5\r\n        daniel = User(self.users)\r\n        daniel.name = 'daniel'\r\n        daniel.pw = '0308'\r\n        daniel.age = '20000308'\r\n        daniel.gender = 'w'\r\n        daniel.number = '01098792433'\r\n        self.users.append(daniel)\r\n\r\n        # daniel - 게시물1\r\n        보리 = Parcel_out()\r\n        보리.species = '강아지'\r\n        보리.pat_name = '보리'\r\n        보리.pat_age = 6\r\n        보리.pat_gender = 'm'\r\n        보리.etc = '관절이 좋지 않으니 주의 바람'\r\n\r\n        # 사용자 6\r\n        hoon = User(self.users)\r\n        hoon.name = 'hoon'\r\n        hoon.pw = '20040118'\r\n        hoon.age = '1118'\r\n        hoon.gender = 'm'\r\n        hoon.number = '01049852736'\r\n        self.users.append(hoon)\r\n\r\n        # hoon - 게시물1\r\n        포키 = Parcel_out()\r\n        포키.species = '거북이'\r\n        포키.pat_name = '포키'\r\n        포키.pat_age = 9\r\n        포키.pat_gender = 'w'\r\n        포키.etc = '옛날에 등딱지를 다쳐서 흉터가 있음'\r\n\r\n        # hoon - 게시물2\r\n        휴지 = Parcel_out()\r\n        휴지.species = '고양이'\r\n        휴지.pat_name = '휴지'\r\n        휴지.pat_age = 1\r\n        휴지.pat_gender = 'm'\r\n        휴지.etc = '길 고양이이며, 피부병이 있었지만 지금은 완치함, 사람들을 좋아함'\r\n\r\n        # 등록하기\r\n        self.animals.append(토깽이)\r\n        vina.up_list.append(토깽이)\r\n        self.animals.append(행복이)\r\n        vina.up_list.append(행복이)\r\n        self.animals.append(꼬꼬)\r\n        nono.up_list.append(꼬꼬)\r\n        self.animals.append(햄토리)\r\n        alex.up_list.append(햄토리)\r\n        self.animals.append(몽이)\r\n        alex.up_list.append(몽이)\r\n        self.animals.append(보리)\r\n        daniel.up_list.append(보리)\r\n        self.animals.append(포키)\r\n        hoon.up_list.append(포키)\r\n        self.animals.append(휴지)\r\n        hoon.up_list.append(휴지)\r\n\r\n        # 신청하기\r\n        꼬꼬.applys.append(vina.name)\r\n        vina.pick_list.append(꼬꼬)\r\n\r\n        행복이.applys.append(nono.name)\r\n        nono.pick_list.append(행복이)\r\n\r\n\r\n\r\n\r\n\r\n    \r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Adoption_book.py b/Adoption_book.py
+--- a/Adoption_book.py	(revision 3a4a27bcc6e2bddffe2525c90b066f3f8d2bb650)
++++ b/Adoption_book.py	(date 1636331127000)
+@@ -3,38 +3,48 @@
+ 
+ class Adoption_book:
+     def __init__(self):
+-        self.animals=[]     # 등록된 동물들
++        self.animals = []     # 등록된 동물들
+         self.users = []   # 저장된 유저들
+         #현재 유저
+         # 처음 객체 생성 시 무조건 로그인
+-        self.test()
+-        while self.set_user() == -1:
+-            print('-로그인 실패-')   # 회원가입이랑 로그인 둘다 안되었을 때
++        self.test()     # 테스트 코드
++        while self.set_user()==0:
++            print('꒦꒷꒷꒦꒷꒷로그인 실패꒦꒷꒷꒦꒷꒦')   # 회원가입이랑 로그인 둘다 안되었을 때
+ 
+-
+-    # 새로 로그인
++    # 로그인
+     def set_user(self):
+-        s = input('회원가입 : 0 | 로그인 : 1\n>> ')
++        print('''
++        〇
++         ｏ
++          °
++        　┳┳ ∩∩
++        　┃┃(･∀･)　☆　　★
++        ┏┻┻┷━Ｏ ┏┷┓┏┷┓
++        ┃Welcome┠┨★┠┨☆┃
++        ┗©━━©┛ ┗©┛┗©┛''')
++        s = input('*꧁ 회원가입 : 0 ༺༻ 로그인 : 1 ꧂*\n\t-ꦼ———▸  ')
+         if s =='1':
+-            sainup_id = input('이름 입력 : ')
+-            sainup_pw = input('비밀번호 입력 : ')
++            sainup_id = input('이름 입력 » ')
++            sainup_pw = input('비밀번호 입력 » ')
+             
+             #로그인 한 이름과 비밀번호가 일치하면 로그인 성공
+-            for i in self.users:
+-                if sainup_pw == i.pw and sainup_id == i.name:
+-                    self.now_user = i
+-                    print('로그인 성공')
+-                    return 0
+-            return -1
++            for user in self.users:
++                if sainup_pw == user.pw and sainup_id == user.name:
++                    self.now_user = user
++                    print('°•°•°•°•°•°로그인 성공•°•°•°•°•°•')
++                    return 1
++            return 0
+         elif s == '0':
+             # 유저리스트에 가입한 유저객체 넣기
+             new = User(self.users)
+             new.set_all()
+             self.users.append(new)
+             print('가입성공')
+-            self.set_user()
++            if self.set_user()==1:
++                return 1
++            return 0
+         else :
+-            print('- 입력 오류 > 다시입력하세요 -')
++            print('꒦꒷꒷꒦꒷꒦입력 오류 > 다시입력하세요꒦꒷꒷꒦꒷꒦')
+             self.set_user()
+             
+     # 입양하고 싶은 동물 종류별 검색
+@@ -47,52 +57,58 @@
+         # 동물 종류 보여주기
+         search_kind = list(search_kind)
+         for i, a in enumerate(search_kind):
+-            print(f'{i + 1}. {a}')
++            print(f' εïз  {i + 1}. {a}')
+ 
+         # 해당되는 종의 동물 모두 출력
+-        select = int(input('검색할 동물번호 >> ')) - 1
++        select = int(input('검색할 동물번호 » ')) - 1
+         for ani in self.animals:
+             if ani.species == search_kind[select]:
+-                print(f'*** {ani.pat_name}의 정보 ***')
+-                print(ani)
++                print('┍————————————— /ᐠ｡ꞈ｡ᐟ\ —————————————┑')
++                print(f'             {ani.pat_name}의 정보   ')
++                print(ani)  # 선택한 동물의 자세한 정보 보여주기
++                print('┕————————————————————————————————-┙')
+ 
+     # 입양할 동물들 목록 보여주기 - 종류 . 이름
+     def show_animals(self):
+         # 등록된 동물 없을 경우 추가할꺼냐고 묻기
+         if len(self.animals)==0:
+             print('아직 등록된 동물이 없습니다')
+-            if input('등록하시겠습니까? y/n >> ')=='y':
++            if input('등록하시겠습니까? y/n » ')=='y':
+                 self.up_animal()
+             return
+ 
+         # 동물의 기본적인 이름 - 종류 번호붙여서 출력
+         for i, a in enumerate(self.animals):
+-            print(f'{i+1}. {a.species} - {a.pat_name}\n\t 설명 : {a.etc}')
++            print(f' εïз {i+1}. {a.species} - {a.pat_name}')
+         
+         # 자세히 보고 싶은 동물 선택하면 동물의 정보 출력
+-        select = input('자세히보기 (없으면 엔터) >> ')
++        select = input('자세히보기 (없으면 엔터) » ')
+         while select !='':
+             # 번호가 다를 경우
+-            if (select.isdigit() == False) or (int(select) - 1 not in range(len(self.animals))):
+-                print('잘못입력했습니다. 해당되는 번호를 입력하세요.')
+-                select = input('자세히보기 (그만보기: 엔터) >> ')
++            if (select.isdigit() != True) or (int(select)-1 not in range(len(self.animals))) :
++                print('꒦꒷꒷꒦꒷꒦잘못입력했습니다. 해당되는 번호를 입력하세요.꒦꒷꒷꒦꒷꒦')
++                select = input('자세히보기 (그만보기: 엔터) » ')
+                 continue
+             # 선택한 동물 정보 보여주기
+             select = int(select)
+-            print(f'*** {self.animals[select-1].pat_name}의 정보 ***')
++            print('┍————————————— /ᐠ｡ꞈ｡ᐟ\ —————————————┑')
++            print(f'           {self.animals[select-1].pat_name}의 정보   ')
+             print(self.animals[select-1])  # 선택한 동물의 자세한 정보 보여주기
++            print('┕————————————————————————————————-┙')
++
+             select = input('자세히보기 (그만보기: 엔터) >> ')
+ 
+     # 입양 신청하기
+     def put_animals(self):
+         self.show_animals()
+-        select_apply = int(input('신청할 동물번호 : '))
++        select_apply = int(input('''╭┈─── 신청할 동물번호 :ྀ࿐ ˊˎ-
++╰┈➤ '''))-1
+ 
+         # 신청한 동물 인덱스에 있는 객체의 신청내역에 신청한 사용자의 이름을 넣는다
+-        self.animals[select_apply].applys.append(self.now_user.name)
++        self.animals[select_apply].applys.append(self.now_user)
+         # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.
+         self.now_user.pick_list.append(self.animals[select_apply])
+-        print('신청되었습니다 ! ')
++        print('‿︵‿︵‿︵୨˚̣̣̣͙୧ 신청되었습니다 ୨˚̣̣̣͙୧‿︵‿︵‿︵ ')
+ 
+     # 게시물 등록
+     def up_animal(self):
+@@ -103,81 +119,102 @@
+ 
+     # 사용자 정보 확인 및 신청한 동물, 분양한 동물 확인
+     def check(self):
+-        print('===== 사용자 정보 =======')
++        print('╭──                   ೋ사용자정보              ──╮')
+         print(self.now_user)
+-        print('--------- 등록한 게시물 ---------')
++        print('  ✿ 등록한 게시물 ⚪ ༺⊰━━━━━━━━━━━━━━━─')
+         self.now_user.show_uplist()
+-        print('------- 입양신청한 반려동물 ------')
++        print('  ✿ 입양신청한 반려동물 ⚪ ༺⊰━━━━━━━━━━─')
+         self.now_user.show_picklist()
++        print('╰──                    ೋ                     ──╯')
+ 
+     # test하기 위한 기본 사용자들
+     def test(self):
+-        # 사용자 1
++        #########사용자들######
++        # 사용자 1 - vina
+         vina = User(self.users)
+         vina.name = 'vina'
+         vina.pw = '1234'
+         vina.age = '991115'
+-        vina.gender = 'w'
++        vina.gender = '여자'
+         vina.number = '01025825852'
+         self.users.append(vina)
+ 
+-        # vina - 게시물1
+-        토깽이 = Parcel_out()
+-        토깽이.species = '토끼'
+-        토깽이.pat_name ='토깽이'
+-        토깽이.pat_age = 5
+-        토깽이.pat_gender = 'w'
+-        토깽이.etc ='당근을 좋아함'
+-
+-        # vina - 게시물2
+-        행복이 = Parcel_out()
+-        행복이.species = '고양이'
+-        행복이.pat_name = '행복이'
+-        행복이.pat_age = 2
+-        행복이.pat_gender = 'w'
+-        행복이.etc = '우리집 고양이 츄르를 좋아해'
+-
+-        # 사용자 2
++        # 사용자 2- nono
+         nono = User(self.users)
+         nono.name = 'nono'
+         nono.pw = 'nnnn'
+         nono.age = '060912'
+-        nono.gender = 'w'
++        nono.gender = '여자'
+         nono.number = '01042514263'
+         self.users.append(nono)
+ 
+-        # nono - 게시물1
+-        꼬꼬 = Parcel_out()
+-        꼬꼬.species = '병아리'
+-        꼬꼬.pat_name = '꼬꼬'
+-        꼬꼬.pat_age = 6
+-        꼬꼬.pat_gender = 'm'
+-        꼬꼬.etc = '병아리 옆구리 부상을 입음'
+-
+-        # 사용자 3
++        # 사용자 3 - nono
+         nara = User(self.users)
+         nara.name = 'nara'
+         nara.pw = 'na2419'
+         nara.age = '04'
+-        nara.gender = 'w'
++        nara.gender = '여자'
+         nara.number = '01042514263'
+         self.users.append(nara)
+ 
+-        # 사용자 4
++        # 사용자 5 - daniel
++        daniel = User(self.users)
++        daniel.name = 'daniel'
++        daniel.pw = '0308'
++        daniel.age = '20000308'
++        daniel.gender = '여자'
++        daniel.number = '01098792433'
++        self.users.append(daniel)
++
++        # 사용자 4 - alex
+         alex = User(self.users)
+         alex.name = 'alex'
+         alex.pw = '0101'
+         alex.age = '860708'
+-        alex.gender = 'm'
++        alex.gender = '남자'
+         alex.number = '01032415768'
+         self.users.append(alex)
+ 
++        # 사용자 6 - hoon
++        hoon = User(self.users)
++        hoon.name = 'hoon'
++        hoon.pw = '1118'
++        hoon.age = '20040118'
++        hoon.gender = '남자'
++        hoon.number = '01049852736'
++        self.users.append(hoon)
++
++        #######게시물 올리기#####
++        # vina - 게시물1
++        토깽이 = Parcel_out()
++        토깽이.species = '토끼'
++        토깽이.pat_name ='토깽이'
++        토깽이.pat_age = 5
++        토깽이.pat_gender = '암컷'
++        토깽이.etc ='당근을 좋아함'
++
++        # vina - 게시물2
++        행복이 = Parcel_out()
++        행복이.species = '고양이'
++        행복이.pat_name = '행복이'
++        행복이.pat_age = 2
++        행복이.pat_gender = '암컷'
++        행복이.etc = '우리집 고양이 츄르를 좋아해'
++
++        # nono - 게시물1
++        꼬꼬 = Parcel_out()
++        꼬꼬.species = '병아리'
++        꼬꼬.pat_name = '꼬꼬'
++        꼬꼬.pat_age = 6
++        꼬꼬.pat_gender = '수컷'
++        꼬꼬.etc = '병아리 옆구리 부상을 입음'
++
+         # alex - 게시물1
+         햄토리 = Parcel_out()
+         햄토리.species = '햄스터'
+         햄토리.pat_name = '햄토리'
+         햄토리.pat_age = 1
+-        햄토리.pat_gender = 'w'
++        햄토리.pat_gender = '암컷'
+         햄토리.etc = '해바라기 씨를 좋아함'
+ 
+         # alex - 게시물2
+@@ -185,52 +222,43 @@
+         몽이.species = '앵무새'
+         몽이.pat_name = '몽이'
+         몽이.pat_age = 2
+-        몽이.pat_gender = 'w'
++        몽이.pat_gender = '암컷'
+         몽이.etc = '"안녕"과 "사랑해"를 할 수 있음'
+ 
+-        # 사용자 5
+-        daniel = User(self.users)
+-        daniel.name = 'daniel'
+-        daniel.pw = '0308'
+-        daniel.age = '20000308'
+-        daniel.gender = 'w'
+-        daniel.number = '01098792433'
+-        self.users.append(daniel)
+ 
+         # daniel - 게시물1
+         보리 = Parcel_out()
+         보리.species = '강아지'
+         보리.pat_name = '보리'
+         보리.pat_age = 6
+-        보리.pat_gender = 'm'
++        보리.pat_gender = '수컷'
+         보리.etc = '관절이 좋지 않으니 주의 바람'
+ 
+-        # 사용자 6
+-        hoon = User(self.users)
+-        hoon.name = 'hoon'
+-        hoon.pw = '20040118'
+-        hoon.age = '1118'
+-        hoon.gender = 'm'
+-        hoon.number = '01049852736'
+-        self.users.append(hoon)
+-
+         # hoon - 게시물1
+         포키 = Parcel_out()
+         포키.species = '거북이'
+         포키.pat_name = '포키'
+         포키.pat_age = 9
+-        포키.pat_gender = 'w'
++        포키.pat_gender = '암컷'
+         포키.etc = '옛날에 등딱지를 다쳐서 흉터가 있음'
+ 
++        # hoon - 게시물1
++        독도 = Parcel_out()
++        독도.species = '거북이'
++        독도.pat_name = '독도'
++        독도.pat_age = 11
++        독도.pat_gender = '수컷'
++        독도.etc = '사실 자라인지 헷갈림'
++
+         # hoon - 게시물2
+         휴지 = Parcel_out()
+         휴지.species = '고양이'
+         휴지.pat_name = '휴지'
+         휴지.pat_age = 1
+-        휴지.pat_gender = 'm'
+-        휴지.etc = '길 고양이이며, 피부병이 있었지만 지금은 완치함, 사람들을 좋아함'
++        휴지.pat_gender = '수컷'
++        휴지.etc = '길 고양이이며, 피부병이\n있었지만 지금은 완치함, 사람들을 좋아함'
+ 
+-        # 등록하기
++        #######게시물 등록하기######
+         self.animals.append(토깽이)
+         vina.up_list.append(토깽이)
+         self.animals.append(행복이)
+@@ -245,16 +273,39 @@
+         daniel.up_list.append(보리)
+         self.animals.append(포키)
+         hoon.up_list.append(포키)
++        self.animals.append(독도)
++        hoon.up_list.append(독도)
+         self.animals.append(휴지)
+         hoon.up_list.append(휴지)
+ 
+-        # 신청하기
+-        꼬꼬.applys.append(vina.name)
++        ####### 신청하기 ########
++        꼬꼬.applys.append(vina)
+         vina.pick_list.append(꼬꼬)
++        꼬꼬.applys.append(daniel)
++        daniel.pick_list.append(꼬꼬)
+ 
+-        행복이.applys.append(nono.name)
++        행복이.applys.append(nono)
+         nono.pick_list.append(행복이)
+ 
++        햄토리.applys.append(nara)
++        nara.pick_list.append(햄토리)
++        몽이.applys.append(nara)
++        nara.pick_list.append(몽이)
++
++        보리.applys.append(hoon)
++        hoon.pick_list.append(보리)
++        보리.applys.append(nono)
++        nono.pick_list.append(보리)
++
++        휴지.applys.append(vina)
++        vina.pick_list.append(휴지)
++        휴지.applys.append(alex)
++        alex.pick_list.append(휴지)
++        휴지.applys.append(nara)
++        nara.pick_list.append(휴지)
++
++
++
+ 
+ 
+ 
+Index: parcel_out.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class Parcel_out:\r\n    def __init__(self):\r\n        # 동물의 종류\r\n        self.species =''\r\n        # 동물의 이름\r\n        self.pat_name =''\r\n        # 동물의 나이\r\n        self.pat_age = 1\r\n        # 동물의 성별\r\n        self.pat_gender =''\r\n        # 분양동물 기타사항\r\n        self.etc =''\r\n        #입양신청자 리스트\r\n        self.applys = []\r\n\r\n    #동물 정보 입력\r\n    def set_pat(self):\r\n        self.pat_name = input('분양할 동물의 이름을 입력하세요 : ')\r\n\r\n        while True:\r\n            age =  input('분양할 동물의 나이를 입력하세요 : ')\r\n            if age.isdigit() == True:\r\n                self.pat_age = int(age)\r\n                break;\r\n            else:\r\n                input('잘못 입력했습니다. 숫자만 입력해주세요')\r\n\r\n        while True:\r\n            gender =  input('분양할 동물의 성별을 입력하세요 (w|m) : ')\r\n            if gender == 'w' or gender == 'm':\r\n                self.pat_gender = gender\r\n                break;\r\n            else:\r\n                input('잘못 입력했습니다. 다시 입력해주세요')\r\n\r\n        self.species = input('분양할 동물 종을 입력하세요 : ')\r\n        self.etc = input('분양할 동물의 기타사항을 입력하세요 : ')\r\n\r\n\r\n    def __str__(self):\r\n        return (f'이름:{self.pat_name}\\t나이:{self.pat_age}\\t성별:{self.pat_gender}\\t종류:{self.species}\\t기타사항:{self.etc}')
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/parcel_out.py b/parcel_out.py
+--- a/parcel_out.py	(revision 3a4a27bcc6e2bddffe2525c90b066f3f8d2bb650)
++++ b/parcel_out.py	(date 1636331127000)
+@@ -1,41 +1,43 @@
+ class Parcel_out:
+     def __init__(self):
+         # 동물의 종류
+-        self.species =''
++        self.species = ''
+         # 동물의 이름
+-        self.pat_name =''
++        self.pat_name = ''
+         # 동물의 나이
+         self.pat_age = 1
+         # 동물의 성별
+-        self.pat_gender =''
++        self.pat_gender = ''
+         # 분양동물 기타사항
+-        self.etc =''
+-        #입양신청자 리스트
++        self.etc = ''
++        # 입양신청자 리스트
+         self.applys = []
+ 
+-    #동물 정보 입력
++    # 동물 정보 입력
+     def set_pat(self):
+-        self.pat_name = input('분양할 동물의 이름을 입력하세요 : ')
++        self.pat_name = input('분양할 동물의 이름을 입력하세요 → ')
+ 
+         while True:
+-            age =  input('분양할 동물의 나이를 입력하세요 : ')
++            age = input('분양할 동물의 나이를 입력하세요 → ')
+             if age.isdigit() == True:
+                 self.pat_age = int(age)
+-                break;
++                break
+             else:
+-                input('잘못 입력했습니다. 숫자만 입력해주세요')
++                input('잘못 입력했습니다(>_<｡)💦 숫자만 입력해주세요')
+ 
+         while True:
+-            gender =  input('분양할 동물의 성별을 입력하세요 (w|m) : ')
+-            if gender == 'w' or gender == 'm':
+-                self.pat_gender = gender
+-                break;
++            gender = input('분양할 동물의 성별을 입력하세요 (w|m) → ')
++            if gender == 'w' :
++                self.pat_gender = '암컷'
++                break
++            elif  gender == 'm':
++                self.pat_gender = '수컷'
++                break
+             else:
+-                input('잘못 입력했습니다. 다시 입력해주세요')
++                input('잘못 입력했습니다(>_<｡)💦 다시 입력해주세요')
+ 
+-        self.species = input('분양할 동물 종을 입력하세요 : ')
+-        self.etc = input('분양할 동물의 기타사항을 입력하세요 : ')
+-
++        self.species = input('분양할 동물 종을 입력하세요 → ')
++        self.etc = input('분양할 동물의 기타사항을 입력하세요 → ')
+ 
+     def __str__(self):
+-        return (f'이름:{self.pat_name}\t나이:{self.pat_age}\t성별:{self.pat_gender}\t종류:{self.species}\t기타사항:{self.etc}')
+\ No newline at end of file
++        return (f'  이름:{self.pat_name}\n  나이:{self.pat_age}\n  성별:{self.pat_gender}\n  종류:{self.species}\n  기타사항:{self.etc}')
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># adieu\r\n파이썬 수행평가\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/README.md b/README.md
+--- a/README.md	(revision 3a4a27bcc6e2bddffe2525c90b066f3f8d2bb650)
++++ b/README.md	(date 1636331127000)
+@@ -1,2 +1,10 @@
+-# adieu
+-파이썬 수행평가
++# ୨┈┈┈┈┈         𝕒𝕕𝕚𝕖𝕦        ┈┈┈┈┈୧
++###✔ 
++실행순서
++로그인 아니면 회원가입
++메뉴선택
++-메뉴들 이쁘게 - 뱃지
++입양, 분양 등 원하는 메뉴 실행 후 
++종료하기
++ 화살표 > 처음 실행파일 메인
++
+Index: login.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/login.py b/login.py
+new file mode 100644
+--- /dev/null	(date 1636331127000)
++++ b/login.py	(date 1636331127000)
+@@ -0,0 +1,58 @@
++from tkinter import *
++from adieu_main import adieuMain
++
++
++class LoginAdieu():
++
++    def __init__(self, title):
++        root = Tk()
++        root.title(title)
++        root.geometry('745x580')
++        root.configure(bg="#FFC978")
++        root.resizable(0, 0)
++        self.root = root
++        # 프레임 설정
++        self.mainFrame = Frame(self.root, bg='#FFC978')
++        self.mainFrame.pack(expand=True)
++        
++        # logo 설정
++        logo_img = PhotoImage(file='img/Adieu.png')
++        logo = Label(self.mainFrame, image=logo_img, bg="#FFC978", anchor='center')
++
++        # id , password 입력칸 설정
++        self.id = Entry(self.mainFrame, width=30,relief="flat",bd=10,fg="gray")
++        self.pw = Entry(self.mainFrame, width=30,relief="flat",bd=10,fg="gray")
++        self.id.insert(0,"input userId")
++        self.pw.insert(0,"input userPassword")
++        self.id.bind("<Button-1>",self.focusId)
++        self.pw.bind("<Button-1>",self.focusPw)
++        self.pw.bind("<FocusIn>",self.focusPw)
++
++        self.loginBtn = Button(self.mainFrame,width=30, relief="flat", bd=10,
++                               text="로그인",command=self.loginEvent, bg="#F0AD48",fg="#B96F00")
++        # 화면 띄우기
++        logo.pack(padx=10, pady=30)
++        self.id.pack(padx=10, pady=5)
++        self.pw.pack(padx=10, pady=5)
++        self.loginBtn.pack(padx=10,pady=30)
++        self.play()
++
++    def focusId(self,event):    # id입력칸
++        self.id.config(fg="black")
++        self.id.delete(0, END)
++
++    def focusPw(self,event):    # pw입력칸 설정
++        self.pw.config(fg="black")
++        self.pw.delete(0,END)
++
++    def loginEvent(self):
++        # 로그인 맞는지 확인하고 메인 진입
++        self.root.destroy()
++        adieuMain("메인")
++
++    def play(self):
++        self.root.mainloop()
++
++
++if __name__ == '__main__':
++    l = LoginAdieu("로그인 화면")
+\ No newline at end of file
+Index: main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from Adoption_book import Adoption_book\r\ndef print_menu():\r\n    print('-------- 가이드 --------')\r\n    print('1. 로그아웃 및 로그인')\r\n    print('2. 게시물 둘러보기')\r\n    print('3. 동물종류별 검색')\r\n    print('4. 반려동물 입양신청하기')\r\n    print('5. 분양 게시물 등록하기')\r\n    print('6. 내 정보 확인하기')\r\n    print('7. 종료하기')\r\n\r\n    num = input('원하는 가이드번호 선택 >> ')\r\n    return num\r\n\r\ndef main():\r\n    user = Adoption_book()\r\n    while True:\r\n        num = int(print_menu())  # 사용할 메뉴 선택\r\n        if num==1:\r\n            user.set_user() # 새로 로그인\r\n        elif num ==2:\r\n            user.show_animals() # 게시물 둘러보기\r\n        elif num ==3:\r\n            user.search_animal()  # 동물 종류별 검색\r\n        elif num ==4:\r\n            user.put_animals()  # 입양신청\r\n        elif num ==5:\r\n            user.up_animal()    # 분양 게시물 등록\r\n        elif num ==6:\r\n            user.check()    # 내정보 확인\r\n        elif num == 7: # 종료\r\n            print('종료되었습니다.')\r\n            break\r\n        else:\r\n            print('- 잘못 입력하셨습니다. 다시 입력하세요 -')\r\n\r\nif __name__ == '__main__':  # __name__ : 파이썬 내장 변수\r\n# main이 name일 때 실행한다.\r\n    main()
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main.py b/main.py
+--- a/main.py	(revision 3a4a27bcc6e2bddffe2525c90b066f3f8d2bb650)
++++ b/main.py	(date 1636331127000)
+@@ -1,15 +1,17 @@
+ from Adoption_book import Adoption_book
+ def print_menu():
+-    print('-------- 가이드 --------')
+-    print('1. 로그아웃 및 로그인')
+-    print('2. 게시물 둘러보기')
+-    print('3. 동물종류별 검색')
+-    print('4. 반려동물 입양신청하기')
+-    print('5. 분양 게시물 등록하기')
+-    print('6. 내 정보 확인하기')
+-    print('7. 종료하기')
++    print('''　       ／＞　　フ    ┍━━━━━━━━»•» 🌸 «•«━━━━┑
++　　　　　| 　_　 _ l     1. 로그아웃 및 로그인  
++　 　　　／` ミ＿Yノ      2. 게시물 둘러보기
++　　 　 /　　　 　 |      3. 동물종류별 검색
++　　　 /　 ヽ　　 ﾉ       4. 반려동물 입양신청하기
++　 　 │　　|　|　|       5. 분양 게시물 등록하기
++　／￣|　　 |　|　|      6. 내 정보 확인하기
++　| (￣ヽ＿_ヽ_)__)      7. 종료하기
++　＼二つ              ┕━━━━»•» 🌸 «•«━━━━━━━━┙                        ''')
++    num = input('''    ╭┈─── 원하는 가이드 :ྀ࿐ ˊˎ-
++    ╰┈➤ ''')
+ 
+-    num = input('원하는 가이드번호 선택 >> ')
+     return num
+ 
+ def main():
+@@ -17,7 +19,8 @@
+     while True:
+         num = int(print_menu())  # 사용할 메뉴 선택
+         if num==1:
+-            user.set_user() # 새로 로그인
++            while user.set_user() == 0:
++                print('꒦꒷꒷꒦꒷꒷로그인 실패꒦꒷꒷꒦꒷꒦') # 새로 로그인
+         elif num ==2:
+             user.show_animals() # 게시물 둘러보기
+         elif num ==3:
+@@ -29,7 +32,7 @@
+         elif num ==6:
+             user.check()    # 내정보 확인
+         elif num == 7: # 종료
+-            print('종료되었습니다.')
++            print('⊱───── ❝ 종료되었습니다 ❞ ─────⊰')
+             break
+         else:
+             print('- 잘못 입력하셨습니다. 다시 입력하세요 -')
+Index: adieu_main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/adieu_main.py b/adieu_main.py
+new file mode 100644
+--- /dev/null	(date 1636331127000)
++++ b/adieu_main.py	(date 1636331127000)
+@@ -0,0 +1,88 @@
++from tkinter import *
++import tkinter.ttk
++
++
++class adieuMain():
++    def __init__(self, title):
++        self.root = Tk()
++        self.root.title(title)
++        self.root.geometry('745x580')
++        self.root.configure(bg="#FFC978")
++        self.root.resizable(0, 0)
++
++        # 동물검색
++        logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
++        logo = Label(self.root,bg="#FFC978",image=logo_img)
++
++        # 왼쪽 사이드
++        cartegoryFrame = Frame(self.root, bg="#FFC978" )
++        for i in range(5):
++            text = Label(cartegoryFrame,text="동물이름"+str(i), fg='#B96F00',bg="#FFC978",pady=5,cursor="hand2"
++                                                                                                    "")
++            text.pack()
++        photo_img = PhotoImage(file='img/search_img.png')
++        search = Label(self.root, image=photo_img,bg="#FFC978")
++
++        # 오른쪽 사이드
++        animalList = Frame(self.root, width=900, height=900, bg="#FFC978")
++        self.animalView = tkinter.ttk.Treeview(animalList,height= 20,columns=["species","name","age"])
++        self.animalView.bind("<ButtonRelease-1>",self.click_item)
++        # treeView 사용 기본항목 포함 4개
++        # scrollbar(animalList)
++        # scrollbar.pack(side='right', fill="y")
++
++        self.animalView.column('#0', width=70,anchor="center")   # 해당 속성이 차지하는 비율 
++        self.animalView.heading('#0', text="num",anchor="center")    # 해당속성의 이름
++        self.animalView.column('#1',width=150,anchor="center")
++        self.animalView.heading('#1',text="species",anchor="center")
++        self.animalView.column('#2',width=200,anchor="center")
++        self.animalView.heading('#2',text="name",anchor="center")
++        self.animalView.column('#3',width=80,anchor="center")
++        self.animalView.heading('#3',text="age",anchor="center")
++
++        treelist = [("A","동물이름", 65), ("B","동물이름", 66), ("C","동물이름", 67), ("D","동물이름", 68), ("E","동물이름", 69),
++                    ("A","동물이름", 65), ("B","동물이름", 66), ("C","동물이름", 67), ("D","동물이름", 68), ("E","동물이름", 69),
++                    ("A","동물이름", 65), ("B","동물이름", 66), ("C","동물이름", 67), ("D","동물이름", 68), ("E","동물이름", 69)]
++
++        for i in range(len(treelist)):
++            self.animalView.insert('', 'end', text=i, values=treelist[i], iid=str(i) + "번")
++
++        # scrollbar.config(command=self.animalView.yview)
++        # self.animalView.config(yscrollcommand=scrollbar.set)
++
++        # 오른쪽 위 로그아웃, 사용자
++        logout = Label(self.root,text="로그아웃",fg="#B96F00",bg="#FFC978",cursor="left_side")
++        user = Label(self.root, text='사용자',fg= '#B96F00',bg="#FFC978",cursor="center_ptr")
++        logout.bind('<ButtonRelease-1>',self.logout_event)
++        user.bind('<ButtonRelease-1>',self.user_event)
++
++        # 화면 보여주기
++        self.animalView.pack(side='left')
++        cartegoryFrame.pack(side='left',fill="y")
++        animalList.place(x=200, y=90)
++        logout.place(x=600,y=15)
++        user.place(x=660,y=15)
++        cartegoryFrame.place(x=50,y=150)
++        search.place(x=15, y=90)
++        logo.place(x=10,y=5)
++        self.play()
++
++    def click_item(self,evnet): # item 클릭 시 실행
++        selectedItem = self.animalView.focus()
++        getValue = self.animalView.item(selectedItem).get('values')
++        print(getValue)
++
++    def logout_event(self,evnet):
++        self.root.destroy()
++        from login import LoginAdieu
++        LoginAdieu("로그인화면")
++
++    def user_event(self,event):
++        self.root.destroy()
++        from sign_up import SignUp
++        SignUp('회원가입')
++        
++    def play(self):
++        self.root.mainloop()
++
++
+Index: sign_up.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/sign_up.py b/sign_up.py
+new file mode 100644
+--- /dev/null	(date 1636331127000)
++++ b/sign_up.py	(date 1636331127000)
+@@ -0,0 +1,97 @@
++from tkinter import *
++
++
++class SignUp():
++    def __init__(self, title):
++        bg_color='#FFC978'  # 배경색
++        self.root = Tk()
++        self.root.title(title)
++        self.root.geometry('745x580')
++        self.root.configure(bg=bg_color)
++        self.root.resizable(0,0)
++        # 왼쪽 사이드
++        logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
++        logo = Label(self.root, bg=bg_color, image=logo_img)    # 로고
++        photo_img = PhotoImage(file='img/input_img.png')
++        photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
++        sign_up_btn = Button(self.root,cursor='hand2', width=16, text='회원가입',bg='#F0AD48',relief='flat',bd=10,fg='#B96F00') # 회원가입 버튼
++        cancel_btn = Button(self.root,cursor='hand2', width=16, text='취소',bg='#F0AD48',relief='flat',bd=10,fg='#B96F00')    # 취소 버튼
++
++        # 입력받기
++        inputFrame = Frame(self.root, bg=bg_color,width=430,height=400)
++        name = Entry(inputFrame, width=20, relief="flat", bd=13, fg="gray")
++        age = Entry(inputFrame, width=25, relief="flat", bd=13, fg="gray")
++        id = Entry(inputFrame, width=25, relief="flat", bd=13, fg="gray")
++        pw = Entry(inputFrame, width=30, relief="flat", bd=13, fg="gray")
++        pw_check = Entry(inputFrame, width=30, relief="flat", bd=13, fg="gray")
++        zipcode = Entry(inputFrame, width=30, relief="flat", bd=13, fg="gray")
++        call_number = Entry(inputFrame, width=40, relief="flat", bd=13, fg="gray")
++        introduce = Entry(inputFrame, width=40, relief="flat", bd=13, fg="gray")
++        inputList = [name, age, id, pw, pw_check, zipcode, call_number, introduce]  # 입력 받을 리스트
++
++        # hint
++        inputList[0].insert(0, '이름')
++        inputList[1].insert(0, '나이')
++        inputList[2].insert(0, 'ID')
++        inputList[3].insert(0, 'PW')
++        inputList[4].insert(0, 'PW 확인')
++        inputList[5].insert(0, '집주소')
++        inputList[6].insert(0, '전화번호')
++        inputList[7].insert(0, '소개')
++
++        # hint 이벤트
++        inputList[0].bind('<Button-1>', lambda x: self.hintEvent(event=name))
++        inputList[1].bind('<Button-1>', lambda x: self.hintEvent(event=age))
++        inputList[2].bind('<Button-1>', lambda x: self.hintEvent(event=id))
++        inputList[3].bind('<Button-1>', lambda x: self.hintEvent(event=pw))
++        inputList[4].bind('<Button-1>', lambda x: self.hintEvent(event=pw_check))
++        inputList[5].bind('<Button-1>', lambda x: self.hintEvent(event=zipcode))
++        inputList[6].bind('<Button-1>', lambda x: self.hintEvent(event=call_number))
++        inputList[7].bind('<Button-1>', lambda x: self.hintEvent(event=introduce))
++        # 탭으로 들어올때 이벤트
++        inputList[0].bind('<FocusIn>', lambda x: self.hintEvent(event=name))
++        inputList[1].bind('<FocusIn>', lambda x: self.hintEvent(event=age))
++        inputList[2].bind('<FocusIn>', lambda x: self.hintEvent(event=id))
++        inputList[3].bind('<FocusIn>', lambda x: self.hintEvent(event=pw))
++        inputList[4].bind('<FocusIn>', lambda x: self.hintEvent(event=pw_check))
++        inputList[5].bind('<FocusIn>', lambda x: self.hintEvent(event=zipcode))
++        inputList[6].bind('<FocusIn>', lambda x: self.hintEvent(event=call_number))
++        inputList[7].bind('<FocusIn>', lambda x: self.hintEvent(event=introduce))
++
++        # 화면넣기
++        inputFrame.place(x=290, y=80)
++        name.pack(pady=5,anchor='w')
++        age.pack(pady=5,anchor='w')
++        id.pack(pady=5,anchor='w')
++        pw.pack(pady=5,anchor='w')
++        pw_check.pack(pady=5,anchor='w')
++        zipcode.pack(pady=5,anchor='w')
++        call_number.pack(pady=5,anchor='w')
++        introduce.pack(pady=5,anchor='w')
++        photo.place(x=40,y=90)
++        sign_up_btn.place(x=65,y=330)
++        cancel_btn.place(x=65,y=385)
++        logo.place(x=5, y=5)
++        self.play()
++
++    def hintEvent(self,event):  # 눌렀을때 글자 넣을수 있게
++        event.config(fg='black')
++        event.delete(0,END)
++        
++    def signUpEvent(self):
++        # 회원가입 버튼 눌렀을때
++        # 아이디 중복 체크
++        # 형식 체크
++        # 비번 확인 체크
++        pass
++    
++    def cancelEvent(self):
++        # 취소 - 시작화면으로 이동
++        pass
++
++    def play(self):
++        self.root.mainloop()
++
++if __name__ == '__main__':
++    SignUp('회원가입')
++
+Index: edit_user_info.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/edit_user_info.py b/edit_user_info.py
+new file mode 100644
+--- /dev/null	(date 1636331127000)
++++ b/edit_user_info.py	(date 1636331127000)
+@@ -0,0 +1,100 @@
++from tkinter import *
++
++
++class EditUserInfo():
++    def __init__(self, title):
++        bg_color = '#FFC978'  # 배경색
++        self.root = Tk()
++        self.root.title(title)
++        self.root.geometry('745x580')
++        self.root.configure(bg=bg_color)
++        self.root.resizable(0, 0)
++        # 왼쪽 사이드
++        logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
++        logo = Label(self.root, bg=bg_color, image=logo_img)  # 로고
++        photo_img = PhotoImage(file='img/input_img.png')
++        photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
++        edit_btn = Button(self.root, cursor='hand2', width=16, text='정보수정', bg='#F0AD48', relief='flat', bd=10,
++                             fg='#B96F00')  # 회원가입 버튼
++        cancel_btn = Button(self.root, cursor='hand2', width=16, text='취소', bg='#F0AD48', relief='flat', bd=10,
++                            fg='#B96F00')  # 취소 버튼
++
++        # 입력받기
++        inputFrame = Frame(self.root, bg=bg_color, width=430, height=400)
++        name = Entry(inputFrame, width=20, relief="flat", bd=13, fg="gray")
++        age = Entry(inputFrame, width=25, relief="flat", bd=13, fg="gray")
++        id = Entry(inputFrame, width=25, relief="flat", bd=13, fg="gray")
++        pw = Entry(inputFrame, width=30, relief="flat", bd=13, fg="gray")
++        pw_check = Entry(inputFrame, width=30, relief="flat", bd=13, fg="gray")
++        zipcode = Entry(inputFrame, width=30, relief="flat", bd=13, fg="gray")
++        call_number = Entry(inputFrame, width=40, relief="flat", bd=13, fg="gray")
++        introduce = Entry(inputFrame, width=40, relief="flat", bd=13, fg="gray")
++        inputList = [name, age, id, pw, pw_check, zipcode, call_number, introduce]  # 입력 받을 리스트
++
++        # hint
++        inputList[0].insert(0, '이름')
++        inputList[1].insert(0, '나이')
++        inputList[2].insert(0, 'ID')
++        inputList[3].insert(0, 'PW')
++        inputList[4].insert(0, 'PW 확인')
++        inputList[5].insert(0, '집주소')
++        inputList[6].insert(0, '전화번호')
++        inputList[7].insert(0, '소개')
++
++        # hint 이벤트
++        inputList[0].bind('<Button-1>', lambda x: self.hintEvent(event=name))
++        inputList[1].bind('<Button-1>', lambda x: self.hintEvent(event=age))
++        inputList[2].bind('<Button-1>', lambda x: self.hintEvent(event=id))
++        inputList[3].bind('<Button-1>', lambda x: self.hintEvent(event=pw))
++        inputList[4].bind('<Button-1>', lambda x: self.hintEvent(event=pw_check))
++        inputList[5].bind('<Button-1>', lambda x: self.hintEvent(event=zipcode))
++        inputList[6].bind('<Button-1>', lambda x: self.hintEvent(event=call_number))
++        inputList[7].bind('<Button-1>', lambda x: self.hintEvent(event=introduce))
++        # 탭으로 들어올때 이벤트
++        inputList[0].bind('<FocusIn>', lambda x: self.hintEvent(event=name))
++        inputList[1].bind('<FocusIn>', lambda x: self.hintEvent(event=age))
++        inputList[2].bind('<FocusIn>', lambda x: self.hintEvent(event=id))
++        inputList[3].bind('<FocusIn>', lambda x: self.hintEvent(event=pw))
++        inputList[4].bind('<FocusIn>', lambda x: self.hintEvent(event=pw_check))
++        inputList[5].bind('<FocusIn>', lambda x: self.hintEvent(event=zipcode))
++        inputList[6].bind('<FocusIn>', lambda x: self.hintEvent(event=call_number))
++        inputList[7].bind('<FocusIn>', lambda x: self.hintEvent(event=introduce))
++
++        # 화면넣기
++        inputFrame.place(x=290, y=80)
++        name.pack(pady=5, anchor='w')
++        age.pack(pady=5, anchor='w')
++        id.pack(pady=5, anchor='w')
++        pw.pack(pady=5, anchor='w')
++        pw_check.pack(pady=5, anchor='w')
++        zipcode.pack(pady=5, anchor='w')
++        call_number.pack(pady=5, anchor='w')
++        introduce.pack(pady=5, anchor='w')
++        photo.place(x=40, y=90)
++        edit_btn.place(x=65, y=330)
++        cancel_btn.place(x=65, y=385)
++        logo.place(x=5, y=5)
++        self.play()
++
++    def hintEvent(self, event):  # 눌렀을때 글자 넣을수 있게
++        event.config(fg='black')
++        event.delete(0, END)
++
++    def signUpEvent(self):
++        # 회원가입 버튼 눌렀을때
++        # 아이디 중복 체크
++        # 형식 체크
++        # 비번 확인 체크
++        pass
++
++    def cancelEvent(self):
++        # 취소 - 시작화면으로 이동
++        pass
++
++    def play(self):
++        self.root.mainloop()
++
++
++if __name__ == '__main__':
++    EditUserInfo('사용자 정보 수정화면')
++

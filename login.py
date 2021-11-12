@@ -28,7 +28,12 @@ class LoginAdieu():
         self.pw.bind("<Button-1>",self.focusPw)
         self.pw.bind("<FocusIn>",self.focusPw)
 
+<<<<<<< HEAD
         self.loginBtn = Button(self.mainFrame,width=30, relief="flat", bd=10, text="로그인", command=self.loginEvent, bg="#F0AD48", fg="#B96F00")
+=======
+        self.loginBtn = Button(self.mainFrame,width=30, relief="flat", bd=10,
+                               text="로그인",command=self.loginEvent, bg="#F0AD48",fg="#B96F00")
+>>>>>>> e4932598133accbe67d43544ebfa854deafdc43f
         # 화면 띄우기
         logo.pack(padx=10, pady=30)
         self.id.pack(padx=10, pady=5)

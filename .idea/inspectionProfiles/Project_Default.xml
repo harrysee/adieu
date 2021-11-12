@@ -4,8 +4,12 @@
     <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredIdentifiers">
         <list>
+<<<<<<< HEAD
           <option value="tictactoe.tictactoe_GUI.maessagebox" />
           <option value="tictactoe.tictactoe_GUI.meassagebox" />
+=======
+          <option value="list.up_list" />
+>>>>>>> e4932598133accbe67d43544ebfa854deafdc43f
         </list>
       </option>
     </inspection_tool>

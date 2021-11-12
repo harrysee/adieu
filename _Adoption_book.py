@@ -61,29 +61,25 @@ class Adoption_book:
         with open(file_path, "w") as out_file:
             json.dump(self.animals, out_file, indent=4)
 
-    # 입양하고 싶은 동물 종류별 검색
-    def search_animal(self):
+    def get_animal_species(self):
         # 동물 종류 중복제거
         search_kind = set()
-        for a in self.animals:
-            search_kind.add(a.species)
+        for key in self.animals.keys():
+            search_kind.add(self.animals[key]['species'])
+        return search_kind
 
+    # 입양하고 싶은 동물 종류별 검색
+    def search_animal(self, select_kind):  # 선택한 동물종류 가져와서 검색하기
+        list = []
         # 동물 종류 보여주기
-        search_kind = list(search_kind)
-        for i, a in enumerate(search_kind):
-            print(f' εïз  {i + 1}. {a}')
-
-        # 해당되는 종의 동물 모두 출력
-        select = int(input('검색할 동물번호 » ')) - 1
-        for ani in self.animals:
-            if ani.species == search_kind[select]:
-                print('┍————————————— /ᐠ｡ꞈ｡ᐟ\ —————————————┑')
-                print(f'             {ani.pat_name}의 정보   ')
-                print(ani)  # 선택한 동물의 자세한 정보 보여주기
-                print('┕————————————————————————————————-┙')
+        for key in self.animals.keys:
+            if self.animals[key]['species'] == select_kind:
+                pair = (self.animals[key]['species'], key, self.animals[key]['pat_age'])
+                list.append(pair)
+        return list     # 검색한 리스트 반환
 
     # 입양할 동물들 목록 보여주기 - 종류 . 이름
-    def show_animals(self):
+    def show_animals(self, animals):
         animals_zip = list()
         # 등록된 동물 없을 경우 none 리턴
         if len(self.animals)==0:
@@ -104,7 +100,6 @@ class Adoption_book:
                 self.animals[select]['pat_gender'],
                 self.animals[select]['pat_gender'],
                 self.animals[select]['user']]
-            
 
     # 입양 신청하기
     def put_animals(self,animalname):

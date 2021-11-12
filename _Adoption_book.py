@@ -1,17 +1,33 @@
 import json
 
-from parcel_out import Parcel_out
+from _parcel_out import Parcel_out
 from _user import User
+from json_use import UseJSON as json
 
 class Adoption_book:
     def __init__(self):
-        self.animals = self.get_animals_json()    # 등록된 동물들
-        self.users = self.get_user_json()     # 유저 데이터
-        # self.users = []   # 저장된 유저들
+        print('시작')
+        self.testi()
+        self.animals = json.get_animals_json(self)    # 등록된 동물들
+        self.users = json.get_user_json(self)     # 유저 데이터
         #현재 유저
         # 처음 객체 생성 시 무조건 로그인
-        self.test()     # 테스트 코드
+        # self.test()     # 테스트 코드
         self.now_user = ''
+
+
+    def testi(self):
+        user = {}
+        user['d'] = {
+            "pw": 'new.pw',
+            'age': 00,
+            'gender': 'new.gender',
+            'call_number':'000000000',
+            'up_list': [],
+            'pick_list': []
+        }
+        json.set_user_json(self, user)
+        print('실행됨')
 
     # 로그인
     def login(self, name, pw):
@@ -22,7 +38,7 @@ class Adoption_book:
 
     def sign_up(self):
         # 유저리스트 유저정보 넣기
-        new = User(self.users)
+        new = User()
         new.set_all()
         self.users[new.name]= {
             "pw" : new.pw,
@@ -32,34 +48,12 @@ class Adoption_book:
             'up_list': [],
             'pick_list' : []
         }
-        self.set_user_json()
+        json.set_user_json(self.users)
         print('가입성공')
         if new.name in self.users==1:
             return 1    # 정상적으로 들어가면 트루
         return 0
 
-    def get_user_json(self):   # userdata 가져오기
-        file_path = "/datas/users_data.json"
-        with open(file_path, "r") as json_file:
-            json_data = json.load(json_file)
-        return json_data
-
-    def set_user_json(self):   # userdata 저장하기
-        file_path = "/datas/users_data.json"
-        with open(file_path, "w") as out_file:
-            json.dump(self.users, out_file,indent=4)
-        self.users = self.get_user_json()
-
-    def get_animals_json(self):  # animals 가져오기
-        file_path = "/datas/animals_book.json"
-        with open(file_path, "r") as json_file:
-            json_data = json.load(json_file)
-        return json_data
-
-    def set_animals_json(self):  # animals 저장하기
-        file_path = "/datas/animals_book.json"
-        with open(file_path, "w") as out_file:
-            json.dump(self.animals, out_file, indent=4)
 
     def get_animal_species(self):
         # 동물 종류 중복제거
@@ -107,8 +101,8 @@ class Adoption_book:
         self.animals[animalname]['apply_users'].appand(self.now_user)
         # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.
         self.users[self.now_user]['pick_list'].append(animalname)
-        self.set_animals_json()
-        self.set_user_json()
+        json.set_animals_json(self.animals)
+        json.set_user_json(self.users)(self.users)()
 
     # 게시물 등록
     def up_animal(self):
@@ -123,8 +117,8 @@ class Adoption_book:
             'apply_users' : [],     # 분양신청한 사용자들
         }
         self.users[self.now_user]['up_list'].append(new.pat_name) # 현재 사용자 객체의 올린 게시물 리스트에 게시물 올린거 추가
-        self.set_animals_json(self.animals)
-        self.set_user_json()
+        json.set_animals_json(self.animals)
+        json.set_user_json(self.users)(self.users)()
 
     # test하기 위한 기본 사용자들
     def test(self):
@@ -303,7 +297,8 @@ class Adoption_book:
         휴지.applys.append(nara)
         nara.pick_list.append(휴지)
 
-
+if __name__ == '__main__':
+    Adoption_book()
 
 
 

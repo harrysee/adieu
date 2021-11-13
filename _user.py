@@ -5,12 +5,17 @@ from json_use import UseJSON as json
 class User:
     def __init__(self):  # 원래 등록된 user들 가져오기
         self.name = ""
+        self.id = ''
+        self.zip_code =''
+        self.introduce = ''
         self.pw = ''
         self.age = 000000
         self.gender = 'w'
         self.number = ''
+        self.input_list = []
 
-    def set_all(self):
+    def check_all(self, input_list):
+        self.input_list = input_list
         # user 객체 보내기 :이름 입력받기
         self.set_name()
         # 비밀번호 설정
@@ -21,14 +26,14 @@ class User:
         self.set_gender()
         # 전화번호
         self.set_number()
-
-    # 이름 입력
-    def set_name(self, name):  # 매개변수로 이름
-        names = json.get_user_json(self)
+    
+    # 중복체크
+    def set_name(self):  # 매개변수로 이름
+        ids = json.get_user_json(self)
         # 중복되는 이름이 없으면 나옴
-        if name in names:   # 이미 이름이 있으면 false 반환
-            return False
-        return True     # 이름 없으면 true
+        if self.input_list[2] in ids:   # 이미 이름이 있으면 false 반환
+            return True
+        return 2     # 이름 없으면 이름 인덱스 반환
 
     # 비밀번호 입력
     def set_pw(self):

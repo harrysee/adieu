@@ -34,6 +34,7 @@ class Adoption_book:
         #로그인 한 이름과 비밀번호가 일치하면 로그인 성공
         if name in self.users and self.users[name][pw] == pw:
             self.now_user = name   # 로그인 성공이면 true 리턴
+            return 1
         return 0
 
     def sign_up(self, user_input_list):

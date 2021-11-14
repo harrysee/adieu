@@ -34,23 +34,27 @@ class Adoption_book:
         #로그인 한 이름과 비밀번호가 일치하면 로그인 성공
         if name in self.users and self.users[name][pw] == pw:
             self.now_user = name   # 로그인 성공이면 true 리턴
+            return 1
         return 0
 
-    def sign_up(self):
+    def sign_up(self, user_input_list):
         # 유저리스트 유저정보 넣기
         new = User()
-        new.set_all()
-        self.users[new.name]= {
+        new.check_all(user_input_list)
+        self.users[new.id]= {
+            'name': new.name,
             "pw" : new.pw,
             'age' : new.age,
             'gender': new.gender,
             'call_number': new.number,
+            'zip_code' : new.zip_code,
+            'introduce' : new.introduce,
             'up_list': [],
             'pick_list' : []
         }
         json.set_user_json(self.users)
         print('가입성공')
-        if new.name in self.users==1:
+        if new.id in self.users==1:
             return 1    # 정상적으로 들어가면 트루
         return 0
 
@@ -120,7 +124,7 @@ class Adoption_book:
         json.set_animals_json(self.animals)
         json.set_user_json(self.users)(self.users)()
 
-    # test하기 위한 기본 사용자들
+    # test하기 위한 기본 사용자들 ---------------------------
     def test(self):
         #########사용자들######
         # 사용자 1 - vina

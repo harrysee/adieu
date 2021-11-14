@@ -1,10 +1,17 @@
 from tkinter import *
+from tkinter import messagebox
+
 from adieu_main import adieuMain
+from _Adoption_book import Adoption_book as adoption_engien
 
 
 class LoginAdieu():
 
     def __init__(self, title):
+        self.engien = adoption_engien()
+        self.loginGUI(title)
+
+    def loginGUI(self,title):
         bg_color = '#FFC978'  # 배경색
         root = Tk()
         root.title(title)
@@ -52,6 +59,12 @@ class LoginAdieu():
 
     def loginEvent(self):
         # 로그인 맞는지 확인하고 메인 진입
+        if self.id['foreground'] != 'black' and self.pw['foreground'] != 'black':
+            messagebox.showinfo("입력오류", "아이디와 비번을 모두 입력하시오.")
+            return
+        if self.engien.login(self.id.get(), self.pw.get()) == False:
+            messagebox.showinfo("안내", "아이디나 비번이 일치하지 않습니다.")
+            return
         self.root.destroy()
         adieuMain("메인")
 

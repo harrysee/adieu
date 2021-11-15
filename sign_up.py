@@ -1,10 +1,7 @@
 import tkinter.messagebox
 from tkinter import *
 from tkinter import messagebox
-
 from _Adoption_book import Adoption_book as adoption_engien
-
-
 
 class SignUp():
     def __init__(self, title):
@@ -104,11 +101,16 @@ class SignUp():
             if info['foreground']!='black':
                 messagebox.showinfo("입력오류",info.get()+" 입력하시오.")
                 return
-        engien.sign_up(self.inputList)
+        message = engien.sign_up(self.inputList)
+        if message != True:
+            messagebox.showinfo("오류", message)  # 회원가입이 성공적으로 안되면 이유 리턴
+            return
+        messagebox.showinfo("안내","회원가입 완료!!")
         # 아이디 중복 체크
         # 형식 체크
         # 비번 확인 체크
-    
+
+
     def cancelEvent(self):
         # 취소 - 시작화면으로 이동
         from start import StartAdieu

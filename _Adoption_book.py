@@ -56,7 +56,7 @@ class Adoption_book:
         print('가입성공')
         if new.id in self.users==1:
             return 1    # 정상적으로 들어가면 트루
-        return 0
+        return "회원가입 실패"
 
 
     def get_animal_species(self):
@@ -65,6 +65,9 @@ class Adoption_book:
         for key in self.animals.keys():
             search_kind.add(self.animals[key]['species'])
         return search_kind
+
+    def get_user_info(self):    # 현재 사용자 정보 반환 [이름, 나이, id,소개]
+        return self.users[self.now_user], self.now_user
 
     # 입양하고 싶은 동물 종류별 검색
     def search_animal(self, select_kind):  # 선택한 동물종류 가져와서 검색하기
@@ -77,7 +80,7 @@ class Adoption_book:
         return list     # 검색한 리스트 반환
 
     # 입양할 동물들 목록 보여주기 - 종류 . 이름
-    def show_animals(self, animals):
+    def show_animals(self):
         animals_zip = list()
         # 등록된 동물 없을 경우 none 리턴
         if len(self.animals)==0:
@@ -90,14 +93,9 @@ class Adoption_book:
         return animals_zip  # 보여줄 목록 반환
 
 
-    def animal_info(self, select): # 자세히 보기 : 동물 이름가져와서 구하기
+    def get_animal_info(self, select): # 자세히 보기 : 동물 이름가져와서 구하기
         # 선택한 동물 정보 반환
-        return [select,
-                self.animals[select]['species'],
-                self.animals[select]['pat_age'],
-                self.animals[select]['pat_gender'],
-                self.animals[select]['pat_gender'],
-                self.animals[select]['user']]
+        return self.animals[select]
 
     # 입양 신청하기
     def put_animals(self,animalname):

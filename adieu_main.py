@@ -1,8 +1,16 @@
 from tkinter import *
 import tkinter.ttk
 
+from _Adoption_book import Adoption_book
+
+
+
 class adieuMain():
-    def __init__(self, title):
+    def __init__(self,title):
+        self.engein =  Adoption_book()
+        self.mainGUI(title)
+
+    def mainGUI(self, title):
         self.TEXTCOLOR = '#B96F00'
         self.BACKGROUND = '#FFC978'  # 배경색
         self.root = Tk()
@@ -17,9 +25,9 @@ class adieuMain():
 
         # 왼쪽 사이드
         cartegoryFrame = Frame(self.root, bg=self.BACKGROUND )
-        for i in range(5):
-            text = Label(cartegoryFrame,text="동물이름"+str(i), fg=self.TEXTCOLOR,bg=self.BACKGROUND,pady=5,cursor="hand2"
-                                                                                                    "")
+        for species in self.engein.get_animal_species():    # 동물 종류를 뽑아낸다
+            text = Label(cartegoryFrame,text=species, fg=self.TEXTCOLOR,bg=self.BACKGROUND,pady=5,cursor="hand2")
+            text.bind('<ButtonRelease-1>', lambda x : self.search_species(event= text))
             text.pack()
         photo_img = PhotoImage(file='img/search_img.png')
         search = Label(self.root, image=photo_img,bg=self.BACKGROUND)
@@ -41,13 +49,7 @@ class adieuMain():
         self.animalView.column('#3',width=80,anchor="center")
         self.animalView.heading('#3',text="age",anchor="center")
 
-        treelist = [("A","동물이름", 65), ("B","동물이름", 66), ("C","동물이름", 67), ("D","동물이름", 68), ("E","동물이름", 69),
-                    ("A","동물이름", 65), ("B","동물이름", 66), ("C","동물이름", 67), ("D","동물이름", 68), ("E","동물이름", 69),
-                    ("A","동물이름", 65), ("B","동물이름", 66), ("C","동물이름", 67), ("D","동물이름", 68), ("E","동물이름", 69)]
-
-        for i in range(len(treelist)):
-            self.animalView.insert('', 'end', text=i, values=treelist[i], iid=str(i) + "번")
-
+        self.draw_animal_list(self.engein.show_animals())
         # scrollbar.config(command=self.animalView.yview)
         # self.animalView.config(yscrollcommand=scrollbar.set)
 
@@ -68,20 +70,26 @@ class adieuMain():
         logo.place(x=10,y=5)
         self.play()
 
-    def click_item(self,evnet): # item 클릭 시 실행
+    def draw_animal_list(self,treelist):    # 동물들 리스트 그리기
+        for i in range(len(treelist)):
+            # 번호, 종류, 이름, 나이 순으로 들어감
+            self.animalView.insert('', 'end', text=i, values=treelist[i], iid=str(i) + "번")
+
+    def click_item(self,evnet): # item 클릭 시 선택한 게시물 가져와서 이름 매개변수로 동물 상세보기로 넘김
         selectedItem = self.animalView.focus()
         getValue = self.animalView.item(selectedItem).get('values')
-        print(getValue)
+        from parcel_infor import ParceAdieuInfor
+        ParceAdieuInfor('게시물 정보',getValue[1])    # 선택한 동물 이름 넘겨주기
 
-    def logout_event(self,evnet):
+    def logout_event(self,evnet):   # 로그아웃 -> 첫화면
         self.root.destroy()
         from start import StartAdieu
         StartAdieu("처음 화면")
 
-    def user_event(self,event):
+    def user_event(self,event): # 사용자클릭햇을때 -> 사용자화면
         self.root.destroy()
-        from sign_up import SignUp
-        SignUp('회원가입')
+        from user_info import UserInfo
+        UserInfo('사용자 정보')
         
     def play(self):
         self.root.mainloop()

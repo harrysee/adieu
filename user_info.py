@@ -1,8 +1,15 @@
 from tkinter import *
 
+from _Adoption_book import Adoption_book
+
 
 class UserInfo():
     def __init__(self, title):
+        self.engien = Adoption_book()
+        self.user, self.id = self.engien.get_user_info()
+        self.userGUI(title)
+
+    def userGUI(self, title):
         text_color = '#B96F00'
         bg_color = '#FFC978'  # 배경색
         self.root = Tk()
@@ -16,13 +23,13 @@ class UserInfo():
         logo = Label(self.root, bg=bg_color, image=logo_img)  # 로고
         photo_img = PhotoImage(file='img/input_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
-        name_info = Label(self.root, width=17, anchor='w', text='이름', bg='#fff', relief='flat', bd=10,
+        name_info = Label(self.root, width=17, anchor='w', text=self.user['name'], bg='#fff', relief='flat', bd=10,
                           fg='#000')  # 회원가입 버튼
-        age_info = Label(self.root, anchor='w', width=17, text='나이', bg='#fff', relief='flat', bd=10,
+        age_info = Label(self.root, anchor='w', width=17, text=self.user['age'], bg='#fff', relief='flat', bd=10,
                          fg='#000')  # 취소 버튼
-        id_info = Label(self.root, width=19, anchor='w', text='ID', bg='#fff', relief='flat', bd=10,
+        id_info = Label(self.root, width=19, anchor='w', text=self.id, bg='#fff', relief='flat', bd=10,
                         fg='#000')  # 취소 버튼
-        intro_info = Label(self.root, width=19, anchor='w', text='소개', bg='#fff', relief='flat', bd=10,
+        intro_info = Label(self.root, width=19, anchor='w', text=self.user['introduce'], bg='#fff', relief='flat', bd=10,
                            fg='#000')  # 취소 버튼
 
         # 하단 버튼
@@ -42,9 +49,8 @@ class UserInfo():
         writelist.bind("<Double-Button-1>", self.writeItemEvent)
         applylist.bind("<Double-Button-1>", self.applyItemEvent)
 
-        for i in testlist:
-            writelist.insert(END, ' ' + i[0] + '   :   ' + i[1])
-            applylist.insert(END, ' ' + i[0] + '   :   ' + i[1])
+        self.draw_postList(self.user['up_list'],writelist)
+        self.draw_postList(self.user['pick_list'],applylist)
 
         # 화면넣기
         write_posts.place(x=280, y=85)
@@ -60,9 +66,10 @@ class UserInfo():
         logo.place(x=5, y=5)
         self.play()
 
-    def editEvent(self):
-        # 분양거절 - 시작화면으로 이동
-        pass
+    def draw_postList(self, postList, listbox):
+        for post in postList:       # 등록한게시물이나 신청한 게시물에 잇는 동물이름으로 정보 가져와서 처리하기
+            animal = self.engien.get_animal_info(post)
+            listbox.insert(END, ' ' + animal['species'] + '   :   ' + post)
 
     def writeItemEvent(self,event):
         # 등록한 게시물 클릭했을때
@@ -77,5 +84,5 @@ class UserInfo():
 
 
 if __name__ == '__main__':
-    UserInfo('분양자 정보화면')
+    UserInfo('사용자 정보화면')
 

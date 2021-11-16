@@ -15,8 +15,8 @@ class StartAdieu():
         self.mainFrame.pack(expand=True)
 
         # logo 설정
-        loog_img = PhotoImage(file='img/Start_logo.png')
-        logo = Label(self.mainFrame, image=loog_img, bg='#FFC978', anchor='center')
+        logo_img = PhotoImage(file='img/Start_logo.png')
+        logo = Label(self.mainFrame, image=logo_img, bg='#FFC978', anchor='center')
 
         # button 설정
         self.btn_login = Button(self.mainFrame, width=30, relief="flat", command=self.loginEvent, bd=10, text="로그인", bg="#F0AD48", fg="#B96F00")

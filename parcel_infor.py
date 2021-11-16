@@ -1,9 +1,14 @@
 from tkinter import *
+from tkinter import messagebox
+
+from _Adoption_book import Adoption_book
 from adieu_main import adieuMain
 
 class ParceAdieuInfor():
     def __init__(self,title, selecanimal): # 타이틀, 선택한동물이름
-        ParceAdieuInfor(title)
+        self.engien = Adoption_book()
+        self.thisAnimal = selecanimal
+        self.ParceInfoGUI(title)
 
     def ParceInfoGUI(self, title):
         self.TEXTCOLOR = 'black'
@@ -38,13 +43,6 @@ class ParceAdieuInfor():
         inputList = [name, species, age, gender, add_infor, user_infor]  # 입력 받을 리스트
 
         self.draw_info(inputList)
-        # text 설정
-        # inputList[0].insert(0, '이름')
-        # inputList[1].insert(0, '종류')
-        # inputList[2].insert(0, '나이')
-        # inputList[3].insert(0, '성별')
-        # inputList[4].insert(0, '추가설명')
-        # inputList[5].insert(0, '사용자 정보')
 
         # 화면에 출력
         inputFrame1.place(x=360, y=80)
@@ -60,20 +58,26 @@ class ParceAdieuInfor():
         user_infor.pack(padx=10, pady=5, anchor='w')
         self.play()
 
-    def draw_info(self, list):
+    def draw_info(self, list):  # gui 정보넣을 라벨 리스트
         # 정보가져오기
+        # [name, species, age, gender, add_infor, user_infor] 순서대로
+        info = self.engien.get_animal_info(self.thisAnimal)
+        keys = ['','species','pat_age','user','pat_gender','pat_etc']
+
+        list[0].config('text', self.thisAnimal) # 처음엔 이름넣기
         # 뿌리기
-        for i in list:
-            i.config('text', '내용')
+        for i in range(1,list):
+            list[i].config('text',info[keys[i]])
+
 
     def subscriptionEvent(self):
+        result = self.engien.put_animals(self.thisAnimal)
+        if result==False:
+            messagebox.showerror('입양신청오류', '입양신청 실패')
+            return
+        messagebox.showinfo()('신청완료', f'빈려동물 {self.thisAnimal} 입양신청되었습니다.')
         self.root.destroy()
-        adieuMain("분양신청")       # 분양신청 페이지로 넘어감
-
-    # 클릭 시 입력
-    def hintEvent(self,event):  # 눌렀을때 글자 넣을수 있게
-        event.config(fg='black')
-        event.delete(0,END)
+        adieuMain("메인")       # 분양신청 후 페이지로 넘어감
 
     def play(self):
         self.root.mainloop()

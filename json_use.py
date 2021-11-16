@@ -3,7 +3,7 @@ import json
 class UseJSON():
     def get_user_json(self):   # userdata 가져오기
         file_path = "datas/users_data.json"
-        with open(file_path, "r") as json_file:
+        with open(file_path, "rt", encoding='UTF8') as json_file:
             json_data = json.load(json_file)
         return json_data
 
@@ -14,7 +14,7 @@ class UseJSON():
 
     def get_animals_json(self):  # animals 가져오기
         file_path = "datas/animals_book.json"
-        with open(file_path, "r") as json_file:
+        with open(file_path, "rt", encoding='UTF8') as json_file:
             json_data = json.load(json_file)
         return json_data
 

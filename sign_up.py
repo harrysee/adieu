@@ -101,7 +101,7 @@ class SignUp():
             if info['foreground']!='black':
                 messagebox.showinfo("입력오류",info.get()+" 입력하시오.")
                 return
-        message = engien.sign_up(self.inputList)
+        message = engien.sign_up(self.inputList, self.gender_var)
         if message != True:
             messagebox.showinfo("오류", message)  # 회원가입이 성공적으로 안되면 이유 리턴
             return
@@ -109,7 +109,6 @@ class SignUp():
         # 아이디 중복 체크
         # 형식 체크
         # 비번 확인 체크
-
 
     def cancelEvent(self):
         # 취소 - 시작화면으로 이동

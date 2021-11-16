@@ -14,7 +14,10 @@ class User:
         self.number = ''
         self.input_list = []
 
-    def check_all(self, input_list):
+    def check_all(self, input_list, gender):
+        # inputList : [name, age, id, pw, pw_check, zipcode, call_number, introduce]
+        # gender : 성별구분 라디오버튼 잇음 -> 1 = 여자 / 2 = 남자
+        # 각자 빈칸 & 형식체크 후 self변수에 값 넣기 / 체크에서 오류날경우 해당 메세지 반환/ 잘들어갔을경우 True반환
         self.input_list = input_list
         # user 객체 보내기 :이름 입력받기
         self.set_name()

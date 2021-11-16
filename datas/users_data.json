@@ -1,4 +1,15 @@
 {
+    "vi1234": {
+        "name": "vina",
+        "pw": "1234",
+        "age": "4",
+        "gender": "w",
+        "call_number": "01012374568",
+        "zip_code": "\uac15\ub0a8",
+        "introduce": "\uace0\uc591\uc774 \uc88b\uc544\ud574\uc694",
+        "up_list": [],
+        "pick_list": []
+    },
     "d": {
         "pw": "new.pw",
         "age": 0,

@@ -36,12 +36,10 @@ class LoginAdieu():
         self.pw.bind("<Button-1>",self.focusPw)
         self.pw.bind("<FocusIn>",self.focusPw)
 
-<<<<<<< HEAD
         self.loginBtn = Button(self.mainFrame,width=30, relief="flat", bd=10, text="로그인", command=self.loginEvent, bg="#F0AD48", fg="#B96F00")
-=======
         self.loginBtn = Button(self.mainFrame,width=30, relief="flat", bd=10,
                                text="로그인",command=self.loginEvent, bg="#F0AD48",fg="#B96F00")
->>>>>>> e4932598133accbe67d43544ebfa854deafdc43f
+
         # 화면 띄우기
         logo.pack(padx=10, pady=30)
         self.id.pack(padx=10, pady=5)
@@ -60,10 +58,10 @@ class LoginAdieu():
     def loginEvent(self):
         # 로그인 맞는지 확인하고 메인 진입
         if self.id['foreground'] != 'black' and self.pw['foreground'] != 'black':
-            messagebox.showinfo("입력오류", "아이디와 비번을 모두 입력하시오.")
+            messagebox.showerror("입력오류", "아이디와 비번을 모두 입력하시오.")
             return
         if self.engien.login(self.id.get(), self.pw.get()) == False:
-            messagebox.showinfo("안내", "아이디나 비번이 일치하지 않습니다.")
+            messagebox.showwarning("안내", "아이디나 비번이 일치하지 않습니다.")
             return
         self.root.destroy()
         adieuMain("메인")

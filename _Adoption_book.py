@@ -7,18 +7,17 @@ from json_use import UseJSON as json
 class Adoption_book:
     def __init__(self):
         print('시작')
-        self.testi()
         self.animals = json.get_animals_json(self)    # 등록된 동물들
         self.users = json.get_user_json(self)     # 유저 데이터
         #현재 유저
         # 처음 객체 생성 시 무조건 로그인
         # self.test()     # 테스트 코드
+        self.testi()
         self.now_user = ''
 
 
     def testi(self):
-        user = {}
-        user['d'] = {
+        self.users['d'] = {
             "pw": 'new.pw',
             'age': 00,
             'gender': 'new.gender',
@@ -26,31 +25,34 @@ class Adoption_book:
             'up_list': [],
             'pick_list': []
         }
-        json.set_user_json(self, user)
+        json.set_user_json(self, self.users)
         print('실행됨')
 
     # 로그인
     def login(self, name, pw):
         #로그인 한 이름과 비밀번호가 일치하면 로그인 성공
-        if name in self.users and self.users[name][pw] == pw:
+        print(self.users)
+        if (name in self.users) and (self.users[name]['pw'] == pw):
             self.now_user = name   # 로그인 성공이면 true 리턴
             return 1
         return 0
 
-    def sign_up(self, user_input_list):
+    def sign_up(self, user_input_list, gender): # inputList : Gui 입력 엔트리들 담겨있음
+        # inputList : [name, age, id, pw, pw_check, zipcode, call_number, introduce]
+        # gender : 성별구분 라디오버튼 잇음 -> 1 = 여자 / 2 = 남자
         # 유저리스트 유저정보 넣기
         new = User()
-        new.check_all(user_input_list)
+        new.check_all(user_input_list, gender)
         self.users[new.id]= {
-            'name': new.name,
+            "name": new.name,
             "pw" : new.pw,
-            'age' : new.age,
-            'gender': new.gender,
-            'call_number': new.number,
-            'zip_code' : new.zip_code,
-            'introduce' : new.introduce,
-            'up_list': [],
-            'pick_list' : []
+            "age" : new.age,
+            "gender": new.gender,
+            "call_number": new.number,
+            "zip_code" : new.zip_code,
+            "introduce" : new.introduce,
+            "up_list": [],
+            "pick_list" : []
         }
         json.set_user_json(self.users)
         print('가입성공')
@@ -100,11 +102,17 @@ class Adoption_book:
     # 입양 신청하기
     def put_animals(self,animalname):
         # 신청한 동물 인덱스에 있는 객체의 신청내역에 신청한 사용자의 이름을 넣는다
-        self.animals[animalname]['apply_users'].appand(self.now_user)
-        # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.
-        self.users[self.now_user]['pick_list'].append(animalname)
-        json.set_animals_json(self.animals)
-        json.set_user_json(self.users)(self.users)()
+        try:
+            self.animals[animalname]['apply_users'].appand(self.now_user)
+            # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.
+            self.users[self.now_user]['pick_list'].append(animalname)
+            json.set_animals_json(self.animals)
+            json.set_user_json(self.users)(self.users)()
+        except:
+            return False
+        return True
+            
+        
 
     # 게시물 등록
     def up_animal(self):

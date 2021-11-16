@@ -6,7 +6,7 @@ from _Adoption_book import Adoption_book
 class UserInfo():
     def __init__(self, title):
         self.engien = Adoption_book()
-        self.user, self.id = self.engien.get_user_info()
+        self.user, self.id = self.engien.get_user_info('nowuser')
         self.userGUI(title)
 
     def userGUI(self, title):

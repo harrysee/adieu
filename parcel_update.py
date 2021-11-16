@@ -1,8 +1,14 @@
 from tkinter import *
+
+from _Adoption_book import Adoption_book
 from adieu_main import adieuMain
 
-class ParceAdieuEdit():
+class ParcelUpdate():
     def __init__(self, title):
+        self.engien = Adoption_book()
+        self.parcelUpdateGUI(title)
+
+    def parcelUpdateGUI(self, title):
         bg_color = '#FFC978'  # 배경색
         self.root = Tk()
         self.root.title(title)

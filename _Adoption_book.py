@@ -5,6 +5,7 @@ from _user import User
 from json_use import UseJSON as json
 
 class Adoption_book:
+    now_user = ''   # static 변수
     def __init__(self):
         print('시작')
         self.animals = json.get_animals_json(self)    # 등록된 동물들
@@ -13,7 +14,7 @@ class Adoption_book:
         # 처음 객체 생성 시 무조건 로그인
         # self.test()     # 테스트 코드
         self.testi()
-        self.now_user = ''
+
 
 
     def testi(self):
@@ -31,9 +32,9 @@ class Adoption_book:
     # 로그인
     def login(self, name, pw):
         #로그인 한 이름과 비밀번호가 일치하면 로그인 성공
-        print(self.users)
         if (name in self.users) and (self.users[name]['pw'] == pw):
-            self.now_user = name   # 로그인 성공이면 true 리턴
+            Adoption_book.now_user = name   # 로그인 성공이면 true 리턴
+            print(Adoption_book.now_user)
             return 1
         return 0
 
@@ -69,7 +70,8 @@ class Adoption_book:
         return search_kind
 
     def get_user_info(self):    # 현재 사용자 정보 반환 [이름, 나이, id,소개]
-        return self.users[self.now_user], self.now_user
+        print(Adoption_book.now_user)
+        return self.users[Adoption_book.now_user], Adoption_book.now_user
 
     # 입양하고 싶은 동물 종류별 검색
     def search_animal(self, select_kind):  # 선택한 동물종류 가져와서 검색하기
@@ -103,9 +105,9 @@ class Adoption_book:
     def put_animals(self,animalname):
         # 신청한 동물 인덱스에 있는 객체의 신청내역에 신청한 사용자의 이름을 넣는다
         try:
-            self.animals[animalname]['apply_users'].appand(self.now_user)
+            self.animals[animalname]['apply_users'].appand(Adoption_book.now_user)
             # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.
-            self.users[self.now_user]['pick_list'].append(animalname)
+            self.users[Adoption_book.now_user]['pick_list'].append(animalname)
             json.set_animals_json(self.animals)
             json.set_user_json(self.users)(self.users)()
         except:
@@ -121,12 +123,12 @@ class Adoption_book:
         self.animals[new.pat_name] = {
             'species' : new.species,       # 종류
             'pat_age' : new.pat_age,            # 나이
-            'user'    : self.now_user,
+            'user'    : Adoption_book.now_user,
             'pat_gender' : new.pat_gender, # 성별
             'pat_etc' : new.etc,     # 기타사항
             'apply_users' : [],     # 분양신청한 사용자들
         }
-        self.users[self.now_user]['up_list'].append(new.pat_name) # 현재 사용자 객체의 올린 게시물 리스트에 게시물 올린거 추가
+        self.users[Adoption_book.now_user]['up_list'].append(new.pat_name) # 현재 사용자 객체의 올린 게시물 리스트에 게시물 올린거 추가
         json.set_animals_json(self.animals)
         json.set_user_json(self.users)(self.users)()
 

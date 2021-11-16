@@ -33,8 +33,10 @@ class UserInfo():
                            fg='#000')  # 취소 버튼
 
         # 하단 버튼
-        edit_btn = Button(self.root, cursor='hand2', width=13, text='정보수정', bg='#F0AD48', relief='flat', bd=8,
+        edit_btn = Button(self.root, cursor='hand2', width=13, text='정보수정', bg='#F0AD48', relief='flat', bd=8, command= self.editBtnEventListener,
                         fg=text_color)  # 취소 버튼
+        add_btn = Button(self.root, cursor='hand2', width=13, text='게시물추가', bg='#F0AD48', relief='flat', bd=8,
+                          command=self.addBtnEventListener,fg=text_color)  # 취소 버튼
 
         # 컨테이너
         write_posts = LabelFrame(self.root, labelanchor='n', width=200, height=200, text="등록한 게시물", fg=text_color,
@@ -43,9 +45,6 @@ class UserInfo():
                                  bg=bg_color)
         writelist = Listbox(write_posts, selectmode='single', height=0)
         applylist = Listbox(apply_posts, selectmode='single', height=0)
-        testlist = [('강아지', '또미'), ('앵무새 ', '탁구'), ('고양이', '축복이'), ('고양이', '행복이'), ('거북이', '독도'), ('병아리', '꼬꼬'),
-                    ('강아지', '또미'), ('앵무새 ', '탁구'), ('고양이', '축복이'), ('고양이', '행복이'), ('거북이', '독도'), ('병아리', '꼬꼬'),
-                    ('강아지', '또미'), ('앵무새 ', '탁구'), ('고양이', '축복이'), ('고양이', '행복이'), ('거북이', '독도'), ('병아리', '꼬꼬')]
         writelist.bind("<Double-Button-1>", self.writeItemEvent)
         applylist.bind("<Double-Button-1>", self.applyItemEvent)
 
@@ -58,6 +57,7 @@ class UserInfo():
         writelist.pack(padx=20, pady=10)
         applylist.pack(padx=20, pady=10)
         edit_btn.place(x=611, y=516)
+        add_btn.place(x=480, y=516)
         photo.place(x=40, y=90)
         name_info.place(x=65, y=300)
         age_info.place(x=65, y=355)
@@ -78,6 +78,18 @@ class UserInfo():
     def applyItemEvent(self,event):
         # 신청한 게시물 클릭했을때
         pass
+
+    def editBtnEventListener(self):
+        # 수정하기 버튼 리스너
+        self.root.destroy()
+        from edit_user_info import EditUserInfo
+        EditUserInfo('사용자정보수정')
+    
+    def addBtnEventListener(self):
+        # 게시물 추가 버튼 리스너
+        self.root.destroy()
+        from parcel_edit import ParceAdieuEdit
+        ParceAdieuEdit('분양등록')
 
     def play(self):
         self.root.mainloop()

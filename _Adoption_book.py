@@ -15,8 +15,6 @@ class Adoption_book:
         # self.test()     # 테스트 코드
         self.testi()
 
-
-
     def testi(self):
         self.users['d'] = {
             "pw": 'new.pw',
@@ -69,9 +67,8 @@ class Adoption_book:
             search_kind.add(self.animals[key]['species'])
         return search_kind
 
-    def get_user_info(self):    # 현재 사용자 정보 반환 [이름, 나이, id,소개]
-        print(Adoption_book.now_user)
-        return self.users[Adoption_book.now_user], Adoption_book.now_user
+    def get_user_info(self, userid):    # 사용자 정보 반환 [이름, 나이, id,소개]
+        return self.users[Adoption_book.now_user], Adoption_book.now_user if userid=='nowuser' else  self.users[userid]
 
     # 입양하고 싶은 동물 종류별 검색
     def search_animal(self, select_kind):  # 선택한 동물종류 가져와서 검색하기
@@ -117,9 +114,9 @@ class Adoption_book:
         
 
     # 게시물 등록
-    def up_animal(self):
+    def up_animal(self, list):  # 게시물 리스트
         new = Parcel_out()
-        new.set_pat()
+        new.set_pat(list)   # [name, species, age, place, add_infor, user_infor]
         self.animals[new.pat_name] = {
             'species' : new.species,       # 종류
             'pat_age' : new.pat_age,            # 나이

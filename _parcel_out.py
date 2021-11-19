@@ -12,7 +12,7 @@ class Parcel_out:
         self.etc =''
 
     #동물 정보 입력
-    def set_pat(self):
+    def set_pat(self,inputlist):    # [name, species, age, place, add_infor, user_infor]
         self.pat_name = input('분양할 동물의 이름을 입력하세요 : ')
 
         while True:

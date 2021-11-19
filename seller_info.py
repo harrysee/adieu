@@ -1,8 +1,15 @@
 from tkinter import *
 
+from _Adoption_book import Adoption_book
+
 
 class SellerInfo():
-    def __init__(self, title):
+    def __init__(self,title, userid):
+        self.engien = Adoption_book()
+        self.thisUserInfo,self.userid= self.engien.get_user_info(userid),userid
+        self.sellerGUI(title)
+
+    def sellerGUI(self, title):
         text_color = '#B96F00'
         bg_color = '#FFC978'  # 배경색
         self.root = Tk()
@@ -16,19 +23,19 @@ class SellerInfo():
         logo = Label(self.root, bg=bg_color, image=logo_img)  # 로고
         photo_img = PhotoImage(file='img/input_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
-        name_info = Label(self.root, width=17,anchor='w', text='이름', bg='#fff', relief='flat', bd=10,
+        name_info = Label(self.root, width=17,anchor='w', text=self.thisUserInfo['name'], bg='#fff', relief='flat', bd=10,
                              fg='#000')  # 회원가입 버튼
-        age_info = Label(self.root,anchor='w', width=17, text='나이', bg='#fff', relief='flat', bd=10,
+        age_info = Label(self.root,anchor='w', width=17, text=self.thisUserInfo['age'], bg='#fff', relief='flat', bd=10,
                             fg='#000')  # 취소 버튼
-        id_info = Label(self.root, width=17,anchor='w', text='ID', bg='#fff', relief='flat', bd=10,
+        id_info = Label(self.root, width=17,anchor='w', text=self.userid, bg='#fff', relief='flat', bd=10,
                             fg='#000')  # 취소 버튼
-        intro_info = Label(self.root, width=17,anchor='w', text='소개', bg='#fff', relief='flat', bd=10,
+        intro_info = Label(self.root, width=17,anchor='w', text=self.thisUserInfo['introduce'], bg='#fff', relief='flat', bd=10,
                             fg='#000')  # 취소 버튼
 
         # 하단 버튼
-        ok_btn = Button(self.root, cursor='hand2', width=13, text='분양수락', bg='#F0AD48', relief='flat', bd=8,
+        ok_btn = Button(self.root, cursor='hand2', width=13, text='분양수락', bg='#F0AD48', relief='flat', bd=8, command=self.okEvent,
                           fg=text_color)  # 회원가입 버튼
-        no_btn = Button(self.root, cursor='hand2', width=13, text='분양거절', bg='#F0AD48', relief='flat', bd=8,
+        no_btn = Button(self.root, cursor='hand2', width=13, text='분양거절', bg='#F0AD48', relief='flat', bd=8, command=self.noEvent,
                             fg=text_color)  # 취소 버튼
 
         #컨테이너
@@ -36,15 +43,12 @@ class SellerInfo():
         apply_posts = LabelFrame(self.root, labelanchor='n',width=200, height=200,text="신청한 게시물",fg=text_color,bg=bg_color)
         writelist = Listbox(write_posts, selectmode='single', height=0)
         applylist = Listbox(apply_posts, selectmode='single', height=0)
-        testlist = [('강아지','또미'),('앵무새','탁구'),('고양이','축복이'),('고양이','행복이'),('거북이','독도'),('병아리','꼬꼬'),
-                    ('강아지','또미'),('앵무새','탁구'),('고양이','축복이'),('고양이','행복이'),('거북이','독도'),('병아리','꼬꼬'),
-                    ('강아지','또미'),('앵무새','탁구'),('고양이','축복이'),('고양이','행복이'),('거북이','독도'),('병아리','꼬꼬')]
         writelist.bind("<Double-Button-1>",self.writeItemEvent)
         applylist.bind("<Double-Button-1>",self.applyItemEvent)
-
-        for i in testlist:
-            writelist.insert(END,' '+ i[0]+'   :   '+i[1])
-            applylist.insert(END,' '+ i[0]+'   :   '+i[1])
+        
+        # 리스트 아이템들 추가
+        self.draw_postList(self.thisUserInfo['up_list'], writelist)
+        self.draw_postList(self.thisUserInfo['pick_list'], applylist)
 
         # 화면넣기
         write_posts.place(x=280,y=85)
@@ -61,13 +65,19 @@ class SellerInfo():
         logo.place(x=5, y=5)
         self.play()
 
+    def draw_postList(self, postList, listbox):
+        for post in postList:       # 등록한게시물이나 신청한 게시물에 잇는 동물이름으로 정보 가져와서 처리하기
+            animal = self.engien.get_animal_info(post)
+            listbox.insert(END, ' ' + animal['species'] + '   :   ' + post)
+
     def okEvent(self):
         # 분양수락 버튼 눌렀을때
-        # 분양자 정보 보내기
+        # 사용자- 신청리스트 및 게시물-신청리스트에서 삭제
+        # 메시지박스로 정보 전달
         pass
 
     def noEvent(self):
-        # 분양거절 - 시작화면으로 이동
+        # 분양거절 - 사용자- 신청리스트 및 게시물-신청리스트에서 삭제 후 시작화면으로 이동
         pass
 
     def writeItemEvent(self,event):

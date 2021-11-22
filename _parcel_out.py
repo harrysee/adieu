@@ -6,33 +6,38 @@ class Parcel_out:
         self.pat_name =''
         # 동물의 나이
         self.pat_age = 1
-        # 동물의 성별
-        self.pat_gender =''
         # 분양동물 기타사항
         self.etc =''
+        # 사용자 정보
+        self.user = ''
 
-    #동물 정보 입력
-    def set_pat(self,inputlist):    # [name, species, age, place, add_infor, user_infor]
-        self.pat_name = input('분양할 동물의 이름을 입력하세요 : ')
+        self.input_list = []
 
-        while True:
-            age =  input('분양할 동물의 나이를 입력하세요 : ')
-            if age.isdigit() == True:
-                self.pat_age = int(age)
-                break;
-            else:
-                input('잘못 입력했습니다. 숫자만 입력해주세요')
+    def check_all(self, input_list):
+        self.input_list = input_list
 
-        while True:
-            gender =  input('분양할 동물의 성별을 입력하세요 (w|m) : ')
-            if gender == 'w' or gender == 'm':
-                self.pat_gender = gender
-                break;
-            else:
-                input('잘못 입력했습니다. 다시 입력해주세요')
+        for info in self.input_list:
+            if info.get() == '':
+                return info + '를 입력하세요'
+            elif info.get() == False:
+                print('꒦꒷꒷꒦꒦꒷잘못 입력했습니다(>_<｡)💦 다시 입력하세요꒦꒷꒷꒦꒷꒦꒷')
 
-        self.species = input('분양할 동물 종을 입력하세요 : ')
-        self.etc = input('분양할 동물의 기타사항을 입력하세요 : ')
+    def set_pat(self):    # [name, species, age, place, add_infor, user_infor]
+
+        self.pat_name = self.input_list[0]
+
+        self.species = self.input_list[1]
+
+        age = self.input_list[2]
+        if age.isdigit() == True:
+            self.pat_age = int(age)
+            return True
+        else:
+            return False
+
+        self.etc = self.input_list[4]
+
+        self.user = self.input_list[5]
 
 
     def __str__(self):

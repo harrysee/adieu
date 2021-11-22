@@ -18,47 +18,34 @@ class User:
         # inputList : [name, age, id, pw, pw_check, zipcode, call_number, introduce]
         # gender : 성별구분 라디오버튼 잇음 -> 1 = 여자 / 2 = 남자
         # 각자 빈칸 & 형식체크 후 self변수에 값 넣기 / 체크에서 오류날경우 해당 메세지 반환/ 잘들어갔을경우 True반환
+        for info in self.input_list:
+            if info.get() == '':
+                return info + '를 입력하세요'
+            elif info.get() == False:
+                print('꒦꒷꒷꒦꒦꒷잘못 입력했습니다(>_<｡)💦 다시 입력하세요꒦꒷꒷꒦꒷꒦꒷')
+
         self.input_list = input_list
+
         # user 객체 보내기 :이름 입력받기
         self.set_name()
-        if self.name != True:
-            print('꒦꒷꒷꒦꒦꒷잘못 입력했습니다(>_<｡)💦 다시 입력하세요꒦꒷꒷꒦꒷꒦꒷')
-            self.set_name()
 
         # 비밀번호 설정
         self.set_pw()
-        if self.pw != True:
-            print('꒦꒷꒷꒦꒦꒷잘못 입력했습니다(>_<｡)💦 다시 입력하세요꒦꒷꒷꒦꒷꒦꒷')
-            self.set_pw()
 
         # 생년월일
         self.set_age()
-        if self.age != True:
-            print('꒦꒷꒷꒦꒦꒷잘못 입력했습니다(>_<｡)💦 다시 입력하세요꒦꒷꒷꒦꒷꒦꒷')
-            self.set_age()
 
         # 성별
         self.set_gender()
-        if self.gender != True:
-            print('꒦꒷꒷꒦꒦꒷잘못 입력했습니다(>_<｡)💦 다시 입력하세요꒦꒷꒷꒦꒷꒦꒷')
-            self.set_gender()
 
         # 전화번호
         self.set_number()
-        if self.number != True:
-            print('꒦꒷꒷꒦꒦꒷잘못 입력했습니다(>_<｡)💦 다시 입력하세요꒦꒷꒷꒦꒷꒦꒷')
-            self.set_number()
 
         # 주소
         self.set_zip_code()
-        if self.zip_code != True:
-            print('꒦꒷꒷꒦꒦꒷잘못 입력했습니다(>_<｡)💦 다시 입력하세요꒦꒷꒷꒦꒷꒦꒷')
-            self.set_zip_code()
 
+        # 소개
         self.set_introduce()
-        if self.introduce != True:
-            print('꒦꒷꒷꒦꒦꒷잘못 입력했습니다(>_<｡)💦 다시 입력하세요꒦꒷꒷꒦꒷꒦꒷')
-            self.set_introduce()
     
     # 중복체크
     def set_name(self):  # 매개변수로 이름
@@ -70,19 +57,22 @@ class User:
 
     # 비밀번호 입력
     def set_pw(self):
-        pw = input('비밀번호 입력 → ')
-        ver_pw = input('비밀번호 확인 → ')
+        pw = self.input_list[3]
 
-        if pw == ver_pw:
+        if len(pw) >= 5:
             self.pw = pw
             return True
+        else:
+            return False
 
     # 나이 입력
     def set_age(self):
-        age = input('생일 ex(20040810) → ')
+        age = self.input_list[2]
         if len(age) == 8:
             self.age = age
             return True
+        else:
+            return False
 
     # 성별 입력
     def set_gender(self):
@@ -96,22 +86,24 @@ class User:
 
     # 전화번호 입력
     def set_number(self):
-        number = input('전화번호 (숫자만) → ')
+        number = self.input_list[6]
 
         if number.isdigit() == True:
             self.number = number
             return True
+        else:
+            return False
 
     # 소개 입력
     def set_introduce(self):
-        intro = input('소개 → ')
+        intro = self.input_list[7]
 
         if intro != '':
             self.introduce = intro
             return True
 
     def set_zip_code(self):
-        zip_code = input('주소 → ')
+        zip_code = self.input_list[5]
 
         if zip_code != '':
             self.zip_code = zip_code

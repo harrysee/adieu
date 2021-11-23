@@ -24,20 +24,20 @@ class Parcel_out:
 
     def set_pat(self):    # [name, species, age, place, add_infor, user_infor]
 
-        self.pat_name = self.input_list[0]
+        self.pat_name = self.input_list[0].get()
 
-        self.species = self.input_list[1]
+        self.species = self.input_list[1].get()
 
-        age = self.input_list[2]
+        age = self.input_list[2].get()
         if age.isdigit() == True:
             self.pat_age = int(age)
             return True
         else:
             return False
 
-        self.etc = self.input_list[4]
+        self.etc = self.input_list[4].get()
 
-        self.user = self.input_list[5]
+        self.user = self.input_list[5].get()
 
 
     def __str__(self):

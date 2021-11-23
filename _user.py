@@ -36,7 +36,7 @@ class User:
         self.set_age()
 
         # 성별
-        self.set_gender()
+        self.set_gender(gender)
 
         # 전화번호
         self.set_number()
@@ -57,7 +57,7 @@ class User:
 
     # 비밀번호 입력
     def set_pw(self):
-        pw = self.input_list[3]
+        pw = self.input_list[3].get()
 
         if len(pw) >= 5:
             self.pw = pw
@@ -67,7 +67,7 @@ class User:
 
     # 나이 입력
     def set_age(self):
-        age = self.input_list[2]
+        age = self.input_list[1].get()
         if len(age) == 8:
             self.age = age
             return True
@@ -75,18 +75,18 @@ class User:
             return False
 
     # 성별 입력
-    def set_gender(self):
-        gender = input('성별 w/m → ')
-        if gender == 'w' :
+    def set_gender(self, gender):
+        if gender == 1:
             self.gender = '여자'
             return True
-        elif gender == 'm':
+        elif gender == 2:
             self.gender = '남자'
-            return True
+        else:
+            return False
 
     # 전화번호 입력
     def set_number(self):
-        number = self.input_list[6]
+        number = self.input_list[6].get()
 
         if number.isdigit() == True:
             self.number = number
@@ -96,14 +96,14 @@ class User:
 
     # 소개 입력
     def set_introduce(self):
-        intro = self.input_list[7]
+        intro = self.input_list[7].get()
 
         if intro != '':
             self.introduce = intro
             return True
 
     def set_zip_code(self):
-        zip_code = self.input_list[5]
+        zip_code = self.input_list[5].get()
 
         if zip_code != '':
             self.zip_code = zip_code

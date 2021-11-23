@@ -96,18 +96,12 @@ class User:
 
     # 소개 입력
     def set_introduce(self):
-        intro = self.input_list[7].get()
-
-        if intro != '':
-            self.introduce = intro
-            return True
+        self.intro = self.input_list[7].get()
+        return True
 
     def set_zip_code(self):
-        zip_code = self.input_list[5].get()
-
-        if zip_code != '':
-            self.zip_code = zip_code
-            return True
+        self.zip_code = self.input_list[5].get()
+        return True
 
     # 올린 게시물이나 신청한 게시물 동물이름 리스트를 넘겨주면 이름과 종류 리스트를 반환한다.
     def show_uplist(self, this_list):     # 사용자 데이터의 올린게시물 리스트 가져오기

@@ -229,7 +229,8 @@
       <workItem from="1637549172189" duration="6118000" />
       <workItem from="1637576517618" duration="3330000" />
       <workItem from="1637639287051" duration="31000" />
-      <workItem from="1637659988472" duration="466000" />
+      <workItem from="1637659988472" duration="493000" />
+      <workItem from="1637665148225" duration="294000" />
     </task>
     <task id="LOCAL-00001" summary="예외처리">
       <created>1623840946595</created>
@@ -287,7 +288,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637582016333</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="_parcel_out.py, _user.py 조건 및 빈칸 확인">
+      <created>1637660472043</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1637660472043</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -22,23 +22,26 @@ class Parcel_out:
             elif info.get() == False:
                 print('꒦꒷꒷꒦꒦꒷잘못 입력했습니다(>_<｡)💦 다시 입력하세요꒦꒷꒷꒦꒷꒦꒷')
 
+        # 동물 정보
+        self.set_pat()
+
+        # 동물 나이
+        self.set_pat_age()
+
     def set_pat(self):    # [name, species, age, place, add_infor, user_infor]
 
         self.pat_name = self.input_list[0].get()
-
         self.species = self.input_list[1].get()
+        self.etc = self.input_list[4].get()
+        self.user = self.input_list[5].get()
 
+    def set_pat_age(self):
         age = self.input_list[2].get()
         if age.isdigit() == True:
             self.pat_age = int(age)
             return True
         else:
             return False
-
-        self.etc = self.input_list[4].get()
-
-        self.user = self.input_list[5].get()
-
 
     def __str__(self):
         return (f'이름:{self.pat_name}\t나이:{self.pat_age}\t성별:{self.pat_gender}\t종류:{self.species}\t기타사항:{self.etc}')

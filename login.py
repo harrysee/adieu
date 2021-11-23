@@ -69,6 +69,5 @@ class LoginAdieu():
     def play(self):
         self.root.mainloop()
 
-
 if __name__ == '__main__':
     l = LoginAdieu("로그인 화면")

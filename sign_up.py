@@ -103,9 +103,10 @@ class SignUp():
                 return
         message = engien.sign_up(self.inputList, self.gender_var)
         if message != True:
-            messagebox.showinfo("오류", message)  # 회원가입이 성공적으로 안되면 이유 리턴
+            messagebox.showerror("오류", message)  # 회원가입이 성공적으로 안되면 이유 리턴
             return
         messagebox.showinfo("안내","회원가입 완료!!")
+        self.cancelEvent()
         # 아이디 중복 체크
         # 형식 체크
         # 비번 확인 체크

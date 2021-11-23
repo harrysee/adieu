@@ -7,25 +7,11 @@ from json_use import UseJSON as json
 class Adoption_book:
     now_user = ''   # static 변수
     def __init__(self):
-        print('시작')
         self.animals = json.get_animals_json(self)    # 등록된 동물들
         self.users = json.get_user_json(self)     # 유저 데이터
         #현재 유저
         # 처음 객체 생성 시 무조건 로그인
         # self.test()     # 테스트 코드
-        self.testi()
-
-    def testi(self):
-        self.users['d'] = {
-            "pw": 'new.pw',
-            'age': 00,
-            'gender': 'new.gender',
-            'call_number':'000000000',
-            'up_list': [],
-            'pick_list': []
-        }
-        json.set_user_json(self, self.users)
-        print('실행됨')
 
     # 로그인
     def login(self, name, pw):
@@ -41,21 +27,23 @@ class Adoption_book:
         # gender : 성별구분 라디오버튼 잇음 -> 1 = 여자 / 2 = 남자
         # 유저리스트 유저정보 넣기
         new = User()
-        new.check_all(user_input_list, gender)
-        self.users[new.id]= {
+        check = new.check_all(user_input_list, gender)
+
+        if check != True : return check     # 형식체크 / 메세지 반환
+        self.users[new.id] = {
             "name": new.name,
-            "pw" : new.pw,
-            "age" : new.age,
+            "pw": new.pw,
+            "age": new.age,
             "gender": new.gender,
             "call_number": new.number,
-            "zip_code" : new.zip_code,
-            "introduce" : new.introduce,
+            "zip_code": new.zip_code,
+            "introduce": new.introduce,
             "up_list": [],
-            "pick_list" : []
+            "pick_list": []
         }
-        json.set_user_json(self.users)
+        json.set_user_json(self, self.users)
         print('가입성공')
-        if new.id in self.users==1:
+        if new.id in self.users:
             return 1    # 정상적으로 들어가면 트루
         return "회원가입 실패"
 

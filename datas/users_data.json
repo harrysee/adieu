@@ -17,5 +17,49 @@
         "call_number": "000000000",
         "up_list": [],
         "pick_list": []
+    },
+    "": {
+        "name": "jeon",
+        "pw": "jj1234",
+        "age": "18",
+        "gender": "w",
+        "call_number": "46046464621",
+        "zip_code": "\ubd80\uc0b0",
+        "introduce": "\ub098\ub2e4",
+        "up_list": [],
+        "pick_list": []
+    },
+    "jeon": {
+        "name": "18",
+        "pw": "jj1234",
+        "age": "18",
+        "gender": "w",
+        "call_number": "4046546161",
+        "zip_code": "\ubd80\uc0b0",
+        "introduce": "\ub098\ub2e4",
+        "up_list": [],
+        "pick_list": []
+    },
+    "nndd": {
+        "name": "34",
+        "pw": "n1234",
+        "age": "34",
+        "gender": "w",
+        "call_number": "010456877953",
+        "zip_code": "\ubd80\uc0b0",
+        "introduce": "\uc804\ub370\uc5ec",
+        "up_list": [],
+        "pick_list": []
+    },
+    "hi": {
+        "name": "12",
+        "pw": "44444",
+        "age": "12",
+        "gender": "w",
+        "call_number": "010213246497",
+        "zip_code": "\ud574\ubcc0",
+        "introduce": "\ubc29\uac00",
+        "up_list": [],
+        "pick_list": []
     }
 }

@@ -2,13 +2,17 @@ from tkinter import *
 
 from _Adoption_book import Adoption_book
 from adieu_main import adieuMain
+from parcel_edit import ParceAdieuEdit
+from seller_info import SellerInfo
+
 
 class ParcelUpdate():
     def __init__(self, title):
         self.engien = Adoption_book()
         self.parcelUpdateGUI(title)
+        self.seller = []
 
-    def parcelUpdateGUI(self, title):
+    def parcelUpdateGUI(self, title, seller):
         bg_color = '#FFC978'  # 배경색
         self.root = Tk()
         self.root.title(title)
@@ -63,8 +67,8 @@ class ParcelUpdate():
         inputList[4].bind('<FocusIn>', lambda x: self.hintEvent(event=add_infor))
 
         # 화면에 출력
-        inputFrame1.place(x=360, y=80)
-        inputFrame2.place(x=90, y=340)
+        inputFrame1.place(x=300, y=80)
+        inputFrame2.place(x=90, y=300)
         logo.place(x=10, y=5)
         photo.place(x=100, y=90)
         btn_update.place(x=470, y=500)
@@ -75,6 +79,15 @@ class ParcelUpdate():
         place.pack(padx=15, pady=5, anchor='w')
         add_infor.pack(padx=10, pady=5, anchor='w')
         user_infor.pack(padx=10, pady=5, anchor='w')
+
+        # 분양자 버튼 생성
+        seller_btn = {}
+
+        for i, d in enumerate(self.seller):
+            btn = Button(self.root, padx=60, text=i, pady=10, fg='#B96F00', bg='#F0AD48', command=lambda x=i: self.sellerEvent(x))
+            btn.grid(row=i, column=0)
+            seller_btn[i] = btn
+
         self.play()
 
     def draw_info(self, list):  # gui 정보넣을 라벨 리스트
@@ -86,15 +99,26 @@ class ParcelUpdate():
         list[0].config('text', self.thisAnimal) # 처음엔 이름넣기
 
         # 뿌리기
-        for i in range(1,list):
-            list[i].config('text',info[keys[i]])
+        for i in range(1, list):
+            list[i].config('text', info[keys[i]])
+
+        # 분양신청자 id 가져오기
+        apply_list = list(info['apply_users'])
+
+        for i in apply_list:
+            self.seller.append(i)
+
+    # 클릭 시 분양자 정보 이동
+    def sellerEvent(self, id):
+        self.root.destroy()
+        SellerInfo("분양자 정보", userid=id)
 
     def subscriptionEvent(self):
         self.root.destroy()
         adieuMain("분양신청")
 
     # 클릭 시 입력
-    def hintEvent(self,event):  # 눌렀을때 글자 넣을수 있게
+    def hintEvent(self, event):  # 눌렀을때 글자 넣을수 있게
         event.config(fg='black')
         event.delete(0,END)
 
@@ -103,4 +127,4 @@ class ParcelUpdate():
 
 
 if __name__ == '__main__':
-    ParceAdieuEdit('분양게시물확인 및 수정')
+    ParceAdieuEdit('분양수정 및 분양자 확인')

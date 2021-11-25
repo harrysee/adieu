@@ -5,7 +5,7 @@ from _Adoption_book import Adoption_book
 from adieu_main import adieuMain
 
 class ParceAdieuInfor():
-    def __init__(self,title, selecanimal): # 타이틀, 선택한동물이름
+    def __init__(self, title, selecanimal): # 타이틀, 선택한동물이름
         self.engien = Adoption_book()
         self.thisAnimal = selecanimal
         self.ParceInfoGUI(title)
@@ -85,4 +85,4 @@ class ParceAdieuInfor():
 
 
 if __name__ == '__main__':
-    ParceAdieuInfor('게시물 정보')
+    ParceAdieuInfor('게시물 정보 및 분양 신청')

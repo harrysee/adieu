@@ -87,19 +87,18 @@ class Adoption_book:
         return self.animals[select]
 
     # 입양 신청하기
-    def put_animals(self,animalname):
+    def put_animals(self, animalname):
         # 신청한 동물 인덱스에 있는 객체의 신청내역에 신청한 사용자의 이름을 넣는다
         try:
             self.animals[animalname]['apply_users'].appand(Adoption_book.now_user)
             # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.
             self.users[Adoption_book.now_user]['pick_list'].append(animalname)
-            json.set_animals_json(self.animals)
-            json.set_user_json(self.users)(self.users)()
+            json.set_animals_json(self, self.animals)
+            json.set_user_json(self, self.users)
         except:
             return False
         return True
-            
-        
+
 
     # 게시물 등록
     def up_animal(self, list):  # 게시물 리스트

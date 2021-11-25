@@ -105,4 +105,4 @@ class ParceAdieuEdit():
 
 
 if __name__ == '__main__':
-    ParceAdieuEdit('분양게시물추가')
+    ParceAdieuEdit('분양게시물등록')

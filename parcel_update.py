@@ -77,6 +77,18 @@ class ParcelUpdate():
         user_infor.pack(padx=10, pady=5, anchor='w')
         self.play()
 
+    def draw_info(self, list):  # gui 정보넣을 라벨 리스트
+        # 정보가져오기
+        # [name, species, age, gender, add_infor, user_infor] 순서대로
+        info = self.engien.get_animal_info(self.thisAnimal)
+        keys = ['','species','pat_age','user','pat_gender','pat_etc']
+
+        list[0].config('text', self.thisAnimal) # 처음엔 이름넣기
+
+        # 뿌리기
+        for i in range(1,list):
+            list[i].config('text',info[keys[i]])
+
     def subscriptionEvent(self):
         self.root.destroy()
         adieuMain("분양신청")
@@ -91,4 +103,4 @@ class ParcelUpdate():
 
 
 if __name__ == '__main__':
-    ParceAdieuEdit('분양게시물수정')
+    ParceAdieuEdit('분양게시물확인 및 수정')

@@ -65,6 +65,7 @@ class ParceAdieuInfor():
         keys = ['','species','pat_age','user','pat_gender','pat_etc']
 
         list[0].config('text', self.thisAnimal) # 처음엔 이름넣기
+
         # 뿌리기
         for i in range(1,list):
             list[i].config('text',info[keys[i]])

@@ -79,7 +79,7 @@ class adieuMain():
         selectedItem = self.animalView.focus()
         getValue = self.animalView.item(selectedItem).get('values')
         from parcel_infor import ParceAdieuInfor
-        ParceAdieuInfor('게시물 정보',getValue[1])    # 선택한 동물 이름 넘겨주기
+        ParceAdieuInfor('게시물 정보', getValue[1])    # 선택한 동물 이름 넘겨주기
 
     def logout_event(self,evnet):   # 로그아웃 -> 첫화면
         self.root.destroy()

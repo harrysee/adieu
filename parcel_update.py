@@ -114,6 +114,9 @@ class ParcelUpdate():
         self.root.destroy()
         SellerInfo("분양자 정보", userid=id)
 
+        # 분양자 리스트에서서 삭제
+        self.seller.remove(id)
+
     def updateEvent(self):
         # 수정 클릭 시 메인화면
         self.root.destroy()

@@ -75,34 +75,25 @@ class SellerInfo():
         messagebox.showinfo('전화번호:', call)
 
         # 분양자에게 작성자의 주소와 전화번호 전달
-        writer = self.engien.get_user_info()
+        writer = self.engien.get_user_info( )
         keys = ['', 'name', 'age', 'id', 'pw', 'pw_check', 'zipcode', 'call_number', 'introduce']
         call = writer[keys[7]]
         zip = writer[keys[6]]
         messagebox.showinfo('전화번호', call, '주소', zip)
 
-
         # 분양 신청한 게시물 삭제
-        self.applylist.delete()
-
-        # 분양자 리스트에서 삭제
-        info = self.engien.get_animal_info(self.thisAnimal)
-        keys = ['', 'species', 'pat_age', 'user', 'pat_gender', 'pat_etc']
-        self.applylist.delete(info['apply_users'])
+        self.applylist.remove(self.thisAnimal)
 
         self.root.destroy()
-        ParcelUpdate('분양수정 및 분양자 확인')
+        ParcelUpdate.sellerEvent('분양수정 및 분양자 확인', self.userid)
 
     def noEvent(self):
         # 분양거절 - 사용자- 신청리스트 및 게시물-신청리스트에서 삭제 후 시작화면으로 이동
         # 분양 신청한 게시물에서 삭제
-        self.applylist.delete()
-
-        # 분양자 리스트에서 삭제
-        self.applylist.delete()
+        self.applylist.remove(self.thisAnimal)
 
         self.root.destroy()
-        ParcelUpdate('분양수정 및 분양자 확인')
+        ParcelUpdate.sellerEvent('분양수정 및 분양자 확인', self.userid)
 
     def writeItemEvent(self,event):
         # 등록한 게시물 클릭했을때

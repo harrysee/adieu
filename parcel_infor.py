@@ -25,7 +25,7 @@ class ParceAdieuInfor():
 
         # logo 설정
         logo_img = PhotoImage(file='img/Adieu.gif', width=200, height=87)
-        # logo = Label(self.root, bg=self.BGCOLOR, image=logo_img)
+        logo = Label(self.root, bg=self.BGCOLOR, image=logo_img)
 
         photo_img = PhotoImage(file='img/animal_img.png', width=300, height=230)
         photo = Label(self.root, bg=self.BGCOLOR, image=photo_img)

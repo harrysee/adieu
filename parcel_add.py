@@ -1,4 +1,6 @@
 from tkinter import *
+from tkinter import messagebox
+
 from adieu_main import adieuMain
 from _Adoption_book import Adoption_book
 
@@ -87,7 +89,7 @@ class ParceAdieuEdit():
             if info['foreground']!='black': # 입력 안되엇을경우
                 messagebox.showinfo("입력오류",info.get()+" 입력하시오.")
                 return
-        message = engien.sign_up(self.inputList, self.gender_var)
+        message = self.engien.sign_up(self.inputList, self.gender_var)
         if message != True:
             messagebox.showinfo("오류", message)  # 등록이 성공적으로 안되면 이유 리턴
             return

@@ -2,8 +2,6 @@ from tkinter import *
 from tkinter import messagebox
 
 from _Adoption_book import Adoption_book
-from parcel_update import ParcelUpdate
-
 
 class SellerInfo():
     def __init__(self, title, userid):
@@ -90,30 +88,30 @@ class SellerInfo():
         messagebox.showinfo('전화번호', call, '주소', zip)
 
         # 분양 신청한 게시물 삭제
-        self.applylist.remove(self.userid)
-
+        self.applylist.pop(self.userid)
+        from parcel_update import ParcelUpdate
         self.root.destroy()
         ParcelUpdate.sellerEvent('분양수정 및 분양자 확인', self.userid)
 
     def noEvent(self):
         # 분양거절 - 사용자- 신청리스트 및 게시물-신청리스트에서 삭제 후 시작화면으로 이동
         # 분양 신청한 게시물에서 삭제
-        self.applylist.remove(self.userid)
-
+        self.thisUserInfo['apply_list'].remove(self.userid)
         self.root.destroy()
+        from parcel_update import ParcelUpdate
         ParcelUpdate.sellerEvent('분양수정 및 분양자 확인', self.userid)
 
     def writeItemEvent(self, event):
         # 등록한 게시물 클릭했을때
-        selectedItem = self.writerlist.curselection()
-        getValue = self.user['pick_list'][selectedItem]
+        selectedItem = self.writelist.curselection()
+        getValue = self.thisUserInfo['up_list'][selectedItem[0]]
         from parcel_infor import ParceAdieuInfor
         ParceAdieuInfor('게시물 정보 및 분양 신청', getValue)
 
     def applyItemEvent(self, event):
         # 신청한 게시물 클릭했을때
         selectedItem = self.applylist.curselection()
-        getValue = self.user['pick_list'][selectedItem]
+        getValue = self.thisUserInfo['pick_list'][selectedItem[0]]
         from parcel_infor import ParceAdieuInfor
         ParceAdieuInfor('게시물 정보 및 분양 신청', getValue)
 

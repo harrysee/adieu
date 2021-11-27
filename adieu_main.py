@@ -21,7 +21,7 @@ class adieuMain():
 
         # 동물검색
         logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
-        # logo = Label(self.root,bg=self.BACKGROUND,image=logo_img)
+        logo = Label(self.root,bg=self.BACKGROUND,image=logo_img)
 
         # 왼쪽 사이드
         cartegoryFrame = Frame(self.root, bg=self.BACKGROUND )
@@ -78,7 +78,7 @@ class adieuMain():
         user.place(x=660,y=15)
         cartegoryFrame.place(x=50,y=150)
         search.place(x=15, y=90)
-        # logo.place(x=10,y=5)
+        logo.place(x=10,y=5)
         self.play()
 
     def draw_animal_list(self,treelist):    # 동물들 리스트 그리기
@@ -109,4 +109,6 @@ class adieuMain():
     def play(self):
         self.root.mainloop()
 
+if __name__ == '__main__':
+    adieuMain('메인')
 

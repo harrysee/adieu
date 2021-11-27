@@ -3,7 +3,7 @@ from tkinter import messagebox
 
 from _Adoption_book import Adoption_book
 from adieu_main import adieuMain
-from parcel_add import ParceAdieuEdit
+from parcel_add import ParceAdieuAdd
 from seller_info import SellerInfo
 from user_info import UserInfo
 

@@ -1,38 +1,27 @@
 class Parcel_out:
     def __init__(self):
-        # 동물의 종류
+        # 동물의 분류
         self.species =''
         # 동물의 이름
         self.pat_name =''
         # 동물의 나이
         self.pat_age = 1
+        self.place = ''
         # 분양동물 기타사항
         self.etc =''
+        self.pat_gender = ''
 
-    def check_all(self, input_list, gender):
+    def set_pat(self, input_list, gender):    # [name, species, age, place, add_infor, user_infor]
         self.input_list = input_list
-
-        for info in self.input_list:
-            if info.get() == '':
-                return info + '를 입력하세요'
-            elif info.get() == False:
-                print('꒦꒷꒷꒦꒦꒷잘못 입력했습니다(>_<｡)💦 다시 입력하세요꒦꒷꒷꒦꒷꒦꒷')
-
-        # 동물 정보
-        self.set_pat()
-
-        # 동물 나이
-        self.set_pat_age()
-
-    def set_pat(self):    # [name, species, age, place, add_infor, user_infor]
         self.pat_name = self.name_check(self.input_list[0].get())
         self.species = self.input_list[1].get()
+        self.place = self.input_list[3].get()
         self.etc = self.input_list[4].get()
-        self.user = self.input_list[5].get()
         age = self.set_pat_age()
         if age != 'true':
             return age
         self.pat_age = self.input_list[2].get()
+        self.pat_gender = self.gender_check(gender)
         return 'ok'
 
 
@@ -57,5 +46,8 @@ class Parcel_out:
         else:
             return '나이를 제대로 입력해주십시오'
 
-    def __str__(self):
-        return (f'이름:{self.pat_name}\t나이:{self.pat_age}\t성별:{self.pat_gender}\t종류:{self.species}\t기타사항:{self.etc}')
+    def gender_check(self, gender_var):
+        if gender_var ==1:
+            return '암컷'
+        else:
+            return '수컷'

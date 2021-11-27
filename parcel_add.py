@@ -1,8 +1,10 @@
 from tkinter import *
+from tkinter import messagebox
+
 from adieu_main import adieuMain
 from _Adoption_book import Adoption_book
 
-class ParceAdieuEdit():
+class ParceAdieuAdd():
     def __init__(self,title):
         self.engien = Adoption_book()
         self.parcelEditGUI(title)
@@ -20,7 +22,7 @@ class ParceAdieuEdit():
         self.mainFrame.pack(expand=True)
 
         # logo 설정
-        logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
+        logo_img = PhotoImage(file='img/Adieu.gif', width=200, height=87)
         logo = Label(self.root, bg=bg_color, image=logo_img)
 
         photo = Frame(self.root, bg='#F0AD48', width=300, height=230)
@@ -36,8 +38,11 @@ class ParceAdieuEdit():
         age = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
         place = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
         add_infor = Entry(inputFrame2, width=52, relief="flat", bd=13, fg="gray")
-        user_infor = Entry(inputFrame2, width=35, relief="flat", bd=13, fg="gray")
-        self.inputList = [name, species, age, place, add_infor, user_infor]  # 입력 받을 리스트
+        self.gender_ani = IntVar()  # 여기에 int 형으로 값을 저장한다
+        gender_w = Radiobutton(inputFrame2, text="암컷", value=1, variable=self.gender_ani, bg=bg_color)
+        gender_m = Radiobutton(inputFrame2, text="수컷", value=2, variable=self.gender_ani, bg=bg_color)
+        gender_w.select()  # 기본적으로 여자 선택
+        self.inputList = [name, species, age, place, add_infor]  # 입력 받을 리스트
 
         # hint
         self.inputList[0].insert(0, '이름')
@@ -45,7 +50,6 @@ class ParceAdieuEdit():
         self.inputList[2].insert(0, '나이')
         self.inputList[3].insert(0, '장소')
         self.inputList[4].insert(0, '추가설명')
-        self.inputList[5].insert(0, '사용자 정보')
 
         # hint 이벤트
         self.inputList[0].bind('<Button-1>', lambda x: self.hintEvent(event=name))
@@ -53,7 +57,6 @@ class ParceAdieuEdit():
         self.inputList[2].bind('<Button-1>', lambda x: self.hintEvent(event=age))
         self.inputList[3].bind('<Button-1>', lambda x: self.hintEvent(event=place))
         self.inputList[4].bind('<Button-1>', lambda x: self.hintEvent(event=add_infor))
-        self.inputList[5].bind('<Button-1>', lambda x: self.hintEvent(event=user_infor))
 
         # tab 이벤트
         self.inputList[0].bind('<FocusIn>', lambda x: self.hintEvent(event=name))
@@ -61,7 +64,6 @@ class ParceAdieuEdit():
         self.inputList[2].bind('<FocusIn>', lambda x: self.hintEvent(event=age))
         self.inputList[3].bind('<FocusIn>', lambda x: self.hintEvent(event=place))
         self.inputList[4].bind('<FocusIn>', lambda x: self.hintEvent(event=add_infor))
-        self.inputList[5].bind('<FocusIn>', lambda x: self.hintEvent(event=user_infor))
 
         # 화면에 출력
         inputFrame1.place(x=360, y=80)
@@ -75,7 +77,8 @@ class ParceAdieuEdit():
         age.pack(padx=15, pady=10, anchor='w')
         place.pack(padx=15, pady=5, anchor='w')
         add_infor.pack(padx=10, pady=5, anchor='w')
-        user_infor.pack(padx=10, pady=5, anchor='w')
+        gender_w.pack(padx=10, pady=5, anchor='w')
+        gender_m.pack(padx=10, pady=5, anchor='w')
         self.play()
 
     def cancelbtnEvent(self):   # 취소
@@ -87,8 +90,8 @@ class ParceAdieuEdit():
             if info['foreground']!='black': # 입력 안되엇을경우
                 messagebox.showinfo("입력오류",info.get()+" 입력하시오.")
                 return
-        message = engien.sign_up(self.inputList, self.gender_var)
-        if message != True:
+        message = self.engien.up_animal(self.inputList, self.gender_ani)
+        if message != 'ok':
             messagebox.showinfo("오류", message)  # 등록이 성공적으로 안되면 이유 리턴
             return
         messagebox.showinfo("안내","게시물 등록 완료!!")
@@ -105,4 +108,4 @@ class ParceAdieuEdit():
 
 
 if __name__ == '__main__':
-    ParceAdieuEdit('분양게시물등록')
+    ParceAdieuAdd('분양게시물등록')

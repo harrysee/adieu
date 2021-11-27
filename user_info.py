@@ -1,6 +1,7 @@
 from tkinter import *
 
 from _Adoption_book import Adoption_book
+from parcel_infor import ParceAdieuInfor
 
 
 class UserInfo():
@@ -44,18 +45,18 @@ class UserInfo():
         apply_posts = LabelFrame(self.root, labelanchor='n', width=200, height=200, text="신청한 게시물", fg=text_color,
                                  bg=bg_color)
         self.writelist = Listbox(write_posts, selectmode='single', height=0)
-        applylist = Listbox(apply_posts, selectmode='single', height=0)
+        self.applylist = Listbox(apply_posts, selectmode='single', height=0)
         self.writelist.bind("<Double-Button-1>", self.writeItemEvent)
-        applylist.bind("<Double-Button-1>", self.applyItemEvent)
+        self.applylist.bind("<Double-Button-1>", self.applyItemEvent)
 
         self.draw_postList(self.user['up_list'],self.writelist)
-        self.draw_postList(self.user['pick_list'],applylist)
+        self.draw_postList(self.user['pick_list'],self.applylist)
 
         # 화면넣기
         write_posts.place(x=280, y=85)
         apply_posts.place(x=510, y=85)
         self.writelist.pack(padx=20, pady=10)
-        applylist.pack(padx=20, pady=10)
+        self.applylist.pack(padx=20, pady=10)
         edit_btn.place(x=611, y=516)
         add_btn.place(x=480, y=516)
         photo.place(x=40, y=90)
@@ -73,14 +74,17 @@ class UserInfo():
 
     def writeItemEvent(self, event):
         # 등록한 게시물 클릭했을때
-        selectedItem = self.writelist.curselection()
+        selectedItem = self.applylist.curselection()
         getValue = self.user['up_list'][selectedItem]
         from parcel_update import ParcelUpdate
         ParcelUpdate('사용자정보수정 및 분양자확인', getValue)
 
     def applyItemEvent(self, event):
         # 신청한 게시물 클릭했을때
-        pass
+        selectedItem = self.applylist.curselection()
+        getValue = self.user['pick_list'][selectedItem]
+        from parcel_infor import ParceAdieuInfor
+        ParceAdieuInfor('게시물 정보 및 분양 신청', getValue)
 
     def editBtnEventListener(self):
         # 수정하기 버튼 리스너

@@ -1,8 +1,8 @@
 from tkinter import *
 from adieu_main import adieuMain
 from _Adoption_book import Adoption_book
-class ParceAdieuEdit():
 
+class ParceAdieuEdit():
     def __init__(self,title):
         self.engien = Adoption_book()
         self.parcelEditGUI(title)

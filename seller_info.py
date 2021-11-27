@@ -1,12 +1,14 @@
 from tkinter import *
+from tkinter import messagebox
 
 from _Adoption_book import Adoption_book
+from parcel_update import ParcelUpdate
 
 
 class SellerInfo():
-    def __init__(self,title, userid):
+    def __init__(self, title, userid):
         self.engien = Adoption_book()
-        self.thisUserInfo,self.userid= self.engien.get_user_info(userid),userid
+        self.thisUserInfo, self.userid= self.engien.get_user_info(userid), userid
         self.sellerGUI(title)
 
     def sellerGUI(self, title):
@@ -23,38 +25,32 @@ class SellerInfo():
         logo = Label(self.root, bg=bg_color, image=logo_img)  # 로고
         photo_img = PhotoImage(file='img/input_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
-        name_info = Label(self.root, width=17,anchor='w', text=self.thisUserInfo['name'], bg='#fff', relief='flat', bd=10,
-                             fg='#000')  # 회원가입 버튼
-        age_info = Label(self.root,anchor='w', width=17, text=self.thisUserInfo['age'], bg='#fff', relief='flat', bd=10,
-                            fg='#000')  # 취소 버튼
-        id_info = Label(self.root, width=17,anchor='w', text=self.userid, bg='#fff', relief='flat', bd=10,
-                            fg='#000')  # 취소 버튼
-        intro_info = Label(self.root, width=17,anchor='w', text=self.thisUserInfo['introduce'], bg='#fff', relief='flat', bd=10,
-                            fg='#000')  # 취소 버튼
+        name_info = Label(self.root, width=17,anchor='w', text=self.thisUserInfo['name'], bg='#fff', relief='flat', bd=10, fg='#000')  # 회원가입 버튼
+        age_info = Label(self.root,anchor='w', width=17, text=self.thisUserInfo['age'], bg='#fff', relief='flat', bd=10, fg='#000')  # 취소 버튼
+        id_info = Label(self.root, width=17,anchor='w', text=self.userid, bg='#fff', relief='flat', bd=10, fg='#000')  # 취소 버튼
+        intro_info = Label(self.root, width=17,anchor='w', text=self.thisUserInfo['introduce'], bg='#fff', relief='flat', bd=10, fg='#000')  # 취소 버튼
 
         # 하단 버튼
-        ok_btn = Button(self.root, cursor='hand2', width=13, text='분양수락', bg='#F0AD48', relief='flat', bd=8, command=self.okEvent,
-                          fg=text_color)  # 회원가입 버튼
-        no_btn = Button(self.root, cursor='hand2', width=13, text='분양거절', bg='#F0AD48', relief='flat', bd=8, command=self.noEvent,
-                            fg=text_color)  # 취소 버튼
+        ok_btn = Button(self.root, cursor='hand2', width=13, text='분양수락', bg='#F0AD48', relief='flat', bd=8, command=self.okEvent, fg=text_color)  # 회원가입 버튼
+        no_btn = Button(self.root, cursor='hand2', width=13, text='분양거절', bg='#F0AD48', relief='flat', bd=8, command=self.noEvent, fg=text_color)  # 취소 버튼
 
         #컨테이너
         write_posts = LabelFrame(self.root, labelanchor='n',width=200, height=200,text="등록한 게시물",fg=text_color,bg=bg_color)
         apply_posts = LabelFrame(self.root, labelanchor='n',width=200, height=200,text="신청한 게시물",fg=text_color,bg=bg_color)
         writelist = Listbox(write_posts, selectmode='single', height=0)
-        applylist = Listbox(apply_posts, selectmode='single', height=0)
+        self.applylist = Listbox(apply_posts, selectmode='single', height=0)
         writelist.bind("<Double-Button-1>",self.writeItemEvent)
-        applylist.bind("<Double-Button-1>",self.applyItemEvent)
+        self.applylist.bind("<Double-Button-1>",self.applyItemEvent)
         
         # 리스트 아이템들 추가
         self.draw_postList(self.thisUserInfo['up_list'], writelist)
-        self.draw_postList(self.thisUserInfo['pick_list'], applylist)
+        self.draw_postList(self.thisUserInfo['pick_list'], self.applylist)
 
         # 화면넣기
         write_posts.place(x=280,y=85)
         apply_posts.place(x=510,y=85)
         writelist.pack(padx=20,pady=10)
-        applylist.pack(padx=20,pady=10)
+        self.applylist.pack(padx=20,pady=10)
         ok_btn.place(x=488, y=516)
         no_btn.place(x=611, y=516)
         photo.place(x=40, y=90)
@@ -71,14 +67,42 @@ class SellerInfo():
             listbox.insert(END, ' ' + animal['species'] + '   :   ' + post)
 
     def okEvent(self):
-        # 분양수락 버튼 눌렀을때
-        # 사용자- 신청리스트 및 게시물-신청리스트에서 삭제
-        # 메시지박스로 정보 전달
-        pass
+        # 분양수락 - 사용자-신청리스트 및 게시물-신청리스트에서 삭제
+        # 작성자에게 분양자 전화번호 전달
+        seller = self.engien.get_user_info(self.thisUserInfo)
+        keys = ['', 'name', 'age', 'id', 'pw', 'pw_check', 'zipcode', 'call_number', 'introduce']
+        call = seller[keys[7]]
+        messagebox.showinfo('전화번호:', call)
+
+        # 분양자에게 작성자의 주소와 전화번호 전달
+        writer = self.engien.get_user_info()
+        keys = ['', 'name', 'age', 'id', 'pw', 'pw_check', 'zipcode', 'call_number', 'introduce']
+        call = writer[keys[7]]
+        zip = writer[keys[6]]
+        messagebox.showinfo('전화번호', call, '주소', zip)
+
+
+        # 분양 신청한 게시물 삭제
+        self.applylist.delete()
+
+        # 분양자 리스트에서 삭제
+        info = self.engien.get_animal_info(self.thisAnimal)
+        keys = ['', 'species', 'pat_age', 'user', 'pat_gender', 'pat_etc']
+        self.applylist.delete(info['apply_users'])
+
+        self.root.destroy()
+        ParcelUpdate('분양수정 및 분양자 확인')
 
     def noEvent(self):
         # 분양거절 - 사용자- 신청리스트 및 게시물-신청리스트에서 삭제 후 시작화면으로 이동
-        pass
+        # 분양 신청한 게시물에서 삭제
+        self.applylist.delete()
+
+        # 분양자 리스트에서 삭제
+        self.applylist.delete()
+
+        self.root.destroy()
+        ParcelUpdate('분양수정 및 분양자 확인')
 
     def writeItemEvent(self,event):
         # 등록한 게시물 클릭했을때

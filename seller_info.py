@@ -90,7 +90,7 @@ class SellerInfo():
         messagebox.showinfo('전화번호', call, '주소', zip)
 
         # 분양 신청한 게시물 삭제
-        self.applylist.remove(self.thisAnimal)
+        self.applylist.remove(self.userid)
 
         self.root.destroy()
         ParcelUpdate.sellerEvent('분양수정 및 분양자 확인', self.userid)
@@ -98,7 +98,7 @@ class SellerInfo():
     def noEvent(self):
         # 분양거절 - 사용자- 신청리스트 및 게시물-신청리스트에서 삭제 후 시작화면으로 이동
         # 분양 신청한 게시물에서 삭제
-        self.applylist.remove(self.thisAnimal)
+        self.applylist.remove(self.userid)
 
         self.root.destroy()
         ParcelUpdate.sellerEvent('분양수정 및 분양자 확인', self.userid)

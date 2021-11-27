@@ -24,7 +24,7 @@ class ParceAdieuInfor():
         self.mainFrame.pack(expand=True)
 
         # logo 설정
-        logo_img = PhotoImage(file='img/Adieu.gif', width=200, height=87)
+        logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
         # logo = Label(self.root, bg=self.BGCOLOR, image=logo_img)
 
         photo = Frame(self.root, bg='#F0AD48', width=300, height=230)

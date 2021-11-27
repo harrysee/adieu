@@ -21,9 +21,9 @@ class SellerInfo():
         self.root.resizable(0, 0)
 
         # 왼쪽 사이드
-        logo_img = PhotoImage(file='img/Adieu.gif', width=182, height=87)
+        logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
         logo = Label(self.root, bg=bg_color, image=logo_img)  # 로고
-        photo_img = PhotoImage(file='img/input_img.gif')
+        photo_img = PhotoImage(file='img/input_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
         name_info = Label(self.root, width=17, anchor='w', text=self.thisUserInfo['name'], bg='#fff', relief='flat',
                           bd=10, fg='#000')  # 회원가입 버튼

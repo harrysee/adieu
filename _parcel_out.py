@@ -26,7 +26,7 @@ class Parcel_out:
 
 
     def name_check(self, name):
-        from json_use import UseJSON
+        from _json_use import UseJSON
         js = UseJSON()
         animals = js.get_animals_json()
         for key in animals.keys():

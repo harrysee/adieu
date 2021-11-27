@@ -15,7 +15,7 @@ class StartAdieu():
         self.mainFrame.pack(expand=True)
 
         # logo 설정
-        logo_img = PhotoImage(file='img/Start_logo.gif')
+        logo_img = PhotoImage(file='img/Start_logo.png')
         logo = Label(self.mainFrame, image=logo_img, bg='#FFC978', anchor='center')
 
         # button 설정

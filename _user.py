@@ -1,5 +1,5 @@
 import json
-from json_use import UseJSON as json
+from _json_use import UseJSON as json
 
 
 class User:

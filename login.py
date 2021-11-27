@@ -24,7 +24,7 @@ class LoginAdieu():
         self.mainFrame.pack(expand=True)
         
         # logo 설정
-        logo_img = PhotoImage(file='img/Adieu.gif')
+        logo_img = PhotoImage(file='img/Adieu.png')
         logo = Label(self.mainFrame, image=logo_img, bg=bg_color, anchor='center')
 
         # id , password 입력칸 설정

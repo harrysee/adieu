@@ -4,7 +4,6 @@ from tkinter import messagebox
 from _Adoption_book import Adoption_book
 from adieu_main import adieuMain
 from parcel_add import ParceAdieuEdit
-from seller_info import SellerInfo
 from user_info import UserInfo
 
 
@@ -14,7 +13,7 @@ class ParcelUpdate():
         self.parcelUpdateGUI(title)
         self.seller = []
 
-    def parcelUpdateGUI(self, title, seller):
+    def parcelUpdateGUI(self, title):
         bg_color = '#FFC978'  # 배경색
         self.root = Tk()
         self.root.title(title)
@@ -30,7 +29,8 @@ class ParcelUpdate():
         logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
         logo = Label(self.root, bg=bg_color, image=logo_img)
 
-        photo = Frame(self.root, bg='#F0AD48', width=300, height=230)
+        photo_img = PhotoImage(file='img/animal_img.png', width=300, height=230)
+        photo = Label(self.root, bg=bg_color, image=photo_img)
         # button 설정
         btn_update = Button(self.root, width=10, text='수정', bg='#F0AD48', command=self.updateEvent, relief='flat', bd=10, fg='#B96F00')
         btn_back = Button(self.root, width=10, text='취소', bg='#F0AD48', command=self.cancelEvent, relief='flat', bd=10, fg='#B96F00')
@@ -66,7 +66,7 @@ class ParcelUpdate():
         self.inputList[4].bind('<FocusIn>', lambda x: self.hintEvent(event=add_infor))
 
         # 화면에 출력
-        inputFrame1.place(x=300, y=80)
+        inputFrame1.place(x=380, y=80)
         inputFrame2.place(x=90, y=300)
         logo.place(x=10, y=5)
         photo.place(x=100, y=90)
@@ -111,6 +111,7 @@ class ParcelUpdate():
 
     # 클릭 시 분양자 정보 이동
     def sellerEvent(self, id):
+        from seller_info import SellerInfo
         self.root.destroy()
         SellerInfo("분양자 정보", userid=id)
 
@@ -136,7 +137,7 @@ class ParcelUpdate():
     def cancelEvent(self):
         # 취소 클릭 시 사용자화면
         self.root.destroy()
-        UserInfo("사용자정보")
+        adieuMain("메인")
 
     # 클릭 시 입력
     def hintEvent(self, event):  # 눌렀을때 글자 넣을수 있게
@@ -148,4 +149,4 @@ class ParcelUpdate():
 
 
 if __name__ == '__main__':
-    ParceAdieuEdit('분양수정 및 분양자 확인')
+    ParcelUpdate('분양수정 및 분양자 확인')

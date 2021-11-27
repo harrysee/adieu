@@ -27,12 +27,13 @@ class ParceAdieuInfor():
         logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
         logo = Label(self.root, bg=self.BGCOLOR, image=logo_img)
 
-        photo = Frame(self.root, bg='#F0AD48', width=300, height=230)
+        photo_img = PhotoImage(file='img/animal_img.png', width=300, height=230)
+        photo = Label(self.root, bg=self.BGCOLOR, image=photo_img)
         # button 설정
         btn_sub = Button(self.root, width=13, text='분양신청', bg='#F0AD48', command=self.subscriptionEvent, relief='flat', bd=10, fg='#B96F00')
         
         # 정보 화면
-        inputFrame1 = Frame(self.root, bg=self.BGCOLOR, width=330, height=400)
+        inputFrame1 = Frame(self.root, bg=self.BGCOLOR, width=380, height=400)
         inputFrame2 = Frame(self.root, bg=self.BGCOLOR, width=100, height=200)
         name = Label(inputFrame1, width=15, relief="flat", bd=13, fg=self.TEXTCOLOR)
         species = Label(inputFrame1, width=15, relief="flat", bd=13, fg=self.TEXTCOLOR)

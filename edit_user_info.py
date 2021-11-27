@@ -1,5 +1,8 @@
 from tkinter import *
 
+from adieu_main import adieuMain
+from user_info import UserInfo
+
 
 class EditUserInfo():
     def __init__(self, title):
@@ -17,9 +20,9 @@ class EditUserInfo():
         logo = Label(self.root, bg=bg_color, image=logo_img)  # 로고
         photo_img = PhotoImage(file='img/input_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
-        edit_btn = Button(self.root, cursor='hand2', width=16, text='정보수정', bg='#F0AD48', relief='flat', bd=10,
+        edit_btn = Button(self.root, cursor='hand2', width=16, text='정보수정', command=self.subscriptionEvent, bg='#F0AD48', relief='flat', bd=10,
                              fg=text_color)  # 회원가입 버튼
-        cancel_btn = Button(self.root, cursor='hand2', width=16, text='취소', bg='#F0AD48', relief='flat', bd=10,
+        cancel_btn = Button(self.root, cursor='hand2', width=16, text='취소', command=self.cancelEvent, bg='#F0AD48', relief='flat', bd=10,
                             fg=text_color)  # 취소 버튼
 
         # 입력받기
@@ -90,9 +93,14 @@ class EditUserInfo():
         # 비번 확인 체크
         pass
 
+    def subscriptionEvent(self):
+        # 수정 - 사용자 정보 볁경 후 시작화면으로 이동
+        pass
+
     def cancelEvent(self):
         # 취소 - 시작화면으로 이동
-        pass
+        self.root.destroy()
+        adieuMain("메인")
 
     def play(self):
         self.root.mainloop()

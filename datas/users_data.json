@@ -26,11 +26,15 @@
         "call_number": "46046464621",
         "zip_code": "\ubd80\uc0b0",
         "introduce": "\ub098\ub2e4",
-        "up_list": [],
+        "up_list": [
+            "dfs",
+            "fsfd"
+        ],
         "pick_list": [
             "dd",
             "",
-            "dd"
+            "dd",
+            "fsfd"
         ]
     },
     "jeon": {

@@ -113,6 +113,7 @@ class Adoption_book:
             'user'    : Adoption_book.NOWUSER,
             'pat_gender' : new.pat_gender, # 성별
             'pat_etc' : new.etc,     # 기타사항
+            'place'   : new.place,
             'apply_users' : [],     # 분양신청한 사용자들
         }
         self.users[Adoption_book.NOWUSER]['up_list'].append(new.pat_name) # 현재 사용자 객체의 올린 게시물 리스트에 게시물 올린거 추가

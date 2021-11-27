@@ -24,7 +24,7 @@ class ParceAdieuInfor():
         self.mainFrame.pack(expand=True)
 
         # logo 설정
-        logo_img = PhotoImage(file='img/Adieu.gif', width=200, height=87)
+        logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
         # logo = Label(self.root, bg=self.BGCOLOR, image=logo_img)
 
         photo = Frame(self.root, bg='#F0AD48', width=300, height=230)
@@ -35,12 +35,13 @@ class ParceAdieuInfor():
         inputFrame1 = Frame(self.root, bg=self.BGCOLOR, width=330, height=400)
         inputFrame2 = Frame(self.root, bg=self.BGCOLOR, width=100, height=200)
         name = Label(inputFrame1, width=15, relief="flat", bd=13, fg=self.TEXTCOLOR)
-        species = Label(inputFrame1, width=15, relief="flat", bd=13, fg=self.TEXTCOLOR)
-        age = Label(inputFrame1, width=15, relief="flat", bd=13, fg=self.TEXTCOLOR)
         gender = Label(inputFrame1, width=15, relief="flat", bd=13, fg=self.TEXTCOLOR)
+        age = Label(inputFrame1, width=15, relief="flat", bd=13, fg=self.TEXTCOLOR)
+        place = Label(inputFrame1, width=15, relief="flat", bd=13, fg=self.TEXTCOLOR)
         add_infor = Label(inputFrame2, width=52, relief="flat", bd=13, fg=self.TEXTCOLOR)
         user_infor = Label(inputFrame2, width=35, relief="flat", bd=13, fg=self.TEXTCOLOR)
-        inputList = [name, species, age, gender, add_infor, user_infor]  # 입력 받을 리스트
+        spaceies = Label(inputFrame2, width=15, relief="flat", bd=13, fg=self.TEXTCOLOR)
+        inputList = [name, gender, age, place, add_infor, user_infor,spaceies]  # 입력 받을 리스트
 
         self.draw_info(inputList)
 
@@ -51,11 +52,12 @@ class ParceAdieuInfor():
         photo.place(x=100, y=90)
         btn_sub.place(x=540, y=500)
         name.pack(padx=15, pady=10, anchor='w')
-        species.pack(padx=15, pady=10, anchor='w')
+        gender.pack(padx=15, pady=10, anchor='w')
         age.pack(padx=15, pady=10, anchor='w')
-        gender.pack(padx=15, pady=5, anchor='w')
+        place.pack(padx=15, pady=5, anchor='w')
         add_infor.pack(padx=10, pady=5, anchor='w')
         user_infor.pack(padx=10, pady=5, anchor='w')
+        spaceies.pack(padx=10, pady=5, anchor='w')
         self.play()
 
     def draw_info(self, list):  # gui 정보넣을 라벨 리스트

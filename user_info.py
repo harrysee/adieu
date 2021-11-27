@@ -69,7 +69,7 @@ class UserInfo():
     def draw_postList(self, postList, listbox):
         for post in postList:       # 등록한게시물이나 신청한 게시물에 잇는 동물이름으로 정보 가져와서 처리하기
             animal = self.engien.get_animal_info(post)
-            listbox.insert(END, ' ' + animal['species'] + '   :   ' + post)
+            listbox.insert(END, ' ' + animal[5] + '   :   ' + post)
 
     def writeItemEvent(self, event):
         # 등록한 게시물 클릭했을때

@@ -9,5 +9,24 @@
         "apply_users": [
             ""
         ]
+    },
+    "dfs": {
+        "species": "\uace0\uc591\uc774",
+        "pat_age": "3",
+        "user": "",
+        "pat_gender": "\uc218\ucef7",
+        "pat_etc": "dfs",
+        "apply_users": []
+    },
+    "fsfd": {
+        "species": "\uace0\uc591\uc774",
+        "pat_age": "2",
+        "user": "",
+        "pat_gender": "\uc218\ucef7",
+        "pat_etc": "dfsf",
+        "place": "dfs",
+        "apply_users": [
+            ""
+        ]
     }
 }

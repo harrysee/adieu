@@ -11,16 +11,16 @@ class Parcel_out:
         self.etc =''
         self.pat_gender = ''
 
-    def set_pat(self, input_list, gender,species):    # [name, species, age, place, add_infor, user_infor]
+    def set_pat(self, input_list, gender,species):    # [name, age, place, add_infor]
         self.input_list = input_list
         self.pat_name = self.name_check(self.input_list[0].get())
         self.species = self.species_check(species)
-        self.place = self.input_list[3].get()
-        self.etc = self.input_list[4].get()
+        self.place = self.input_list[2].get()
+        self.etc = self.input_list[3].get()
         age = self.set_pat_age()
         if age != 'true':
             return age
-        self.pat_age = self.input_list[2].get()
+        self.pat_age = self.input_list[1].get()
         self.pat_gender = self.gender_check(gender)
         return 'ok'
 
@@ -39,7 +39,7 @@ class Parcel_out:
 
 
     def set_pat_age(self):
-        age = self.input_list[2].get()
+        age = self.input_list[1].get()
         if age.isdigit() == True:
             self.pat_age = int(age)
             return 'true'
@@ -54,5 +54,5 @@ class Parcel_out:
 
     def species_check(self, species):
         field = ['고양이','강아지','새','기타']
-        return field[species]
+        return field[species.get()]
         

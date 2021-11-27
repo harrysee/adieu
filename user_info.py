@@ -74,7 +74,7 @@ class UserInfo():
 
     def writeItemEvent(self, event):
         # 등록한 게시물 클릭했을때
-        selectedItem = self.applylist.curselection()
+        selectedItem = self.writelist.curselection()
         getValue = self.user['up_list'][selectedItem]
         from parcel_update import ParcelUpdate
         ParcelUpdate('사용자정보수정 및 분양자확인', getValue)

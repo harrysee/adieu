@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f2fb7a25-084f-40e4-9a7b-fa9c2366f185" name="Default Changelist" comment="parcel_update.py 분양자 버튼 및 이벤트 생성, seller_info.py 분양자 버튼 이벤트 알고리즘 중">
+    <list default="true" id="f2fb7a25-084f-40e4-9a7b-fa9c2366f185" name="Default Changelist" comment="Merge remote-tracking branch 'origin/main' into main&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;parcel_update.py">
+      <change beforePath="$PROJECT_DIR$/.idea/adieu.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/adieu.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/user_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/user_img.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parcel_edit.py" beforeDir="false" afterPath="$PROJECT_DIR$/parcel_edit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parcel_update.py" beforeDir="false" afterPath="$PROJECT_DIR$/parcel_update.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/seller_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/seller_info.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_info.py" afterDir="false" />
@@ -45,7 +45,6 @@
     <setting file="file://$PROJECT_DIR$/login.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/datas/users_data.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/datas/animals_book.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/parcel_edit.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/sign_up.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/parcel_update.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/_parcel_out.py" root0="FORCE_HIGHLIGHTING" />

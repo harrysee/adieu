@@ -102,9 +102,9 @@ class Adoption_book:
         return True
 
     # 게시물 등록
-    def up_animal(self, list,gender):  # 게시물 리스트
+    def up_animal(self, list,gender,species):  # 게시물 리스트
         new = Parcel_out()
-        check = new.set_pat(list, gender)   # [name, species, age, place, add_infor, user_infor]
+        check = new.set_pat(list, gender,species)   # [name, species, age, place, add_infor, user_infor]
         if check != 'ok':
             return check
         self.animals[new.pat_name] = {

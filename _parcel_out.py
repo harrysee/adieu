@@ -11,10 +11,10 @@ class Parcel_out:
         self.etc =''
         self.pat_gender = ''
 
-    def set_pat(self, input_list, gender):    # [name, species, age, place, add_infor, user_infor]
+    def set_pat(self, input_list, gender,species):    # [name, species, age, place, add_infor, user_infor]
         self.input_list = input_list
         self.pat_name = self.name_check(self.input_list[0].get())
-        self.species = self.input_list[1].get()
+        self.species = self.species_check(species)
         self.place = self.input_list[3].get()
         self.etc = self.input_list[4].get()
         age = self.set_pat_age()
@@ -51,3 +51,8 @@ class Parcel_out:
             return '암컷'
         else:
             return '수컷'
+
+    def species_check(self, species):
+        field = ['고양이','강아지','새','기타']
+        return field[species]
+        

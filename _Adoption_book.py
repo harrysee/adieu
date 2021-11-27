@@ -2,7 +2,7 @@ import json
 
 from _parcel_out import Parcel_out
 from _user import User
-from json_use import UseJSON as json
+from _json_use import UseJSON as json
 
 class Adoption_book:
     NOWUSER = ''   # static 변수
@@ -94,13 +94,11 @@ class Adoption_book:
     def put_animals(self, animalname):
         # 신청한 동물 인덱스에 있는 객체의 신청내역에 신청한 사용자의 이름을 넣는다
         apply_list = self.animals[animalname]['apply_users']
-        print(apply_list)
         apply_list.append(Adoption_book.NOWUSER)
         # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.
         self.users[Adoption_book.NOWUSER]['pick_list'].append(animalname)
         json.set_animals_json(self, self.animals)
         json.set_user_json(self, self.users)
-
         return True
 
     # 게시물 등록

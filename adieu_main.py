@@ -20,7 +20,7 @@ class adieuMain():
         self.root.resizable(0, 0)
 
         # 동물검색
-        logo_img = PhotoImage(file='img/Adieu.gif', width=182, height=87)
+        logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
         logo = Label(self.root,bg=self.BACKGROUND,image=logo_img)
 
         # 왼쪽 사이드
@@ -38,7 +38,7 @@ class adieuMain():
         s_etc.bind('<ButtonRelease-1>', lambda x: self.search_species(event=s_etc))
         s_etc.pack()
 
-        photo_img = PhotoImage(file='img/search_img.gif')
+        photo_img = PhotoImage(file='img/search_img.png')
         search = Label(self.root, image=photo_img,bg=self.BACKGROUND)
 
         # 오른쪽 사이드

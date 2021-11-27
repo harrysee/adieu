@@ -1,8 +1,11 @@
 from tkinter import *
+from tkinter import messagebox
 
 from _Adoption_book import Adoption_book
 from adieu_main import adieuMain
-from parcel_add import ParceAdieuAdd
+from parcel_add import ParceAdieuEdit
+from seller_info import SellerInfo
+from user_info import UserInfo
 
 
 class ParcelUpdate():
@@ -11,7 +14,7 @@ class ParcelUpdate():
         self.parcelUpdateGUI(title)
         self.seller = []
 
-    def parcelUpdateGUI(self, title):
+    def parcelUpdateGUI(self, title, seller):
         bg_color = '#FFC978'  # 배경색
         self.root = Tk()
         self.root.title(title)
@@ -29,41 +32,38 @@ class ParcelUpdate():
 
         photo = Frame(self.root, bg='#F0AD48', width=300, height=230)
         # button 설정
-        btn_update = Button(self.root, width=10, text='수정', bg='#F0AD48', command=self.subscriptionEvent, relief='flat', bd=10, fg='#B96F00')
-        btn_back = Button(self.root, width=10, text='취소', bg='#F0AD48', command=self.subscriptionEvent, relief='flat', bd=10, fg='#B96F00')
+        btn_update = Button(self.root, width=10, text='수정', bg='#F0AD48', command=self.updateEvent, relief='flat', bd=10, fg='#B96F00')
+        btn_back = Button(self.root, width=10, text='취소', bg='#F0AD48', command=self.cancelEvent, relief='flat', bd=10, fg='#B96F00')
 
         # 입력받기
         inputFrame1 = Frame(self.root, bg=bg_color, width=330, height=400)
         inputFrame2 = Frame(self.root, bg=bg_color, width=100, height=200)
-        name = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
+        name = Label(inputFrame1, width=15, relief="flat", bd=13, fg="gray", text="이름")
         species = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
         age = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
         place = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
         add_infor = Entry(inputFrame2, width=52, relief="flat", bd=13, fg="gray")
         user_infor = Entry(inputFrame2, width=35, relief="flat", bd=13, fg="gray")
-        inputList = [name, species, age, place, add_infor, user_infor]  # 입력 받을 리스트
+        self.inputList = [name, species, age, place, add_infor, user_infor]  # 입력 받을 리스트
 
         # hint
-        inputList[0].insert(0, '이름')
-        inputList[1].insert(0, '종류')
-        inputList[2].insert(0, '나이')
-        inputList[3].insert(0, '장소')
-        inputList[4].insert(0, '추가설명')
-        inputList[5].insert(0, '사용자 정보')
+        self.inputList[1].insert(0, '종류')
+        self.inputList[2].insert(0, '나이')
+        self.inputList[3].insert(0, '장소')
+        self.inputList[4].insert(0, '추가설명')
+        self.inputList[5].insert(0, '사용자 정보')
 
         # hint 이벤트
-        inputList[0].bind('<Button-1>', lambda x: self.hintEvent(event=name))
-        inputList[1].bind('<Button-1>', lambda x: self.hintEvent(event=species))
-        inputList[2].bind('<Button-1>', lambda x: self.hintEvent(event=age))
-        inputList[3].bind('<Button-1>', lambda x: self.hintEvent(event=place))
-        inputList[4].bind('<Button-1>', lambda x: self.hintEvent(event=add_infor))
+        self.inputList[1].bind('<Button-1>', lambda x: self.hintEvent(event=species))
+        self.inputList[2].bind('<Button-1>', lambda x: self.hintEvent(event=age))
+        self.inputList[3].bind('<Button-1>', lambda x: self.hintEvent(event=place))
+        self.inputList[4].bind('<Button-1>', lambda x: self.hintEvent(event=add_infor))
 
         # tab 이벤트
-        inputList[0].bind('<FocusIn>', lambda x: self.hintEvent(event=name))
-        inputList[1].bind('<FocusIn>', lambda x: self.hintEvent(event=species))
-        inputList[2].bind('<FocusIn>', lambda x: self.hintEvent(event=age))
-        inputList[3].bind('<FocusIn>', lambda x: self.hintEvent(event=place))
-        inputList[4].bind('<FocusIn>', lambda x: self.hintEvent(event=add_infor))
+        self.inputList[1].bind('<FocusIn>', lambda x: self.hintEvent(event=species))
+        self.inputList[2].bind('<FocusIn>', lambda x: self.hintEvent(event=age))
+        self.inputList[3].bind('<FocusIn>', lambda x: self.hintEvent(event=place))
+        self.inputList[4].bind('<FocusIn>', lambda x: self.hintEvent(event=add_infor))
 
         # 화면에 출력
         inputFrame1.place(x=300, y=80)
@@ -86,6 +86,8 @@ class ParcelUpdate():
             btn = Button(self.root, padx=60, text=i, pady=10, fg='#B96F00', bg='#F0AD48', command=lambda x=i: self.sellerEvent(x))
             btn.grid(row=i, column=0)
             seller_btn[i] = btn
+
+        seller_btn.pack(x=580, y=15)
 
         self.play()
 
@@ -110,12 +112,31 @@ class ParcelUpdate():
     # 클릭 시 분양자 정보 이동
     def sellerEvent(self, id):
         self.root.destroy()
-        from seller_info import SellerInfo
         SellerInfo("분양자 정보", userid=id)
 
-    def subscriptionEvent(self):
+        # 분양자 리스트에서서 삭제
+        self.seller.remove(id)
+
+    def updateEvent(self):
+        # 수정 클릭 시 메인화면
         self.root.destroy()
-        adieuMain("분양신청")
+
+        for info in self.inputList:
+            if info['foreground']!='black': # 입력 안되엇을경우
+                messagebox.showinfo("입력오류", info.get()+" 입력하시오.")
+                return
+        message = self.engien.sign_up(self.inputList, self.gender_var)
+        if message != True:
+            messagebox.showinfo("오류", message)  # 등록이 성공적으로 안되면 이유 리턴
+            return
+        messagebox.showinfo("안내", "게시물 수정 완료!!")
+        adieuMain("메인화면")
+
+
+    def cancelEvent(self):
+        # 취소 클릭 시 사용자화면
+        self.root.destroy()
+        UserInfo("사용자정보")
 
     # 클릭 시 입력
     def hintEvent(self, event):  # 눌렀을때 글자 넣을수 있게
@@ -127,4 +148,4 @@ class ParcelUpdate():
 
 
 if __name__ == '__main__':
-    ParceAdieuAdd('분양수정 및 분양자 확인')
+    ParceAdieuEdit('분양수정 및 분양자 확인')

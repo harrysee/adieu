@@ -34,57 +34,51 @@ class ParceAdieuAdd():
         inputFrame1 = Frame(self.root, bg=bg_color, width=330, height=400)
         inputFrame2 = Frame(self.root, bg=bg_color, width=100, height=200)
         name = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
+        species = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
         age = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
         place = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
         add_infor = Entry(inputFrame2, width=52, relief="flat", bd=13, fg="gray")
         self.gender_ani = IntVar()  # 여기에 int 형으로 값을 저장한다
-        gender_w = Radiobutton(self.root, text="암컷", value=1, variable=self.gender_ani, bg=bg_color)
-        gender_m = Radiobutton(self.root, text="수컷", value=2, variable=self.gender_ani, bg=bg_color)
+        gender_w = Radiobutton(inputFrame2, text="암컷", value=1, variable=self.gender_ani, bg=bg_color)
+        gender_m = Radiobutton(inputFrame2, text="수컷", value=2, variable=self.gender_ani, bg=bg_color)
         gender_w.select()  # 기본적으로 여자 선택
-        self.species_var = IntVar()
-        species_0 = Radiobutton(self.root, text="고양이", value=0, variable=self.species_var, bg=bg_color)
-        species_1 = Radiobutton(self.root, text="강아지", value=1, variable=self.species_var, bg=bg_color)
-        species_2 = Radiobutton(self.root, text="새", value=2, variable=self.species_var, bg=bg_color)
-        species_3 = Radiobutton(self.root, text="기타", value=3, variable=self.species_var, bg=bg_color)
-        species_0.select()
-        self.inputList = [name,  age, place, add_infor]  # 입력 받을 리스트
+        self.inputList = [name, species, age, place, add_infor]  # 입력 받을 리스트
 
         # hint
         self.inputList[0].insert(0, '이름')
-        self.inputList[1].insert(0, '나이')
-        self.inputList[2].insert(0, '장소')
-        self.inputList[3].insert(0, '추가설명')
+        self.inputList[1].insert(0, '종류')
+        self.inputList[2].insert(0, '나이')
+        self.inputList[3].insert(0, '장소')
+        self.inputList[4].insert(0, '추가설명')
 
         # hint 이벤트
         self.inputList[0].bind('<Button-1>', lambda x: self.hintEvent(event=name))
-        self.inputList[1].bind('<Button-1>', lambda x: self.hintEvent(event=age))
-        self.inputList[2].bind('<Button-1>', lambda x: self.hintEvent(event=place))
-        self.inputList[3].bind('<Button-1>', lambda x: self.hintEvent(event=add_infor))
+        self.inputList[1].bind('<Button-1>', lambda x: self.hintEvent(event=species))
+        self.inputList[2].bind('<Button-1>', lambda x: self.hintEvent(event=age))
+        self.inputList[3].bind('<Button-1>', lambda x: self.hintEvent(event=place))
+        self.inputList[4].bind('<Button-1>', lambda x: self.hintEvent(event=add_infor))
 
         # tab 이벤트
         self.inputList[0].bind('<FocusIn>', lambda x: self.hintEvent(event=name))
-        self.inputList[1].bind('<FocusIn>', lambda x: self.hintEvent(event=age))
-        self.inputList[2].bind('<FocusIn>', lambda x: self.hintEvent(event=place))
-        self.inputList[3].bind('<FocusIn>', lambda x: self.hintEvent(event=add_infor))
+        self.inputList[1].bind('<FocusIn>', lambda x: self.hintEvent(event=species))
+        self.inputList[2].bind('<FocusIn>', lambda x: self.hintEvent(event=age))
+        self.inputList[3].bind('<FocusIn>', lambda x: self.hintEvent(event=place))
+        self.inputList[4].bind('<FocusIn>', lambda x: self.hintEvent(event=add_infor))
 
         # 화면에 출력
-        inputFrame1.place(x=400, y=80)
+        inputFrame1.place(x=360, y=80)
         inputFrame2.place(x=90, y=340)
         logo.place(x=10, y=5)
         photo.place(x=100, y=90)
         btn_edit.place(x=470, y=500)
         btn_back.place(x=590, y=500)
         name.pack(padx=15, pady=10, anchor='w')
-        gender_w.place(x=410, y=290, anchor='w')
-        gender_m.place(x=470, y=290, anchor='w')
+        species.pack(padx=15, pady=10, anchor='w')
         age.pack(padx=15, pady=10, anchor='w')
         place.pack(padx=15, pady=5, anchor='w')
         add_infor.pack(padx=10, pady=5, anchor='w')
-        species_0.place(x=100, y=420, anchor='w')
-        species_1.place(x=180, y=420, anchor='w')
-        species_2.place(x=250, y=420, anchor='w')
-        species_3.place(x=300, y=420, anchor='w')
-
+        gender_w.pack(padx=10, pady=5, anchor='w')
+        gender_m.pack(padx=10, pady=5, anchor='w')
         self.play()
 
     def cancelbtnEvent(self):   # 취소
@@ -96,7 +90,7 @@ class ParceAdieuAdd():
             if info['foreground']!='black': # 입력 안되엇을경우
                 messagebox.showinfo("입력오류",info.get()+" 입력하시오.")
                 return
-        message = self.engien.up_animal(self.inputList, self.gender_ani,self.species_var)
+        message = self.engien.up_animal(self.inputList, self.gender_ani)
         if message != 'ok':
             messagebox.showinfo("오류", message)  # 등록이 성공적으로 안되면 이유 리턴
             return

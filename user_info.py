@@ -1,7 +1,6 @@
 from tkinter import *
 
 from _Adoption_book import Adoption_book
-from parcel_infor import ParceAdieuInfor
 
 
 class UserInfo():
@@ -89,8 +88,8 @@ class UserInfo():
     def editBtnEventListener(self):
         # 수정하기 버튼 리스너
         self.root.destroy()
-        from parcel_update import ParcelUpdate
-        ParcelUpdate('사용자정보수정')
+        from edit_user_info import EditUserInfo
+        EditUserInfo('사용자정보수정')
 
     def addBtnEventListener(self):
         # 게시물 추가 버튼 리스너

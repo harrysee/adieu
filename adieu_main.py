@@ -20,7 +20,7 @@ class adieuMain():
         self.root.resizable(0, 0)
 
         # 동물검색
-        logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
+        logo_img = PhotoImage(file='img/Adieu.gif', width=182, height=87)
         logo = Label(self.root,bg=self.BACKGROUND,image=logo_img)
 
         # 왼쪽 사이드
@@ -38,25 +38,27 @@ class adieuMain():
         s_etc.bind('<ButtonRelease-1>', lambda x: self.search_species(event=s_etc))
         s_etc.pack()
 
-        photo_img = PhotoImage(file='img/search_img.png')
+        photo_img = PhotoImage(file='img/search_img.gif')
         search = Label(self.root, image=photo_img,bg=self.BACKGROUND)
 
         # 오른쪽 사이드
         animalList = Frame(self.root, width=900, height=900, bg=self.BACKGROUND)
-        self.animalView = tkinter.ttk.Treeview(animalList,height= 20,columns=["species","name","age"])
+        self.animalView = tkinter.ttk.Treeview(animalList,height= 20,columns=["species","name","age","applycnt"])
         self.animalView.bind("<Double-Button-1>",self.click_item)
         # treeView 사용 기본항목 포함 4개
         # scrollbar(animalList)
         # scrollbar.pack(side='right', fill="y")
 
         self.animalView.column('#0', width=70,anchor="center")   # 해당 속성이 차지하는 비율 
-        self.animalView.heading('#0', text="num",anchor="center")    # 해당속성의 이름
-        self.animalView.column('#1',width=150,anchor="center")
-        self.animalView.heading('#1',text="species",anchor="center")
-        self.animalView.column('#2',width=200,anchor="center")
-        self.animalView.heading('#2',text="name",anchor="center")
+        self.animalView.heading('#0', text="등록번호",anchor="center")    # 해당속성의 번호
+        self.animalView.column('#1',width=120,anchor="center")
+        self.animalView.heading('#1',text="분류",anchor="center")
+        self.animalView.column('#2',width=180,anchor="center")
+        self.animalView.heading('#2',text="이름",anchor="center")
         self.animalView.column('#3',width=80,anchor="center")
-        self.animalView.heading('#3',text="age",anchor="center")
+        self.animalView.heading('#3',text="나이",anchor="center")
+        self.animalView.column('#4', width=70, anchor="center")
+        self.animalView.heading('#4', text="신청수", anchor="center")
 
         self.draw_animal_list(self.engein.show_animals())
         # scrollbar.config(command=self.animalView.yview)
@@ -87,6 +89,7 @@ class adieuMain():
     def click_item(self,evnet): # item 클릭 시 선택한 게시물 가져와서 이름 매개변수로 동물 상세보기로 넘김
         selectedItem = self.animalView.focus()
         getValue = self.animalView.item(selectedItem).get('values')
+        print(getValue[1])
         from parcel_infor import ParceAdieuInfor
         ParceAdieuInfor('게시물 정보', getValue[1])    # 선택한 동물 이름 넘겨주기
 

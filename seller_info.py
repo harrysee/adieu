@@ -23,7 +23,7 @@ class SellerInfo():
         # 왼쪽 사이드
         logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
         logo = Label(self.root, bg=bg_color, image=logo_img)  # 로고
-        photo_img = PhotoImage(file='img/user_img.png')
+        photo_img = PhotoImage(file='img/input_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
         name_info = Label(self.root, width=17, anchor='w', text=self.thisUserInfo['name'], bg='#fff', relief='flat',
                           bd=10, fg='#000')  # 회원가입 버튼
@@ -80,14 +80,14 @@ class SellerInfo():
         seller = self.engien.get_user_info(self.thisUserInfo)
         keys = ['', 'name', 'age', 'id', 'pw', 'pw_check', 'zipcode', 'call_number', 'introduce']
         call = seller[keys[7]]
-        messagebox.showinfo('분양자 전화번호:', call)
+        messagebox.showinfo('전화번호:', call)
 
         # 분양자에게 작성자의 주소와 전화번호 전달
         writer = self.engien.get_user_info()
         keys = ['', 'name', 'age', 'id', 'pw', 'pw_check', 'zipcode', 'call_number', 'introduce']
         call = writer[keys[7]]
         zip = writer[keys[6]]
-        messagebox.showinfo('게시물 작성자 전화번호', call, '주소', zip)
+        messagebox.showinfo('전화번호', call, '주소', zip)
 
         # 분양 신청한 게시물 삭제
         self.applylist.remove(self.userid)

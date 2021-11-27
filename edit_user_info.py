@@ -16,9 +16,9 @@ class EditUserInfo():
         self.root.configure(bg=bg_color)
         self.root.resizable(0, 0)
         # 왼쪽 사이드
-        logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
+        logo_img = PhotoImage(file='img/Adieu.gif', width=182, height=87)
         logo = Label(self.root, bg=bg_color, image=logo_img)  # 로고
-        photo_img = PhotoImage(file='img/input_img.png')
+        photo_img = PhotoImage(file='img/input_img.gif')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
         edit_btn = Button(self.root, cursor='hand2', width=16, text='정보수정', command=self.subscriptionEvent, bg='#F0AD48', relief='flat', bd=10,
                              fg=text_color)  # 회원가입 버튼

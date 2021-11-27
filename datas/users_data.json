@@ -27,7 +27,11 @@
         "zip_code": "\ubd80\uc0b0",
         "introduce": "\ub098\ub2e4",
         "up_list": [],
-        "pick_list": []
+        "pick_list": [
+            "dd",
+            "",
+            "dd"
+        ]
     },
     "jeon": {
         "name": "18",
@@ -37,7 +41,9 @@
         "call_number": "4046546161",
         "zip_code": "\ubd80\uc0b0",
         "introduce": "\ub098\ub2e4",
-        "up_list": [],
+        "up_list": [
+            "dd"
+        ],
         "pick_list": []
     },
     "nndd": {

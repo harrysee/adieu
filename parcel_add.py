@@ -1,6 +1,4 @@
 from tkinter import *
-from tkinter import messagebox
-
 from adieu_main import adieuMain
 from _Adoption_book import Adoption_book
 
@@ -25,8 +23,7 @@ class ParceAdieuEdit():
         logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
         logo = Label(self.root, bg=bg_color, image=logo_img)
 
-        photo_img = PhotoImage(file='img/animal_img.png', width=300, height=230)
-        photo = Label(self.root, bg=bg_color, image=photo_img)
+        photo = Frame(self.root, bg='#F0AD48', width=300, height=230)
         # button 설정
         btn_edit = Button(self.root, width=10, text='등록', bg='#F0AD48', command=self.subscriptionEvent, relief='flat', bd=10, fg='#B96F00')
         btn_back = Button(self.root, width=10, text='취소', bg='#F0AD48', command=self.cancelbtnEvent, relief='flat', bd=10, fg='#B96F00')
@@ -67,7 +64,7 @@ class ParceAdieuEdit():
         self.inputList[5].bind('<FocusIn>', lambda x: self.hintEvent(event=user_infor))
 
         # 화면에 출력
-        inputFrame1.place(x=380, y=80)
+        inputFrame1.place(x=360, y=80)
         inputFrame2.place(x=90, y=340)
         logo.place(x=10, y=5)
         photo.place(x=100, y=90)
@@ -90,7 +87,7 @@ class ParceAdieuEdit():
             if info['foreground']!='black': # 입력 안되엇을경우
                 messagebox.showinfo("입력오류",info.get()+" 입력하시오.")
                 return
-        message = self.engien.sign_up(self.inputList, self.gender_var)
+        message = engien.sign_up(self.inputList, self.gender_var)
         if message != True:
             messagebox.showinfo("오류", message)  # 등록이 성공적으로 안되면 이유 리턴
             return
@@ -99,9 +96,9 @@ class ParceAdieuEdit():
         adieuMain("메인")
 
     # 클릭 시 입력
-    def hintEvent(self, event):  # 눌렀을때 글자 넣을수 있게
+    def hintEvent(self,event):  # 눌렀을때 글자 넣을수 있게
         event.config(fg='black')
-        event.delete(0, END)
+        event.delete(0,END)
 
     def play(self):
         self.root.mainloop()

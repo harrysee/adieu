@@ -24,8 +24,8 @@ class ParceAdieuInfor():
         self.mainFrame.pack(expand=True)
 
         # logo 설정
-        logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
-        logo = Label(self.root, bg=self.BGCOLOR, image=logo_img)
+        logo_img = PhotoImage(file='img/Adieu.gif', width=200, height=87)
+        # logo = Label(self.root, bg=self.BGCOLOR, image=logo_img)
 
         photo_img = PhotoImage(file='img/animal_img.png', width=300, height=230)
         photo = Label(self.root, bg=self.BGCOLOR, image=photo_img)
@@ -48,7 +48,7 @@ class ParceAdieuInfor():
         # 화면에 출력
         inputFrame1.place(x=360, y=80)
         inputFrame2.place(x=90, y=340)
-        logo.place(x=10, y=5)
+        # logo.place(x=10, y=5)
         photo.place(x=100, y=90)
         btn_sub.place(x=540, y=500)
         name.pack(padx=15, pady=10, anchor='w')
@@ -63,21 +63,18 @@ class ParceAdieuInfor():
         # 정보가져오기
         # [name, species, age, gender, add_infor, user_infor] 순서대로
         info = self.engien.get_animal_info(self.thisAnimal)
-        keys = ['','species','pat_age','user','pat_gender','pat_etc']
-
-        list[0].config('text', self.thisAnimal) # 처음엔 이름넣기
+        list[0].configure(text=self.thisAnimal) # 처음엔 이름넣기
 
         # 뿌리기
-        for i in range(1,list):
-            list[i].config('text',info[keys[i]])
-
+        for i in range(1,len(list)):
+            list[i].configure(text=info[i-1])
 
     def subscriptionEvent(self):
         result = self.engien.put_animals(self.thisAnimal)
         if result==False:
             messagebox.showerror('입양신청오류', '입양신청 실패')
             return
-        messagebox.showinfo()('신청완료', f'빈려동물 {self.thisAnimal} 입양신청되었습니다.')
+        messagebox.showinfo('신청완료', f'빈려동물 {self.thisAnimal} 입양신청되었습니다.')
         self.root.destroy()
         adieuMain("메인")       # 분양신청 후 페이지로 넘어감
 
@@ -86,4 +83,4 @@ class ParceAdieuInfor():
 
 
 if __name__ == '__main__':
-    ParceAdieuInfor('게시물 정보 및 분양 신청')
+    ParceAdieuInfor('게시물 정보 및 분양 신청','dd')

@@ -71,39 +71,42 @@ class Adoption_book:
     # 입양할 동물들 목록 보여주기 - 종류 . 이름
     def show_animals(self):
         animals_zip = list()
-        # 등록된 동물 없을 경우 none 리턴
+        # 등록된 동물 없을 경우 - 리턴
         if len(self.animals)==0:
-            return 'none'
+            return '-'
 
         # 동물의 기본적인 이름 - 종류 번호붙여서 출력
         for key in self.animals.keys():
-            pair = (self.animals[key]['species'],key,self.animals[key]['pat_age'])
+            pair = (self.animals[key]['species'],key,self.animals[key]['pat_age'], len(self.animals[key]['apply_users']))
             animals_zip.append(pair)
         return animals_zip  # 보여줄 목록 반환
 
 
     def get_animal_info(self, select): # 자세히 보기 : 동물 이름가져와서 구하기
         # 선택한 동물 정보 반환
-        return self.animals[select]
+        infolist = []
+        keys = ['pat_gender','pat_age','place','pat_etc','user','species']
+        for key in keys:
+            infolist.append(self.animals[select][key])
+        return infolist
 
     # 입양 신청하기
     def put_animals(self, animalname):
         # 신청한 동물 인덱스에 있는 객체의 신청내역에 신청한 사용자의 이름을 넣는다
-        try:
-            self.animals[animalname]['apply_users'].appand(Adoption_book.NOWUSER)
-            # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.
-            self.users[Adoption_book.NOWUSER]['pick_list'].append(animalname)
-            json.set_animals_json(self, self.animals)
-            json.set_user_json(self, self.users)
-        except:
-            return False
-        return True
+        apply_list = self.animals[animalname]['apply_users']
+        print(apply_list)
+        apply_list.append(Adoption_book.NOWUSER)
+        # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.
+        self.users[Adoption_book.NOWUSER]['pick_list'].append(animalname)
+        json.set_animals_json(self, self.animals)
+        json.set_user_json(self, self.users)
 
+        return True
 
     # 게시물 등록
     def up_animal(self, list,gender):  # 게시물 리스트
         new = Parcel_out()
-        check = new.set_pat(list,gender)   # [name, species, age, place, add_infor, user_infor]
+        check = new.set_pat(list, gender)   # [name, species, age, place, add_infor, user_infor]
         if check != 'ok':
             return check
         self.animals[new.pat_name] = {
@@ -115,8 +118,8 @@ class Adoption_book:
             'apply_users' : [],     # 분양신청한 사용자들
         }
         self.users[Adoption_book.NOWUSER]['up_list'].append(new.pat_name) # 현재 사용자 객체의 올린 게시물 리스트에 게시물 올린거 추가
-        json.set_animals_json(self.animals)
-        json.set_user_json(self.users)(self.users)()
+        json.set_animals_json(self,self.animals)
+        json.set_user_json(self, self.users)
         return 'ok'
 
     # test하기 위한 기본 사용자들 ---------------------------

@@ -95,7 +95,7 @@ class UserInfo():
     def addBtnEventListener(self):
         # 게시물 추가 버튼 리스너
         self.root.destroy()
-        from parcel_edit import ParceAdieuEdit
+        from parcel_add import ParceAdieuEdit
         ParceAdieuEdit('분양등록')
 
     def play(self):

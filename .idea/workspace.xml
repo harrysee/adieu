@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f2fb7a25-084f-40e4-9a7b-fa9c2366f185" name="Default Changelist" comment="">
+    <list default="true" id="f2fb7a25-084f-40e4-9a7b-fa9c2366f185" name="Default Changelist" comment="parcel_update.py 분양자 버튼 및 이벤트 생성, seller_info.py 분양자 버튼 이벤트 알고리즘 중">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/user_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/user_img.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parcel_edit.py" beforeDir="false" afterPath="$PROJECT_DIR$/parcel_edit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parcel_update.py" beforeDir="false" afterPath="$PROJECT_DIR$/parcel_update.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/seller_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/seller_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_info.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,8 +235,7 @@
       <workItem from="1637843178027" duration="8032000" />
       <workItem from="1637853132650" duration="6000" />
       <workItem from="1637904703257" duration="5910000" />
-      <workItem from="1637917590424" duration="14764000" />
-      <workItem from="1637988333370" duration="6332000" />
+      <workItem from="1637917590424" duration="14608000" />
     </task>
     <task id="LOCAL-00001" summary="예외처리">
       <created>1623840946595</created>
@@ -298,14 +300,7 @@
       <option name="project" value="LOCAL" />
       <updated>1637853080788</updated>
     </task>
-    <task id="LOCAL-00010" summary="parcel_update.py 분양자 버튼 및 이벤트 생성, seller_info.py 분양자 버튼 이벤트 알고리즘 중">
-      <created>1637977987818</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1637977987818</updated>
-    </task>
-    <option name="localTasksCounter" value="11" />
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -332,8 +327,7 @@
     <MESSAGE value="user_info.py 분양등록 버튼 추가" />
     <MESSAGE value="user_info.py, parcel_update.py 정보 불러오기 및 뿌리기" />
     <MESSAGE value="parcel_update.py 분양자 버튼 및 이벤트 생성" />
-    <MESSAGE value="parcel_update.py 분양자 버튼 및 이벤트 생성, seller_info.py 분양자 버튼 이벤트 알고리즘 중" />
-    <option name="LAST_COMMIT_MESSAGE" value="parcel_update.py 분양자 버튼 및 이벤트 생성, seller_info.py 분양자 버튼 이벤트 알고리즘 중" />
+    <option name="LAST_COMMIT_MESSAGE" value="parcel_update.py 분양자 버튼 및 이벤트 생성" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/adieu$seller_info.coverage" NAME="seller_info Coverage Results" MODIFIED="1637962946724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

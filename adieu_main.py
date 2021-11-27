@@ -25,10 +25,19 @@ class adieuMain():
 
         # 왼쪽 사이드
         cartegoryFrame = Frame(self.root, bg=self.BACKGROUND )
-        for species in self.engein.get_animal_species():    # 동물 종류를 뽑아낸다
-            text = Label(cartegoryFrame,text=species, fg=self.TEXTCOLOR,bg=self.BACKGROUND,pady=5,cursor="hand2")
-            text.bind('<ButtonRelease-1>', lambda x : self.search_species(event= text))
-            text.pack()
+        s_cat = Label(cartegoryFrame, text="고양이", fg=self.TEXTCOLOR, bg=self.BACKGROUND, pady=5, cursor="hand2")
+        s_cat.bind('<ButtonRelease-1>', lambda x: self.search_species(event=s_cat))
+        s_cat.pack()
+        s_dog = Label(cartegoryFrame, text="강아지", fg=self.TEXTCOLOR, bg=self.BACKGROUND, pady=5, cursor="hand2")
+        s_dog.bind('<ButtonRelease-1>', lambda x: self.search_species(event=s_dog))
+        s_dog.pack()
+        s_bird = Label(cartegoryFrame, text="새", fg=self.TEXTCOLOR, bg=self.BACKGROUND, pady=5, cursor="hand2")
+        s_bird.bind('<ButtonRelease-1>', lambda x: self.search_species(event=s_bird))
+        s_bird.pack()
+        s_etc = Label(cartegoryFrame, text="기타", fg=self.TEXTCOLOR, bg=self.BACKGROUND, pady=5, cursor="hand2")
+        s_etc.bind('<ButtonRelease-1>', lambda x: self.search_species(event=s_etc))
+        s_etc.pack()
+
         photo_img = PhotoImage(file='img/search_img.png')
         search = Label(self.root, image=photo_img,bg=self.BACKGROUND)
 
@@ -85,6 +94,9 @@ class adieuMain():
         self.root.destroy()
         from start import StartAdieu
         StartAdieu("처음 화면")
+
+    def search_species(self,event):   # 동물 종류별 검색
+        pass
 
     def user_event(self,event): # 사용자클릭햇을때 -> 사용자화면
         self.root.destroy()

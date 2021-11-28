@@ -1,5 +1,6 @@
 from tkinter import *
 
+from _Adoption_book import Adoption_book
 from adieu_main import adieuMain
 from user_info import UserInfo
 
@@ -9,6 +10,8 @@ class EditUserInfo():
         text_color = '#B96F00'
         bg_color = '#FFC978'  # 배경색
         bd_relief = "flat"     # 테두리 타입
+        engien = Adoption_book()
+        userInfo, userId= engien.get_user_info('nowuser')
         
         self.root = Tk()
         self.root.title(title)
@@ -38,14 +41,14 @@ class EditUserInfo():
         inputList = [name, age, id, pw, pw_check, zipcode, call_number, introduce]  # 입력 받을 리스트
 
         # hint
-        inputList[0].insert(0, '이름')
-        inputList[1].insert(0, '나이')
-        inputList[2].insert(0, 'ID')
-        inputList[3].insert(0, 'PW')
-        inputList[4].insert(0, 'PW 확인')
-        inputList[5].insert(0, '집주소')
-        inputList[6].insert(0, '전화번호')
-        inputList[7].insert(0, '소개')
+        inputList[0].insert(0, userInfo['name'])
+        inputList[1].insert(0, userInfo['age'])
+        inputList[2].insert(0, userId)
+        inputList[3].insert(0, userInfo['pw'])
+        inputList[4].insert(0, userInfo['pw'])
+        inputList[5].insert(0, userInfo['zip_code'])
+        inputList[6].insert(0, userInfo['call_number'])
+        inputList[7].insert(0, userInfo['introduce'])
 
         # hint 이벤트
         inputList[0].bind('<Button-1>', lambda x: self.hintEvent(event=name))

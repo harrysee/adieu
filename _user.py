@@ -1,7 +1,6 @@
 import json
 from _json_use import UseJSON as json
 
-
 class User:
     def __init__(self):  # 원래 등록된 user들 가져오기
         self.name = ""

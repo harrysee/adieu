@@ -14,6 +14,7 @@ class Adoption_book:
         # self.test()     # 테스트 코드
 
     # 로그인
+
     def login(self, name, pw):
         #로그인 한 이름과 비밀번호가 일치하면 로그인 성공
         if (name in self.users) and (self.users[name]['pw'] == pw):
@@ -47,26 +48,18 @@ class Adoption_book:
             return 1    # 정상적으로 들어가면 트루
         return "회원가입 실패"
 
-
-    def get_animal_species(self):
-        # 동물 종류 중복제거
-        search_kind = set()
-        for key in self.animals.keys():
-            search_kind.add(self.animals[key]['species'])
-        return search_kind
-
     def get_user_info(self, userid):    # 사용자 정보 반환 [이름, 나이, id,소개]
         return self.users[Adoption_book.NOWUSER], Adoption_book.NOWUSER if userid=='nowuser' else  self.users[userid]
 
     # 입양하고 싶은 동물 종류별 검색
     def search_animal(self, select_kind):  # 선택한 동물종류 가져와서 검색하기
-        list = []
-        # 동물 종류 보여주기
-        for key in self.animals.keys:
+        search_list = list()
+
+        for key in self.animals:
             if self.animals[key]['species'] == select_kind:
-                pair = (self.animals[key]['species'], key, self.animals[key]['pat_age'])
-                list.append(pair)
-        return list     # 검색한 리스트 반환
+                pair = (self.animals[key]['species'], key, self.animals[key]['pat_age'], len(self.animals[key]['apply_users']) )
+                search_list.append(pair)
+        return search_list     # 검색한 리스트 반환
 
     # 입양할 동물들 목록 보여주기 - 종류 . 이름
     def show_animals(self):
@@ -102,7 +95,7 @@ class Adoption_book:
         return True
 
     # 게시물 등록
-    def up_animal(self, list,gender,species):  # 게시물 리스트
+    def up_animal(self, list, gender, species):  # 게시물 리스트
         new = Parcel_out()
         check = new.set_pat(list, gender,species)   # [name, species, age, place, add_infor, user_infor]
         if check != 'ok':
@@ -120,6 +113,7 @@ class Adoption_book:
         json.set_animals_json(self,self.animals)
         json.set_user_json(self, self.users)
         return 'ok'
+
 
     # test하기 위한 기본 사용자들 ---------------------------
     def test(self):

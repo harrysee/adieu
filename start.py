@@ -6,7 +6,7 @@ class StartAdieu():
     def __init__(self, title):
         root = Tk()
         root.title(title)
-        root.geometry('745x580')
+        root.geometry('745x580+400+100')
         root.configure(bg="#FFC978")
         self.root = root
 

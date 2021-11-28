@@ -81,14 +81,14 @@ class SellerInfo():
         messagebox.showinfo('전화번호:', call)
 
         # 분양자에게 작성자의 주소와 전화번호 전달
-        writer = self.engien.get_user_info()
+        writer = self.engien.get_user_info(self.userid)
         keys = ['', 'name', 'age', 'id', 'pw', 'pw_check', 'zipcode', 'call_number', 'introduce']
         call = writer[keys[7]]
         zip = writer[keys[6]]
-        messagebox.showinfo('전화번호', call, '주소', zip)
+        messagebox.showinfo('전화번호', call + '\n분양시설 : '+ zip)
 
         # 분양 신청한 게시물 삭제
-        self.applylist.pop(self.userid)
+        self.thisUserInfo['apply_list'].remove(self.userid)
         from parcel_update import ParcelUpdate
         self.root.destroy()
         ParcelUpdate.sellerEvent('분양수정 및 분양자 확인', self.userid)

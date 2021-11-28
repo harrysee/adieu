@@ -8,9 +8,7 @@
         "zip_code": "\uac15\ub0a8",
         "introduce": "\uace0\uc591\uc774 \uc88b\uc544\ud574\uc694",
         "up_list": [],
-        "pick_list": [
-            "fsfd"
-        ]
+        "pick_list": []
     },
     "d": {
         "pw": "new.pw",
@@ -28,15 +26,11 @@
         "call_number": "46046464621",
         "zip_code": "\ubd80\uc0b0",
         "introduce": "\ub098\ub2e4",
-        "up_list": [
-            "dfs",
-            "fsfd"
-        ],
+        "up_list": [],
         "pick_list": [
             "dd",
             "",
-            "dd",
-            "fsfd"
+            "dd"
         ]
     },
     "jeon": {
@@ -50,9 +44,7 @@
         "up_list": [
             "dd"
         ],
-        "pick_list": [
-            "fsfd"
-        ]
+        "pick_list": []
     },
     "nndd": {
         "name": "34",

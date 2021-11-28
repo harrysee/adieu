@@ -74,21 +74,15 @@ class SellerInfo():
 
     def okEvent(self):
         # 분양수락 - 사용자-신청리스트 및 게시물-신청리스트에서 삭제
-        # 작성자에게 분양자 전화번호 전달
-        seller = self.engien.get_user_info(self.thisUserInfo)
-        keys = ['', 'name', 'age', 'id', 'pw', 'pw_check', 'zipcode', 'call_number', 'introduce']
-        call = seller[keys[7]]
-        messagebox.showinfo('전화번호:', call)
-
         # 분양자에게 작성자의 주소와 전화번호 전달
         writer = self.engien.get_user_info()
         keys = ['', 'name', 'age', 'id', 'pw', 'pw_check', 'zipcode', 'call_number', 'introduce']
         call = writer[keys[7]]
         zip = writer[keys[6]]
-        messagebox.showinfo('전화번호', call, '주소', zip)
+        messagebox.showinfo('게시물 작성자 전화번호', call, '주소', zip)
 
         # 분양 신청한 게시물 삭제
-        self.applylist.pop(self.userid)
+        self.thisUserInfo['apply_list'].remove(self.userid)
         from parcel_update import ParcelUpdate
         self.root.destroy()
         ParcelUpdate.sellerEvent('분양수정 및 분양자 확인', self.userid)
@@ -97,8 +91,8 @@ class SellerInfo():
         # 분양거절 - 사용자- 신청리스트 및 게시물-신청리스트에서 삭제 후 시작화면으로 이동
         # 분양 신청한 게시물에서 삭제
         self.thisUserInfo['apply_list'].remove(self.userid)
-        self.root.destroy()
         from parcel_update import ParcelUpdate
+        self.root.destroy()
         ParcelUpdate.sellerEvent('분양수정 및 분양자 확인', self.userid)
 
     def writeItemEvent(self, event):

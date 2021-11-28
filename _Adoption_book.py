@@ -58,6 +58,24 @@ class Adoption_book:
     def get_user_info(self, userid):    # 사용자 정보 반환 [이름, 나이, id,소개]
         return self.users[Adoption_book.NOWUSER], Adoption_book.NOWUSER if userid=='nowuser' else  self.users[userid]
 
+    # def update_user(self, user_input_list, gender):
+    #     new = User()
+    #     check = new.check_all(user_input_list, gender)
+    #
+    #     if check != True : return check     # 형식체크 / 메세지 반환
+    #     self.users[new.id] = {
+    #         "name": new.name,
+    #         "pw": new.pw,
+    #         "age": new.age,
+    #         "gender": new.gender,
+    #         "call_number": new.number,
+    #         "zip_code": new.zip_code,
+    #         "introduce": new.introduce,
+    #         "up_list": [],
+    #         "pick_list": []
+    #     }
+    #     json.set_user_json(self, self.users)
+
     # 입양하고 싶은 동물 종류별 검색
     def search_animal(self, select_kind):  # 선택한 동물종류 가져와서 검색하기
         list = []
@@ -120,6 +138,23 @@ class Adoption_book:
         json.set_animals_json(self,self.animals)
         json.set_user_json(self, self.users)
         return 'ok'
+
+    # def update_animal(self, list, gender, species):
+    #     new = Parcel_out()
+    #     check = new.set_pat(list, gender, species)  # [name, species, age, place, add_infor, user_infor]
+    #     if check != 'ok':
+    #         return check
+    #     self.animals[new.pat_name] = {
+    #         'species': new.species,  # 종류
+    #         'pat_age': new.pat_age,  # 나이
+    #         'user': Adoption_book.NOWUSER,
+    #         'pat_gender': new.pat_gender,  # 성별
+    #         'pat_etc': new.etc,  # 기타사항
+    #         'place': new.place,
+    #         'apply_users': [],  # 분양신청한 사용자들
+    #     }
+    #     json.set_animals_json(self, self.animals)
+    #     return 'ok'
 
     # test하기 위한 기본 사용자들 ---------------------------
     def test(self):

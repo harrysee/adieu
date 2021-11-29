@@ -89,7 +89,7 @@ class Adoption_book:
         apply_list = self.animals[animalname]['apply_users']
         apply_list.append(Adoption_book.NOWUSER)
         # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.
-        self.users[Adoption_book.NOWUSER]['pick_list'].append(animalname)
+        self.users[Adoption_book.NOWUSER]['pick_list'].append((animalname,0))   # 0:미정 / 1:수락/ -1:거절
         json.set_animals_json(self, self.animals)
         json.set_user_json(self, self.users)
         return True

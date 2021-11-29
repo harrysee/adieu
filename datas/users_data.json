@@ -27,13 +27,7 @@
         "zip_code": "\ubd80\uc0b0",
         "introduce": "\ub098\ub2e4",
         "up_list": [],
-        "pick_list": [
-            "dd",
-            "",
-            "dd",
-            "fsfd",
-            "fsfd"
-        ]
+        "pick_list": []
     },
     "jeon": {
         "name": "name",
@@ -47,6 +41,7 @@
             "dd"
         ],
         "pick_list": [
+            "fsfd",
             "fsfd"
         ]
     },

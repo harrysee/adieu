@@ -24,8 +24,8 @@ class ParceAdieuInfor():
         self.mainFrame.pack(expand=True)
 
         # logo 설정
-        # logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
-        # logo = Label(self.root, bg=self.BGCOLOR, image=logo_img)
+        logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
+        logo = Label(self.root, bg=self.BGCOLOR, image=logo_img)
 
         photo = Frame(self.root, bg='#F0AD48', width=300, height=230)
         # button 설정
@@ -48,7 +48,7 @@ class ParceAdieuInfor():
         # 화면에 출력
         inputFrame1.place(x=360, y=80)
         inputFrame2.place(x=90, y=340)
-        # logo.place(x=10, y=5)
+        logo.place(x=10, y=5)
         photo.place(x=100, y=90)
         btn_sub.place(x=540, y=500)
         name.pack(padx=15, pady=10, anchor='w')

@@ -28,7 +28,7 @@ class LoginAdieu():
 
         # id , password 입력칸 설정
         self.id = Entry(self.mainFrame, width=30,relief="flat",bd=10,fg="gray")
-        self.pw = Entry(self.mainFrame, width=30,relief="flat",bd=10,fg="gray")
+        self.pw = Entry(self.mainFrame, width=30,relief="flat",bd=10,fg="gray", show='')
         self.id.insert(0,"input userId")
         self.pw.insert(0,"input userPassword")
         self.id.bind("<Button-1>",self.focusId)

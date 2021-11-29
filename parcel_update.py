@@ -25,6 +25,10 @@ class ParcelUpdate():
         self.mainFrame = Frame(self.root, bg=bg_color)
         self.mainFrame.pack(expand=True)
 
+        # 객체 설명
+        info1 = ['이름', '나이', '장소', '성별']
+        info2 = ['세부설명', '종류']
+
         # logo 설정
         logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
         logo = Label(self.root, bg=bg_color, image=logo_img)
@@ -36,6 +40,8 @@ class ParcelUpdate():
         btn_back = Button(self.root, width=10, text='취소', bg='#F0AD48', command=self.cancelEvent, relief='flat', bd=10, fg='#B96F00')
 
         # 입력받기
+        infoFrame1 = Frame(self.root, bg=self.BGCOLOR, width=350, height=400)
+        infoFrame2 = Frame(self.root, bg=self.BGCOLOR, width=100, height=200)
         inputFrame1 = Frame(self.root, bg=bg_color, width=330, height=400)
         inputFrame2 = Frame(self.root, bg=bg_color, width=100, height=200)
         name = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
@@ -73,17 +79,25 @@ class ParcelUpdate():
         self.inputList[3].bind('<FocusIn>', lambda x: self.hintEvent(event=add_infor))
 
         # 화면에 출력
-        inputFrame1.place(x=400, y=80)
-        inputFrame2.place(x=90, y=340)
+        infoFrame1.place(x=380, y=80)
+        inputFrame1.place(x=460, y=80)
+        infoFrame2.place(x=50, y=340)
+        inputFrame2.place(x=150, y=340)
         logo.place(x=10, y=5)
         photo.place(x=100, y=90)
         btn_update.place(x=470, y=500)
         btn_back.place(x=590, y=500)
+        for i, d in enumerate(info1):
+            text = Label(infoFrame1, bg=self.BGCOLOR, width=10, text=d, fg='#333')
+            text.pack(padx=10, pady=20)
         name.pack(padx=15, pady=10, anchor='w')
         gender_w.place(x=410, y=290, anchor='w')
         gender_m.place(x=470, y=290, anchor='w')
         age.pack(padx=15, pady=10, anchor='w')
         place.pack(padx=15, pady=5, anchor='w')
+        for i, d in enumerate(info2):
+            text = Label(infoFrame1, bg=self.BGCOLOR, width=10, text=d, fg='#333')
+            text.pack(padx=10, pady=20)
         add_infor.pack(padx=10, pady=5, anchor='w')
         species_0.place(x=100, y=420, anchor='w')
         species_1.place(x=180, y=420, anchor='w')
@@ -92,7 +106,7 @@ class ParcelUpdate():
         self.play()
 
         # 분양자 버튼 생성
-        seller_btn = {}
+        seller_btn = []
 
         for i, d in enumerate(self.seller):
             btn = Button(self.root, padx=60, text=i, pady=10, fg='#B96F00', bg='#F0AD48', command=lambda x=i: self.sellerEvent(x))

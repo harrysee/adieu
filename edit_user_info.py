@@ -20,6 +20,10 @@ class EditUserInfo():
         self.root.geometry('745x580')
         self.root.configure(bg=bg_color)
         self.root.resizable(0, 0)
+
+        # 객체 설명
+        info = ['이름', '성별', 'id', 'pw', 'pw확인', '주소', '전화번호', '소개']
+
         # 왼쪽 사이드
         logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
         logo = Label(self.root, bg=bg_color, image=logo_img)  # 로고
@@ -32,6 +36,7 @@ class EditUserInfo():
                             fg=text_color)  # 취소 버튼
 
         # 입력받기
+        infoFrame = Frame(self.root, bg=bg_color, width=100, height=400)
         inputFrame = Frame(self.root, bg=bg_color, width=430, height=400)
         name = Entry(inputFrame, width=20, relief=bd_relief, bd=13, fg="gray")
         age = Entry(inputFrame, width=25, relief=bd_relief, bd=13, fg="gray")
@@ -77,7 +82,11 @@ class EditUserInfo():
         self.inputList[7].bind('<FocusIn>', lambda x: self.hintEvent(event=introduce))
 
         # 화면넣기
-        inputFrame.place(x=290, y=80)
+        infoFrame.place(x=250, y=80)
+        inputFrame.place(x=360, y=80)
+        for i, d in enumerate(info):
+            text = Label(infoFrame, bg=bg_color, width=10, text=d, fg='#333')
+            text.pack(padx=10, pady=16)
         name.pack(pady=5, anchor='w')
         age.pack(pady=5, anchor='w')
         id.pack(pady=5, anchor='w')

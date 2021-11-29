@@ -23,17 +23,23 @@ class ParceAdieuInfor():
         self.mainFrame = Frame(self.root, bg=self.BGCOLOR)
         self.mainFrame.pack(expand=True)
 
+        # 객체 설명
+        info1 = ['이름', '성별', '나이', '장소']
+        info2 = ['세부설명', '게시물 작성자', '종류']
+
         # logo 설정
         logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
         logo = Label(self.root, bg=self.BGCOLOR, image=logo_img)
 
-        photo_img = PhotoImage(file='img/input_img.png')
+        photo_img = PhotoImage(file='img/animal_img.png')
         photo = Label(self.root, image=photo_img, bg=self.BGCOLOR, anchor="w")  # 이미지 넣기 왼쪽 정렬
         # button 설정
         btn_sub = Button(self.root, width=13, text='분양신청', bg='#F0AD48', command=self.subscriptionEvent, relief='flat', bd=10, fg='#B96F00')
-        
+
         # 정보 화면
-        inputFrame1 = Frame(self.root, bg=self.BGCOLOR, width=330, height=400)
+        infoFrame1 = Frame(self.root, bg=self.BGCOLOR, width=350, height=400)
+        infoFrame2 = Frame(self.root, bg=self.BGCOLOR, width=100, height=200)
+        inputFrame1 = Frame(self.root, bg=self.BGCOLOR, width=430, height=400)
         inputFrame2 = Frame(self.root, bg=self.BGCOLOR, width=100, height=200)
         name = Label(inputFrame1, width=15, relief="flat", bd=13, fg=self.TEXTCOLOR)
         gender = Label(inputFrame1, width=15, relief="flat", bd=13, fg=self.TEXTCOLOR)
@@ -47,15 +53,23 @@ class ParceAdieuInfor():
         self.draw_info(inputList)
 
         # 화면에 출력
-        inputFrame1.place(x=360, y=80)
-        inputFrame2.place(x=90, y=340)
+        infoFrame1.place(x=380, y=80)
+        inputFrame1.place(x=460, y=80)
+        infoFrame2.place(x=50, y=340)
+        inputFrame2.place(x=150, y=340)
         logo.place(x=10, y=5)
         photo.place(x=100, y=90)
         btn_sub.place(x=540, y=500)
+        for i, d in enumerate(info1):
+            text = Label(infoFrame1, bg=self.BGCOLOR, width=10, text=d, fg='#333')
+            text.pack(padx=10, pady=20)
         name.pack(padx=15, pady=10, anchor='w')
         gender.pack(padx=15, pady=10, anchor='w')
         age.pack(padx=15, pady=10, anchor='w')
         place.pack(padx=15, pady=5, anchor='w')
+        for i, d in enumerate(info2):
+            text = Label(infoFrame2, bg=self.BGCOLOR, width=10, text=d, fg='#333')
+            text.pack(padx=10, pady=15)
         add_infor.pack(padx=10, pady=5, anchor='w')
         user_infor.pack(padx=10, pady=5, anchor='w')
         spaceies.pack(padx=10, pady=5, anchor='w')

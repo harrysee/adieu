@@ -30,11 +30,13 @@
         "pick_list": [
             "dd",
             "",
-            "dd"
+            "dd",
+            "fsfd",
+            "fsfd"
         ]
     },
     "jeon": {
-        "name": "18",
+        "name": "name",
         "pw": "jj1234",
         "age": "18",
         "gender": "w",
@@ -44,7 +46,9 @@
         "up_list": [
             "dd"
         ],
-        "pick_list": []
+        "pick_list": [
+            "fsfd"
+        ]
     },
     "nndd": {
         "name": "34",

@@ -92,7 +92,7 @@ class adieuMain():
     def click_item(self,evnet): # item 클릭 시 선택한 게시물 가져와서 이름 매개변수로 동물 상세보기로 넘김
         selectedItem = self.animalView.focus()
         getValue = self.animalView.item(selectedItem).get('values')
-        print(getValue[1])
+        self.root.destroy()
         from parcel_infor import ParceAdieuInfor
         ParceAdieuInfor('게시물 정보', getValue[1])    # 선택한 동물 이름 넘겨주기
 

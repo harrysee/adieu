@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 
 from _Adoption_book import Adoption_book
-from adieu_main import adieuMain
+
 
 class ParceAdieuInfor():
     def __init__(self, title, selecanimal): # 타이틀, 선택한동물이름
@@ -77,11 +77,11 @@ class ParceAdieuInfor():
             return
         messagebox.showinfo('신청완료', f'빈려동물 {self.thisAnimal} 입양신청되었습니다.')
         self.root.destroy()
+        from adieu_main import adieuMain
         adieuMain("메인")       # 분양신청 후 페이지로 넘어감
 
     def play(self):
         self.root.mainloop()
-
 
 if __name__ == '__main__':
     ParceAdieuInfor('게시물 정보 및 분양 신청','dd')

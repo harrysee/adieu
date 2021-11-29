@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 
 from _Adoption_book import Adoption_book
 from adieu_main import adieuMain
@@ -7,6 +8,7 @@ from user_info import UserInfo
 
 class EditUserInfo():
     def __init__(self, title):
+        self.engien = Adoption_book()
         text_color = '#B96F00'
         bg_color = '#FFC978'  # 배경색
         bd_relief = "flat"     # 테두리 타입
@@ -21,9 +23,10 @@ class EditUserInfo():
         # 왼쪽 사이드
         logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
         logo = Label(self.root, bg=bg_color, image=logo_img)  # 로고
+
         photo_img = PhotoImage(file='img/input_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
-        edit_btn = Button(self.root, cursor='hand2', width=16, text='정보수정', command=self.subscriptionEvent, bg='#F0AD48', relief='flat', bd=10,
+        edit_btn = Button(self.root, cursor='hand2', width=16, text='정보수정', command=self.updateEvent, bg='#F0AD48', relief='flat', bd=10,
                              fg=text_color)  # 회원가입 버튼
         cancel_btn = Button(self.root, cursor='hand2', width=16, text='취소', command=self.cancelEvent, bg='#F0AD48', relief='flat', bd=10,
                             fg=text_color)  # 취소 버튼
@@ -38,36 +41,40 @@ class EditUserInfo():
         zipcode = Entry(inputFrame, width=30, relief=bd_relief, bd=13, fg="gray")
         call_number = Entry(inputFrame, width=40, relief=bd_relief, bd=13, fg="gray")
         introduce = Entry(inputFrame, width=40, relief=bd_relief, bd=13, fg="gray")
-        inputList = [name, age, id, pw, pw_check, zipcode, call_number, introduce]  # 입력 받을 리스트
+        self.gender_var = IntVar()  # 여기에 int 형으로 값을 저장한다
+        gender_w = Radiobutton(inputFrame, text="여자", value=1, variable=self.gender_var, bg=bg_color)
+        gender_m = Radiobutton(inputFrame, text="남자", value=2, variable=self.gender_var, bg=bg_color)
+        gender_w.select()  # 기본적으로 여자 선택
+        self.inputList = [name, age, id, pw, pw_check, zipcode, call_number, introduce]  # 입력 받을 리스트
 
         # hint
-        inputList[0].insert(0, userInfo['name'])
-        inputList[1].insert(0, userInfo['age'])
-        inputList[2].insert(0, userId)
-        inputList[3].insert(0, userInfo['pw'])
-        inputList[4].insert(0, userInfo['pw'])
-        inputList[5].insert(0, userInfo['zip_code'])
-        inputList[6].insert(0, userInfo['call_number'])
-        inputList[7].insert(0, userInfo['introduce'])
+        self.inputList[0].insert(0, userInfo['name'])
+        self.inputList[1].insert(0, userInfo['age'])
+        self.inputList[2].insert(0, userId)
+        self.inputList[3].insert(0, userInfo['pw'])
+        self.inputList[4].insert(0, userInfo['pw'])
+        self.inputList[5].insert(0, userInfo['zip_code'])
+        self.inputList[6].insert(0, userInfo['call_number'])
+        self.inputList[7].insert(0, userInfo['introduce'])
 
         # hint 이벤트
-        inputList[0].bind('<Button-1>', lambda x: self.hintEvent(event=name))
-        inputList[1].bind('<Button-1>', lambda x: self.hintEvent(event=age))
-        inputList[2].bind('<Button-1>', lambda x: self.hintEvent(event=id))
-        inputList[3].bind('<Button-1>', lambda x: self.hintEvent(event=pw))
-        inputList[4].bind('<Button-1>', lambda x: self.hintEvent(event=pw_check))
-        inputList[5].bind('<Button-1>', lambda x: self.hintEvent(event=zipcode))
-        inputList[6].bind('<Button-1>', lambda x: self.hintEvent(event=call_number))
-        inputList[7].bind('<Button-1>', lambda x: self.hintEvent(event=introduce))
+        self.inputList[0].bind('<Button-1>', lambda x: self.hintEvent(event=name))
+        self.inputList[1].bind('<Button-1>', lambda x: self.hintEvent(event=age))
+        self.inputList[2].bind('<Button-1>', lambda x: self.hintEvent(event=id))
+        self.inputList[3].bind('<Button-1>', lambda x: self.hintEvent(event=pw))
+        self.inputList[4].bind('<Button-1>', lambda x: self.hintEvent(event=pw_check))
+        self.inputList[5].bind('<Button-1>', lambda x: self.hintEvent(event=zipcode))
+        self.inputList[6].bind('<Button-1>', lambda x: self.hintEvent(event=call_number))
+        self.inputList[7].bind('<Button-1>', lambda x: self.hintEvent(event=introduce))
         # 탭으로 들어올때 이벤트
-        inputList[0].bind('<FocusIn>', lambda x: self.hintEvent(event=name))
-        inputList[1].bind('<FocusIn>', lambda x: self.hintEvent(event=age))
-        inputList[2].bind('<FocusIn>', lambda x: self.hintEvent(event=id))
-        inputList[3].bind('<FocusIn>', lambda x: self.hintEvent(event=pw))
-        inputList[4].bind('<FocusIn>', lambda x: self.hintEvent(event=pw_check))
-        inputList[5].bind('<FocusIn>', lambda x: self.hintEvent(event=zipcode))
-        inputList[6].bind('<FocusIn>', lambda x: self.hintEvent(event=call_number))
-        inputList[7].bind('<FocusIn>', lambda x: self.hintEvent(event=introduce))
+        self.inputList[0].bind('<FocusIn>', lambda x: self.hintEvent(event=name))
+        self.inputList[1].bind('<FocusIn>', lambda x: self.hintEvent(event=age))
+        self.inputList[2].bind('<FocusIn>', lambda x: self.hintEvent(event=id))
+        self.inputList[3].bind('<FocusIn>', lambda x: self.hintEvent(event=pw))
+        self.inputList[4].bind('<FocusIn>', lambda x: self.hintEvent(event=pw_check))
+        self.inputList[5].bind('<FocusIn>', lambda x: self.hintEvent(event=zipcode))
+        self.inputList[6].bind('<FocusIn>', lambda x: self.hintEvent(event=call_number))
+        self.inputList[7].bind('<FocusIn>', lambda x: self.hintEvent(event=introduce))
 
         # 화면넣기
         inputFrame.place(x=290, y=80)
@@ -96,9 +103,11 @@ class EditUserInfo():
         # 비번 확인 체크
         pass
 
-    def subscriptionEvent(self):
-        # 수정 - 사용자 정보 볁경 후 시작화면으로 이동
-        pass
+    def updateEvent(self):
+        self.engien.sign_up(self.inputList, self.gender_var)
+        messagebox.showinfo('안내', '정보수정 완료')
+        self.root.destroy()
+        UserInfo('사용자 정보')
 
     def cancelEvent(self):
         # 취소 - 시작화면으로 이동

@@ -27,7 +27,8 @@ class ParceAdieuInfor():
         logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
         logo = Label(self.root, bg=self.BGCOLOR, image=logo_img)
 
-        photo = Frame(self.root, bg='#F0AD48', width=300, height=230)
+        photo_img = PhotoImage(file='img/input_img.png')
+        photo = Label(self.root, image=photo_img, bg=self.BGCOLOR, anchor="w")  # 이미지 넣기 왼쪽 정렬
         # button 설정
         btn_sub = Button(self.root, width=13, text='분양신청', bg='#F0AD48', command=self.subscriptionEvent, relief='flat', bd=10, fg='#B96F00')
         

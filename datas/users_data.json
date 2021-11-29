@@ -66,5 +66,16 @@
         "introduce": "\ubc29\uac00",
         "up_list": [],
         "pick_list": []
+    },
+    "ga1234": {
+        "name": "18",
+        "pw": "g1234",
+        "age": "18",
+        "gender": "w",
+        "call_number": "01012341234",
+        "zip_code": "\uc11c\uc6b8",
+        "introduce": "\ubc18\uac00\uc6cc",
+        "up_list": [],
+        "pick_list": []
     }
 }

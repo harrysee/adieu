@@ -29,7 +29,8 @@ class ParcelUpdate():
         logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
         logo = Label(self.root, bg=bg_color, image=logo_img)
 
-        photo = Frame(self.root, bg='#F0AD48', width=300, height=230)
+        photo_img = PhotoImage(file='img/input_img.png')
+        photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
         # button 설정
         btn_update = Button(self.root, width=10, text='수정', bg='#F0AD48', command=self.updateEvent, relief='flat', bd=10, fg='#B96F00')
         btn_back = Button(self.root, width=10, text='취소', bg='#F0AD48', command=self.cancelEvent, relief='flat', bd=10, fg='#B96F00')
@@ -143,7 +144,7 @@ class ParcelUpdate():
                 messagebox.showinfo("입력오류", info.get()+" 입력하시오.")
                 return
 
-        # self.engien.update_animal(self.inputList, self.gender_ani, self.species_var)
+        self.engien.update_animal(self.inputList, self.gender_ani, self.species_var)
 
         messagebox.showinfo("안내", "게시물 수정 완료!!")
         adieuMain("메인화면")

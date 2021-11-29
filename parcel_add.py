@@ -25,7 +25,8 @@ class ParceAdieuAdd():
         logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
         logo = Label(self.root, bg=bg_color, image=logo_img)
 
-        photo = Frame(self.root, bg='#F0AD48', width=300, height=230)
+        photo_img = PhotoImage(file='img/input_img.png')
+        photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
         # button 설정
         btn_edit = Button(self.root, width=10, text='등록', bg='#F0AD48', command=self.subscriptionEvent, relief='flat', bd=10, fg='#B96F00')
         btn_back = Button(self.root, width=10, text='취소', bg='#F0AD48', command=self.cancelbtnEvent, relief='flat', bd=10, fg='#B96F00')

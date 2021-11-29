@@ -49,7 +49,7 @@ class Adoption_book:
         return "회원가입 실패"
 
     def get_user_info(self, userid):    # 사용자 정보 반환 [이름, 나이, id,소개]
-        return self.users[Adoption_book.NOWUSER], Adoption_book.NOWUSER if userid=='nowuser' else  self.users[userid]
+        return (self.users[Adoption_book.NOWUSER], Adoption_book.NOWUSER) if userid == 'nowuser' else self.users[userid]
 
     # 입양하고 싶은 동물 종류별 검색
     def search_animal(self, select_kind):  # 선택한 동물종류 가져와서 검색하기

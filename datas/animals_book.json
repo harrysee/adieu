@@ -54,6 +54,8 @@
         "pat_gender": "\uc218\ucef7",
         "pat_etc": "\ubbf8\ub9bc\ubbf8\ub9bc\uc124\uba85",
         "place": "\ubbf8\ub9bc",
-        "apply_users": []
+        "apply_users": [
+            "ga1234"
+        ]
     }
 }

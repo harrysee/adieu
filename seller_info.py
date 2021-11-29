@@ -6,7 +6,8 @@ from _Adoption_book import Adoption_book
 class SellerInfo():
     def __init__(self, title, userid):
         self.engien = Adoption_book()
-        self.thisUserInfo, self.userid = self.engien.get_user_info(userid), userid
+        self.thisUserInfo = self.engien.get_user_info(userid)
+        self.userid = userid
         self.sellerGUI(title)
 
     def sellerGUI(self, title):
@@ -26,9 +27,9 @@ class SellerInfo():
         photo_img = PhotoImage(file='img/input_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
         name_info = Label(self.root, width=17, anchor='w', text=self.thisUserInfo['name'], bg='#fff', relief='flat',
-                          bd=10, fg='#000')  # 회원가입 버튼
+                          bd=10, fg='#000')
         age_info = Label(self.root, anchor='w', width=17, text=self.thisUserInfo['age'], bg='#fff', relief='flat',
-                         bd=10, fg='#000')  # 취소 버튼
+                         bd=10, fg='#000')
         id_info = Label(self.root, width=17, anchor='w', text=self.userid, bg='#fff', relief='flat', bd=10,
                         fg='#000')  # 취소 버튼
         intro_info = Label(self.root, width=17, anchor='w', text=self.thisUserInfo['introduce'], bg='#fff',
@@ -76,8 +77,9 @@ class SellerInfo():
 
     def draw_postList(self, postList, listbox):
         for post in postList:  # 등록한게시물이나 신청한 게시물에 잇는 동물이름으로 정보 가져와서 처리하기
+            print(post)
             animal = self.engien.get_animal_info(post)
-            listbox.insert(END, ' ' + animal['species'] + '   :   ' + post)
+            listbox.insert(END, ' ' + animal[5] + '   :   ' + post)
 
     def okEvent(self):
         # 분양수락 - 사용자-신청리스트 및 게시물-신청리스트에서 삭제

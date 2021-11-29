@@ -25,6 +25,7 @@ class LoginAdieu():
         # logo 설정
         logo_img = PhotoImage(file='img/Adieu.png')
         logo = Label(self.mainFrame, image=logo_img, bg=bg_color, anchor='center')
+        logo.bind('<Button-1>', self.moveStart)
 
         # id , password 입력칸 설정
         self.id = Entry(self.mainFrame, width=30,relief="flat",bd=10,fg="gray")
@@ -45,6 +46,11 @@ class LoginAdieu():
         self.pw.pack(padx=10, pady=5)
         self.loginBtn.pack(padx=10,pady=30)
         self.play()
+
+    def moveStart(self, evnet):
+        self.root.destroy()
+        from start import StartAdieu
+        StartAdieu("시작화면")
 
     def focusId(self,event):    # id입력칸
         self.id.config(fg="black")

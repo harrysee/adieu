@@ -34,7 +34,7 @@ class ParcelUpdate():
         logo.bind('<Button-1>',self.moveMain)
 
         # 동물 타이틀 이미지 넣기
-        photo_img = PhotoImage(file='img/input_img.png')
+        photo_img = PhotoImage(file='img/animal_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
         # button 설정
         btn_update = Button(self.root, width=10, text='수정', bg='#F0AD48', command=self.updateEvent, relief='flat', bd=10, fg='#B96F00')
@@ -83,17 +83,21 @@ class ParcelUpdate():
         photo.place(x=100, y=90)
         btn_update.place(x=470, y=500)
         btn_back.place(x=590, y=500)
+
         for i, d in enumerate(info1):
             text = Label(infoFrame1, bg=self.BGCOLOR, width=10, text=d, fg='#333')
             text.pack(padx=10, pady=20)
+
         name.pack(padx=15, pady=10, anchor='w')
         gender_w.place(x=410, y=290, anchor='w')
         gender_m.place(x=470, y=290, anchor='w')
         age.pack(padx=15, pady=10, anchor='w')
         place.pack(padx=15, pady=5, anchor='w')
+
         for i, d in enumerate(info2):
             text = Label(infoFrame1, bg=self.BGCOLOR, width=10, text=d, fg='#333')
             text.pack(padx=10, pady=20)
+
         add_infor.pack(padx=10, pady=5, anchor='w')
         species_0.place(x=100, y=420, anchor='w')
         species_1.place(x=180, y=420, anchor='w')

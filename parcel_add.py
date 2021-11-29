@@ -26,7 +26,7 @@ class ParceAdieuAdd():
         logo = Label(self.root, bg=bg_color, image=logo_img)
         logo.bind('<Button-1>',self.cancelbtnEvent)
 
-        photo_img = PhotoImage(file='img/input_img.png')
+        photo_img = PhotoImage(file='img/animal_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
         # button 설정
         btn_edit = Button(self.root, width=10, text='등록', bg='#F0AD48', command=self.subscriptionEvent, relief='flat', bd=10, fg='#B96F00')

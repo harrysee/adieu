@@ -61,16 +61,20 @@ class ParceAdieuInfor():
         logo.place(x=10, y=5)
         photo.place(x=100, y=90)
         btn_sub.place(x=540, y=500)
+
         for i, d in enumerate(info1):
             text = Label(infoFrame1, bg=self.BGCOLOR, width=10, text=d, fg='#333')
             text.pack(padx=10, pady=20)
+
         name.pack(padx=15, pady=10, anchor='w')
         gender.pack(padx=15, pady=10, anchor='w')
         age.pack(padx=15, pady=10, anchor='w')
         place.pack(padx=15, pady=5, anchor='w')
+
         for i, d in enumerate(info2):
             text = Label(infoFrame2, bg=self.BGCOLOR, width=10, text=d, fg='#333')
             text.pack(padx=10, pady=15)
+
         add_infor.pack(padx=10, pady=5, anchor='w')
         user_infor.pack(padx=10, pady=5, anchor='w')
         spaceies.pack(padx=10, pady=5, anchor='w')

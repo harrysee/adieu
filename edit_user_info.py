@@ -86,9 +86,11 @@ class EditUserInfo():
         # 화면넣기
         infoFrame.place(x=250, y=80)
         inputFrame.place(x=360, y=80)
+
         for i, d in enumerate(info):
             text = Label(infoFrame, bg=bg_color, width=10, text=d, fg='#333')
             text.pack(padx=10, pady=16)
+
         name.pack(pady=5, anchor='w')
         age.pack(pady=5, anchor='w')
         id.pack(pady=5, anchor='w')

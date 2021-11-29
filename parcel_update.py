@@ -9,6 +9,7 @@ from user_info import UserInfo
 class ParcelUpdate():
     def __init__(self, title, selec):
         self.engien = Adoption_book()
+        self.thisAnimal = self.engien.get_animal_info(selec)
         self.parcelUpdateGUI(title,selec)
         self.seller = []        # 분양자들 이름 리스트
 
@@ -19,6 +20,9 @@ class ParcelUpdate():
         self.root.geometry('745x580+400+100')
         self.root.configure(bg=bg_color)
         self.root.resizable(0, 0)
+
+        # 기존 정보 가져오기
+        self.inputList = self.thisAnimal
 
         # 프레임 설정
         self.mainFrame = Frame(self.root, bg=bg_color)
@@ -153,18 +157,19 @@ class ParcelUpdate():
 
     def updateEvent(self):
         # 수정 클릭 시 메인화면
-        self.root.destroy()
+        # 분양자 리스트 추가
+        seller = self.thisAnimal[6]
+        print(seller)
 
-        for info in self.inputList:
-            if info['foreground']!='black': # 입력 안되엇을경우
-                messagebox.showinfo("입력오류", info.get()+" 입력하시오.")
-                return
-
-        self.engien.up_animal(self.inputList, self.gender_ani, self.species_var)
+        message = self.engien.update_animal(self.inputList, self.gender_ani, self.species_var, seller)
+        if message != 'ok':
+            messagebox.showinfo("오류", message)  # 등록이 성공적으로 안되면 이유 리턴
+            return
 
         messagebox.showinfo("안내", "게시물 수정 완료!!")
-        adieuMain("메인화면")
 
+        self.root.destroy()
+        adieuMain("메인화면")
 
     def cancelEvent(self):
         # 취소 클릭 시 사용자화면

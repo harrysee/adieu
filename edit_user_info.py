@@ -1,19 +1,18 @@
 from tkinter import *
 from tkinter import messagebox
 
-from _Adoption_book import Adoption_book
+from _Adoption_book import Adoption_book as adoption_engien
 from adieu_main import adieuMain
 from user_info import UserInfo
 
 
 class EditUserInfo():
     def __init__(self, title):
-        self.engien = Adoption_book()
         text_color = '#B96F00'
         bg_color = '#FFC978'  # 배경색
         bd_relief = "flat"     # 테두리 타입
-        engien = Adoption_book()
-        userInfo, userId= engien.get_user_info('nowuser')
+        self.engien = adoption_engien()
+        self.userInfo, self.userId= self.engien.get_user_info('nowuser')
         
         self.root = Tk()
         self.root.title(title)
@@ -21,8 +20,11 @@ class EditUserInfo():
         self.root.configure(bg=bg_color)
         self.root.resizable(0, 0)
 
+        # 기존 정보 가져오기
+        self.inputList = self.userInfo
+
         # 객체 설명
-        info = ['이름', '성별', 'id', 'pw', 'pw확인', '주소', '전화번호', '소개']
+        info = ['이름', '나이', 'id', 'pw', 'pw확인', '주소', '전화번호', '소개', '성별']
 
         # 왼쪽 사이드
         logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
@@ -55,19 +57,17 @@ class EditUserInfo():
         self.inputList = [name, age, id, pw, pw_check, zipcode, call_number, introduce]  # 입력 받을 리스트
 
         # hint
-        self.inputList[0].insert(0, userInfo['name'])
-        self.inputList[1].insert(0, userInfo['age'])
-        self.inputList[2].insert(0, userId)
-        self.inputList[3].insert(0, userInfo['pw'])
-        self.inputList[4].insert(0, userInfo['pw'])
-        self.inputList[5].insert(0, userInfo['zip_code'])
-        self.inputList[6].insert(0, userInfo['call_number'])
-        self.inputList[7].insert(0, userInfo['introduce'])
+        self.inputList[0].insert(0, self.userInfo['name'])
+        self.inputList[1].insert(0, self.userInfo['age'])
+        self.inputList[3].insert(0, self.userInfo['pw'])
+        self.inputList[4].insert(0, self.userInfo['pw'])
+        self.inputList[5].insert(0, self.userInfo['zip_code'])
+        self.inputList[6].insert(0, self.userInfo['call_number'])
+        self.inputList[7].insert(0, self.userInfo['introduce'])
 
         # hint 이벤트
         self.inputList[0].bind('<Button-1>', lambda x: self.hintEvent(event=name))
         self.inputList[1].bind('<Button-1>', lambda x: self.hintEvent(event=age))
-        self.inputList[2].bind('<Button-1>', lambda x: self.hintEvent(event=id))
         self.inputList[3].bind('<Button-1>', lambda x: self.hintEvent(event=pw))
         self.inputList[4].bind('<Button-1>', lambda x: self.hintEvent(event=pw_check))
         self.inputList[5].bind('<Button-1>', lambda x: self.hintEvent(event=zipcode))
@@ -76,13 +76,12 @@ class EditUserInfo():
         # 탭으로 들어올때 이벤트
         self.inputList[0].bind('<FocusIn>', lambda x: self.hintEvent(event=name))
         self.inputList[1].bind('<FocusIn>', lambda x: self.hintEvent(event=age))
-        self.inputList[2].bind('<FocusIn>', lambda x: self.hintEvent(event=id))
         self.inputList[3].bind('<FocusIn>', lambda x: self.hintEvent(event=pw))
         self.inputList[4].bind('<FocusIn>', lambda x: self.hintEvent(event=pw_check))
         self.inputList[5].bind('<FocusIn>', lambda x: self.hintEvent(event=zipcode))
         self.inputList[6].bind('<FocusIn>', lambda x: self.hintEvent(event=call_number))
         self.inputList[7].bind('<FocusIn>', lambda x: self.hintEvent(event=introduce))
-
+        print(self.inputList)
         # 화면넣기
         infoFrame.place(x=250, y=80)
         inputFrame.place(x=360, y=80)
@@ -91,14 +90,16 @@ class EditUserInfo():
             text = Label(infoFrame, bg=bg_color, width=10, text=d, fg='#333')
             text.pack(padx=10, pady=16)
 
-        name.pack(pady=5, anchor='w')
-        age.pack(pady=5, anchor='w')
-        id.pack(pady=5, anchor='w')
-        pw.pack(pady=5, anchor='w')
-        pw_check.pack(pady=5, anchor='w')
-        zipcode.pack(pady=5, anchor='w')
-        call_number.pack(pady=5, anchor='w')
-        introduce.pack(pady=5, anchor='w')
+        self.inputList[0].pack(pady=5, anchor='w')
+        self.inputList[1].pack(pady=5, anchor='w')
+        self.inputList[2].pack(pady=5, anchor='w')
+        self.inputList[3].pack(pady=5, anchor='w')
+        self.inputList[4].pack(pady=5, anchor='w')
+        self.inputList[5].pack(pady=5, anchor='w')
+        self.inputList[6].pack(pady=5, anchor='w')
+        self.inputList[7].pack(pady=5, anchor='w')
+        gender_w.pack(pady=15, anchor='w')
+        gender_m.place(x=60, y=439)
         photo.place(x=40, y=90)
         edit_btn.place(x=65, y=330)
         cancel_btn.place(x=65, y=385)
@@ -115,7 +116,15 @@ class EditUserInfo():
         event.delete(0, END)
 
     def updateEvent(self):
-        self.engien.sign_up(self.inputList, self.gender_var)
+        # 작성한 게시물, 신청한 게시물 가져오기
+        up = self.userInfo['up_list']
+        pick = self.userInfo['pick_list']
+
+        message = self.engien.update_user(self.inputList, self.gender_var, up, pick)
+        if message != True:
+            messagebox.showerror("오류", message)  # 회원가입이 성공적으로 안되면 이유 리턴
+            return
+
         messagebox.showinfo('안내', '정보수정 완료')
         self.root.destroy()
         UserInfo('사용자 정보')

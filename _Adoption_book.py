@@ -48,6 +48,33 @@ class Adoption_book:
             return 1    # 정상적으로 들어가면 트루
         return "회원가입 실패"
 
+    # 사용자 정보 수정
+    def update_user(self, user_input_list, gender, up, pick): # inputList : Gui 입력 엔트리들 담겨있음
+        # inputList : [name, age, id, pw, pw_check, zipcode, call_number, introduce]
+        # gender : 성별구분 라디오버튼 잇음 -> 1 = 여자 / 2 = 남자
+        # 유저리스트 유저정보 넣기
+        new = User()
+        check = new.check_all(user_input_list, gender)
+
+        if check != True : return check     # 형식체크 / 메세지 반환
+
+        self.users[new.id] = {
+            "name": new.name,
+            "pw": new.pw,
+            "age": new.age,
+            "gender": new.gender,
+            "call_number": new.number,
+            "zip_code": new.zip_code,
+            "introduce": new.introduce,
+            "up_list": up,
+            "pick_list": pick
+        }
+        json.set_user_json(self, self.users)
+
+        if new.id in self.users:
+            return 1    # 정상적으로 들어가면 트루
+        return "회원가입 실패"
+
     def get_user_info(self, userid):    # 사용자 정보 반환 [이름, 나이, id,소개]
         return (self.users[Adoption_book.NOWUSER], Adoption_book.NOWUSER) if userid == 'nowuser' else self.users[userid]
 
@@ -109,8 +136,25 @@ class Adoption_book:
             'place'   : new.place,
             'apply_users' : [],     # 분양신청한 사용자들
         }
-        self.users[Adoption_book.NOWUSER]['up_list'].append(new.pat_name) # 현재 사용자 객체의 올린 게시물 리스트에 게시물 올린거 추가
         json.set_animals_json(self,self.animals)
+        json.set_user_json(self, self.users)
+        return 'ok'
+
+    # 게시물 수정
+    def update_animal(self, list, gender, species, seller):  # 게시물 리스트
+        new = Parcel_out()
+        check = new.set_pat(list, gender, species)  # [name, species, age, place, add_infor, user_infor]
+        if check != 'ok':
+            return check
+        self.animals[new.pat_name] = {
+            'species': new.species,  # 종류
+            'pat_age': new.pat_age,  # 나이
+            'pat_gender': new.pat_gender,  # 성별
+            'pat_etc': new.etc,  # 기타사항
+            'place': new.place,
+            'apply_users': seller  # 분양신청한 사용자들
+        }
+        json.set_animals_json(self, self.animals)
         json.set_user_json(self, self.users)
         return 'ok'
 

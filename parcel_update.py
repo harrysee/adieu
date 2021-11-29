@@ -6,18 +6,17 @@ from adieu_main import adieuMain
 from seller_info import SellerInfo
 from user_info import UserInfo
 
-
 class ParcelUpdate():
-    def __init__(self, title):
+    def __init__(self, title, selec):
         self.engien = Adoption_book()
-        self.parcelUpdateGUI(title)
-        self.seller = []
+        self.parcelUpdateGUI(title,selec)
+        self.seller = []        # 분양자들 이름 리스트
 
-    def parcelUpdateGUI(self, title, seller):
+    def parcelUpdateGUI(self, title,selec):
         bg_color = '#FFC978'  # 배경색
         self.root = Tk()
         self.root.title(title)
-        self.root.geometry('745x580')
+        self.root.geometry('745x580+400+100')
         self.root.configure(bg=bg_color)
         self.root.resizable(0, 0)
 
@@ -27,8 +26,10 @@ class ParcelUpdate():
 
         # logo 설정
         logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
-        logo = Label(self.root, bg=bg_color, image=logo_img)
+        logo = Label(self.root, bg=bg_color, image=logo_img,cursor='hand2')
+        logo.bind('<Button-1>',self.moveMain)
 
+        # 동물 타이틀 이미지 넣기
         photo_img = PhotoImage(file='img/input_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
         # button 설정
@@ -45,21 +46,16 @@ class ParcelUpdate():
         self.gender_ani = IntVar()  # 여기에 int 형으로 값을 저장한다
         gender_w = Radiobutton(self.root, text="암컷", value=1, variable=self.gender_ani, bg=bg_color)
         gender_m = Radiobutton(self.root, text="수컷", value=2, variable=self.gender_ani, bg=bg_color)
-        gender_w.select()  # 기본적으로 여자 선택
-        self.species_var = IntVar()
+        self.species_var = IntVar()     # 동물 종류 입력받을 var
         species_0 = Radiobutton(self.root, text="고양이", value=0, variable=self.species_var, bg=bg_color)
         species_1 = Radiobutton(self.root, text="강아지", value=1, variable=self.species_var, bg=bg_color)
         species_2 = Radiobutton(self.root, text="새", value=2, variable=self.species_var, bg=bg_color)
         species_3 = Radiobutton(self.root, text="기타", value=3, variable=self.species_var, bg=bg_color)
-        species_0.select()
+        spacelist = [(species_0,species_1,species_2,species_3),(gender_m,gender_w)]
         self.inputList = [name, age, place, add_infor]  # 입력 받을 리스트 # 입력 받을 리스트
-
-        # hint
-        self.inputList[1].insert(0, '종류')
-        self.inputList[2].insert(0, '나이')
-        self.inputList[3].insert(0, '장소')
-        self.inputList[4].insert(0, '추가설명')
-        self.inputList[5].insert(0, '사용자 정보')
+        
+        # 미리 힌트로 데이터 세팅
+        self.draw_info(self.inputList, spacelist,selec)
 
         self.inputList[0].bind('<Button-1>', lambda x: self.hintEvent(event=name))
         self.inputList[1].bind('<Button-1>', lambda x: self.hintEvent(event=age))
@@ -92,28 +88,33 @@ class ParcelUpdate():
         self.play()
 
         # 분양자 버튼 생성
-        seller_btn = {}
+        seller_btn = []
 
         for i, d in enumerate(self.seller):
             btn = Button(self.root, padx=60, text=i, pady=10, fg='#B96F00', bg='#F0AD48', command=lambda x=i: self.sellerEvent(x))
-            btn.grid(row=i, column=0)
-            seller_btn[i] = btn
+            seller_btn.append(btn)
+        btn.grid(row=i, column=0)
+        seller_btn[i] = btn
 
         seller_btn.pack(x=580, y=15)
-
         self.play()
 
-    def draw_info(self, list):  # gui 정보넣을 라벨 리스트
+    def moveMain(self,e):
+        self.root.destroy()
+        from adieu_main import adieuMain
+        adieuMain("메인")
+
+    def draw_info(self, list, field, selec):  # gui에 저장된 게시물 미리 세팅하기 (entry리스트, [종류튜플, 성별튜플], 선택한 동물)
         # 정보가져오기
         # [name, species, age, gender, add_infor, user_infor] 순서대로
-        info = self.engien.get_animal_info(self.thisAnimal)
-        keys = ['','species','pat_age','user','pat_gender','pat_etc']
-
-        list[0].config('text', self.thisAnimal) # 처음엔 이름넣기
+        info = self.engien.get_animal_info(selec)
+        list[0].insert(0,selec) # 처음엔 이름넣기
 
         # 뿌리기
-        for i in range(1, list):
-            list[i].config('text', info[keys[i]])
+        for i in range(1, len(list)):
+            list[i].insert(0, info[i])
+        field[0][0 if info[5]=='고양이' else 1 if info[5]=='강아지' else 2 if info[5]=='새' else 3].select()   # 동물 종류 따라서
+        field[1][0 if info[0]=='암컷' else 1].select()   # 동물 성별 따라서
 
         # 분양신청자 id 가져오기
         apply_list = list(info['apply_users'])
@@ -144,7 +145,7 @@ class ParcelUpdate():
                 messagebox.showinfo("입력오류", info.get()+" 입력하시오.")
                 return
 
-        self.engien.update_animal(self.inputList, self.gender_ani, self.species_var)
+        self.engien.up_animal(self.inputList, self.gender_ani, self.species_var)
 
         messagebox.showinfo("안내", "게시물 수정 완료!!")
         adieuMain("메인화면")

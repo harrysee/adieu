@@ -76,9 +76,9 @@ class Adoption_book:
 
 
     def get_animal_info(self, select): # 자세히 보기 : 동물 이름가져와서 구하기
-        # 선택한 동물 정보 반환
+        # 선택한 동물 정보 리스트로 반환
         infolist = []
-        keys = ['pat_gender','pat_age','place','pat_etc','user','species']
+        keys = ['pat_gender','pat_age','place','pat_etc','user','species','apply_users']
         for key in keys:
             infolist.append(self.animals[select][key])
         return infolist

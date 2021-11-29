@@ -13,7 +13,7 @@ class ParceAdieuAdd():
         bg_color = '#FFC978'  # 배경색
         self.root = Tk()
         self.root.title(title)
-        self.root.geometry('745x580')
+        self.root.geometry('745x580+400+100')
         self.root.configure(bg=bg_color)
         self.root.resizable(0, 0)
 
@@ -24,6 +24,7 @@ class ParceAdieuAdd():
         # logo 설정
         logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
         logo = Label(self.root, bg=bg_color, image=logo_img)
+        logo.bind('<Button-1>',self.cancelbtnEvent)
 
         photo_img = PhotoImage(file='img/input_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
@@ -87,7 +88,7 @@ class ParceAdieuAdd():
         species_3.place(x=300, y=420, anchor='w')
         self.play()
 
-    def cancelbtnEvent(self):   # 취소
+    def cancelbtnEvent(self,event):   # 취소
         self.root.destroy()
         adieuMain("메인")
 

@@ -14,7 +14,7 @@ class LoginAdieu():
         bg_color = '#FFC978'  # 배경색
         root = Tk()
         root.title(title)
-        root.geometry('745x580')
+        root.geometry('745x580+400+100')
         root.configure(bg=bg_color)
         root.resizable(0, 0)
         self.root = root
@@ -28,7 +28,7 @@ class LoginAdieu():
 
         # id , password 입력칸 설정
         self.id = Entry(self.mainFrame, width=30,relief="flat",bd=10,fg="gray")
-        self.pw = Entry(self.mainFrame, width=30,relief="flat",bd=10,fg="gray", show='')
+        self.pw = Entry(self.mainFrame, width=30,relief="flat",bd=10,fg="gray")
         self.id.insert(0,"input userId")
         self.pw.insert(0,"input userPassword")
         self.id.bind("<Button-1>",self.focusId)
@@ -52,6 +52,7 @@ class LoginAdieu():
 
     def focusPw(self,event):    # pw입력칸 설정
         self.pw.config(fg="black")
+        self.pw.config(show='●')
         self.pw.delete(0,END)
 
     def loginEvent(self):

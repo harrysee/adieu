@@ -15,7 +15,7 @@ class adieuMain():
         self.BACKGROUND = '#FFC978'  # 배경색
         self.root = Tk()
         self.root.title(title)
-        self.root.geometry('745x580')
+        self.root.geometry('745x580+400+100')
         self.root.configure(bg=self.BACKGROUND)
         self.root.resizable(0, 0)
 

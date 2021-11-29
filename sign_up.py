@@ -13,7 +13,7 @@ class SignUp():
         bg_color = '#FFC978'  # 배경색
         self.root = Tk()
         self.root.title(title)
-        self.root.geometry('745x580')
+        self.root.geometry('745x580+400+100')
         self.root.configure(bg=bg_color)
         self.root.resizable(0, 0)
         # 왼쪽 사이드
@@ -90,6 +90,7 @@ class SignUp():
         self.play()
 
     def hintEvent(self,event):  # 눌렀을때 글자 넣을수 있게
+        if event.get() in ('PW','PW 확인'): event.config(show='●')
         event.config(fg='black')
         event.delete(0,END)
         

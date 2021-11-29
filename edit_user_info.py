@@ -17,7 +17,7 @@ class EditUserInfo():
         
         self.root = Tk()
         self.root.title(title)
-        self.root.geometry('745x580')
+        self.root.geometry('745x580+400+100')
         self.root.configure(bg=bg_color)
         self.root.resizable(0, 0)
 
@@ -26,7 +26,9 @@ class EditUserInfo():
 
         # 왼쪽 사이드
         logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
-        logo = Label(self.root, bg=bg_color, image=logo_img)  # 로고
+        logo = Label(self.root, bg=bg_color, image=logo_img, cursor='hand2')  # 로고
+        logo.bind('<Button-1>',self.moveMain)
+
 
         photo_img = PhotoImage(file='img/input_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
@@ -101,16 +103,14 @@ class EditUserInfo():
         logo.place(x=5, y=5)
         self.play()
 
+    def moveMain(self,evnet):
+        self.root.destroy()
+        from adieu_main import adieuMain
+        adieuMain("메인")
+
     def hintEvent(self, event):  # 눌렀을때 글자 넣을수 있게
         event.config(fg='black')
         event.delete(0, END)
-
-    def signUpEvent(self):
-        # 회원가입 버튼 눌렀을때
-        # 아이디 중복 체크
-        # 형식 체크
-        # 비번 확인 체크
-        pass
 
     def updateEvent(self):
         self.engien.sign_up(self.inputList, self.gender_var)

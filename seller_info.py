@@ -14,13 +14,15 @@ class SellerInfo():
         bg_color = '#FFC978'  # 배경색
         self.root = Tk()
         self.root.title(title)
-        self.root.geometry('745x580')
+        self.root.geometry('745x580+400+100')
         self.root.configure(bg=bg_color)
         self.root.resizable(0, 0)
 
         # 왼쪽 사이드
         logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
-        logo = Label(self.root, bg=bg_color, image=logo_img)  # 로고
+        logo = Label(self.root, bg=bg_color, image=logo_img,cursor='hand2')  # 로고
+        logo.bind('<Button-1>',self.moveMain)
+
         photo_img = PhotoImage(file='img/input_img.png')
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
         name_info = Label(self.root, width=17, anchor='w', text=self.thisUserInfo['name'], bg='#fff', relief='flat',
@@ -66,6 +68,11 @@ class SellerInfo():
         intro_info.place(x=65, y=465)
         logo.place(x=5, y=5)
         self.play()
+        
+    def moveMain(self,e): # 로고누르면 이동
+        self.root.destroy()
+        from adieu_main import adieuMain
+        adieuMain("메인")
 
     def draw_postList(self, postList, listbox):
         for post in postList:  # 등록한게시물이나 신청한 게시물에 잇는 동물이름으로 정보 가져와서 처리하기
@@ -105,6 +112,7 @@ class SellerInfo():
         # 등록한 게시물 클릭했을때
         selectedItem = self.writelist.curselection()
         getValue = self.thisUserInfo['up_list'][selectedItem[0]]
+        self.root.destroy()
         from parcel_infor import ParceAdieuInfor
         ParceAdieuInfor('게시물 정보 및 분양 신청', getValue)
 
@@ -112,6 +120,7 @@ class SellerInfo():
         # 신청한 게시물 클릭했을때
         selectedItem = self.applylist.curselection()
         getValue = self.thisUserInfo['pick_list'][selectedItem[0]]
+        self.root.destroy()
         from parcel_infor import ParceAdieuInfor
         ParceAdieuInfor('게시물 정보 및 분양 신청', getValue)
 

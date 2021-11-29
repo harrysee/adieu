@@ -15,7 +15,7 @@ class ParceAdieuInfor():
         self.BGCOLOR = '#FFC978'  # 배경색
         self.root = Tk()
         self.root.title(title)
-        self.root.geometry('745x580')
+        self.root.geometry('745x580+400+100')
         self.root.configure(bg=self.BGCOLOR)
         self.root.resizable(0, 0)
 
@@ -29,7 +29,8 @@ class ParceAdieuInfor():
 
         # logo 설정
         logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
-        logo = Label(self.root, bg=self.BGCOLOR, image=logo_img)
+        logo = Label(self.root, bg=self.BGCOLOR, image=logo_img,cursor='hand2')
+        logo.bind('<Button-1>',self.moveMain)
 
         photo_img = PhotoImage(file='img/animal_img.png')
         photo = Label(self.root, image=photo_img, bg=self.BGCOLOR, anchor="w")  # 이미지 넣기 왼쪽 정렬
@@ -75,11 +76,16 @@ class ParceAdieuInfor():
         spaceies.pack(padx=10, pady=5, anchor='w')
         self.play()
 
+    def moveMain(self,e):
+        self.root.destroy()
+        from adieu_main import adieuMain
+        adieuMain("메인")
+
     def draw_info(self, list):  # gui 정보넣을 라벨 리스트
         # 정보가져오기
         # [name, species, age, gender, add_infor, user_infor] 순서대로
         info = self.engien.get_animal_info(self.thisAnimal)
-        list[0].configure(text=self.thisAnimal) # 처음엔 이름넣기
+        list[0].configure(text=self.thisAnimal)     # 처음엔 이름넣기
 
         # 뿌리기
         for i in range(1,len(list)):

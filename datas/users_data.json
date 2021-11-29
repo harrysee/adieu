@@ -43,7 +43,7 @@
         ]
     },
     "jeon": {
-        "name": "name",
+        "name": "18",
         "pw": "jj1234",
         "age": "18",
         "gender": "w",
@@ -51,12 +51,9 @@
         "zip_code": "\ubd80\uc0b0",
         "introduce": "\ub098\ub2e4",
         "up_list": [
-            "dd"
+            "dfs0"
         ],
-        "pick_list": [
-            "fsfd",
-            "fsfd"
-        ]
+        "pick_list": []
     },
     "nndd": {
         "name": "34",

@@ -142,9 +142,8 @@ class ParcelUpdate():
 
     # 클릭 시 분양자 정보 이동
     def sellerEvent(self, id):
-        print(id)
         self.root.destroy()
-        SellerInfo("분양자 정보", userid=id)
+        SellerInfo("분양자 정보", userid=id, animalkey=self.animalkey)
 
         # # 작성자에게 분양자 전화번호 전달
         # seller = self.engien.get_user_info(id)
@@ -159,7 +158,6 @@ class ParcelUpdate():
         # 수정 클릭 시 메인화면
         # 분양자 리스트 추가
         seller = self.thisAnimal[6]
-        print(seller)
 
         message = self.engien.update_animal(self.inputList, self.gender_ani, self.species_var, seller)
         if message != 'ok':

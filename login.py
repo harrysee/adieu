@@ -9,6 +9,8 @@ class LoginAdieu():
     def __init__(self, title):
         self.engien = adoption_engien()
         self.loginGUI(title)
+        self.userInfo = self.engien.get_user_info('nowuser')
+        self.thisAniaml = self.engien.get_animal_info(self.userInfo)
 
     def loginGUI(self,title):
         bg_color = '#FFC978'  # 배경색
@@ -69,6 +71,7 @@ class LoginAdieu():
         if self.engien.login(self.id.get(), self.pw.get()) == False:
             messagebox.showwarning("안내", "아이디나 비번이 일치하지 않습니다.")
             return
+
         self.root.destroy()
         adieuMain("메인")
 

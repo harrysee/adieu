@@ -123,6 +123,19 @@ class Adoption_book:
         json.set_user_json(self, self.users)
         return True
 
+    # 분양 수락, 거절 확인
+    def check_pick(self, sellerId, animalkey, check):   # 1:수락, -1:거절
+        index = self.users[sellerId]['pick_list'].find(animalkey)
+        self.users[sellerId]['pick_check'][index] = check
+
+        if check == 1:
+            self.delete_animal(index)
+        elif check == -1:
+            user = self.users(self.users[sellerId]['pick_list'][index]['user'])     # 유저에서 분양자를 통해 pick_list에 있는 사용자 정보 가져옴
+            user['up_list'].remove(index)
+            self.users[sellerId]['pick_list'].remove(index)
+            self.users[sellerId]['pick_check'].pop(self.users['pick_list'].find(index))
+
     # 게시물 등록
     def up_animal(self, list, gender, species):  # 게시물 리스트
         new = Parcel_out()
@@ -167,6 +180,7 @@ class Adoption_book:
         self.users[self.NOWUSER]['up_list'].remove(animal)   # 해당 유저의 올린게시물에서 삭제
         for applyuser in self.animals[animal]['apply_users']:   # 이 펫에 분양신청한 사람들한테도 삭제
             applyuser['pick_list'].remove(animal)
+            applyuser['pick_check'].pop(applyuser['pick_list'].find(animal))
             # applyuser['pick_list'].find(animal) -- 해당 동물의 인덱스 가져오기
         del self.animals[animal]    # 게시물 자체를 삭제
         # 업데이트

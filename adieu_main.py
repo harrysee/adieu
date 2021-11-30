@@ -1,14 +1,14 @@
 from tkinter import *
 import tkinter.ttk
+from tkinter import messagebox
 
 from _Adoption_book import Adoption_book
-
-
 
 class adieuMain():
     def __init__(self,title):
         self.engein = Adoption_book()
         self.mainGUI(title)
+        self.user, self.id = self.engein.get_user_info('nowuser')
 
     def mainGUI(self, title):
         self.TEXTCOLOR = '#B96F00'
@@ -56,7 +56,7 @@ class adieuMain():
 
         # 전체 동물 보여주기
         self.draw_animal_list(self.engein.show_animals())
-        search.bind('<ButtonRelease-1>', lambda x: self.draw_animal_list(self.engein.show_animals()))
+        search.bind('<ButtonRelease-1>', lambda x: self.draw_animal_list(self.engine.show_animals()))
         
 
         # 오른쪽 위 로그아웃, 사용자
@@ -88,6 +88,18 @@ class adieuMain():
         for i in range(len(treelist)):  # 그리기
             # 번호, 종류, 이름, 나이 순으로 들어감
             self.animalView.insert('', 'end', text=i+1, values=treelist[i])
+
+    def show_message(self):
+        for i, post in enumerate(self.user['pick_check']):
+            animal = self.self.engein.users(self.user['pick_list'][i])  # 분양 신청했던 동물 이름
+
+            if post == 1:
+                user = self.engein.users(self.user['pick_list'][i]['user']) # 사용자 정보 가져오기
+                messagebox.showinfo('안내', f'{animal} 분양을 수락했습니다.\n {user["call_number"]}, {user["zip_code"]}')
+
+            elif post == -1:
+                messagebox.showinfo('안내', f'{animal} 분양을 거절했습니다.')
+
 
     def click_item(self,evnet): # item 클릭 시 선택한 게시물 가져와서 이름 매개변수로 동물 상세보기로 넘김
         selectedItem = self.animalView.focus()

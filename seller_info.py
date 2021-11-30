@@ -4,10 +4,12 @@ from tkinter import messagebox
 from _Adoption_book import Adoption_book
 
 class SellerInfo():
-    def __init__(self, title, userid):
+    def __init__(self, title, userid, animalkey):
         self.engien = Adoption_book()
         self.thisUserInfo = self.engien.get_user_info(userid)
         self.userid = userid
+        self.animalkey = animalkey
+        self.userInfo = self.engien.get_user_info('nowuser')
         self.sellerGUI(title)
 
     def sellerGUI(self, title):
@@ -84,25 +86,19 @@ class SellerInfo():
     def okEvent(self):
         # 분양수락 - 사용자-신청리스트 및 게시물-신청리스트에서 삭제
         # 작성자에게 분양자 전화번호 전달
-        seller = self.engien.get_user_info(self.thisUserInfo)
-        keys = ['', 'name', 'age', 'id', 'pw', 'pw_check', 'zipcode', 'call_number', 'introduce']
-        call = seller[keys[7]]
-        messagebox.showinfo('전화번호:', call)
-
-        # 분양자에게 작성자의 주소와 전화번호 전달
-
-        # 게시물 수락
-        self.users[Adoption_book.NOWUSER]['pick_check'] = 1
+        messagebox.showinfo('분양자 정보', f"분양자 전화번호 : {self.thisUserInfo['call_number']}")
+        # 분양 수락
+        self.engien.check_pick(self.userid, self.animalkey, 1)
 
         from parcel_update import ParcelUpdate
         self.root.destroy()
-        ParcelUpdate.sellerEvent('분양수정 및 분양자 확인', self.userid)
+        ParcelUpdate('분양수정 및 분양자 확인')
 
     def noEvent(self):
         # 분양거절 - 사용자- 신청리스트 및 게시물-신청리스트에서 삭제 후 시작화면으로 이동
 
-        # 게시물 거절
-        self.users[Adoption_book.NOWUSER]['pick_check'] = -1
+        # 분양 거절
+        self.engien.check_pick(self.userid, self.animalkey, -1)
 
         self.root.destroy()
         from parcel_update import ParcelUpdate

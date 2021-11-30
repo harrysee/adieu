@@ -4,11 +4,12 @@ from tkinter import messagebox
 
 from _Adoption_book import Adoption_book
 
+
 class adieuMain():
-    def __init__(self,title):
-        self.engein = Adoption_book()
+    def __init__(self, title):
+        self.engien = Adoption_book()
+        self.user, self.id = self.engien.get_user_info('nowuser')
         self.mainGUI(title)
-        self.user, self.id = self.engein.get_user_info('nowuser')
 
     def mainGUI(self, title):
         self.TEXTCOLOR = '#B96F00'
@@ -21,10 +22,10 @@ class adieuMain():
 
         # 로고
         logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
-        logo = Label(self.root,bg=self.BACKGROUND,image=logo_img)
-        
+        logo = Label(self.root, bg=self.BACKGROUND, image=logo_img)
+
         # 왼쪽 사이드
-        cartegoryFrame = Frame(self.root, bg=self.BACKGROUND )
+        cartegoryFrame = Frame(self.root, bg=self.BACKGROUND)
         s_cat = Label(cartegoryFrame, text="고양이", fg=self.TEXTCOLOR, bg=self.BACKGROUND, pady=5, cursor="hand2")
         s_cat.bind('<ButtonRelease-1>', lambda x: self.search_species(event=s_cat))
         s_dog = Label(cartegoryFrame, text="강아지", fg=self.TEXTCOLOR, bg=self.BACKGROUND, pady=5, cursor="hand2")
@@ -36,17 +37,17 @@ class adieuMain():
 
         # 오른쪽 사이드
         animalList = Frame(self.root, width=900, height=900, bg=self.BACKGROUND)
-        self.animalView = tkinter.ttk.Treeview(animalList,height= 20,columns=["species","name","age","applycnt"])
-        self.animalView.bind("<Double-Button-1>",self.click_item)
+        self.animalView = tkinter.ttk.Treeview(animalList, height=20, columns=["species", "name", "age", "applycnt"])
+        self.animalView.bind("<Double-Button-1>", self.click_item)
 
-        self.animalView.column('#0', width=70,anchor="center")   # 해당 속성이 차지하는 비율 
-        self.animalView.heading('#0', text="등록번호",anchor="center")    # 해당속성의 번호
-        self.animalView.column('#1',width=120,anchor="center")
-        self.animalView.heading('#1',text="분류",anchor="center")
-        self.animalView.column('#2',width=180,anchor="center")
-        self.animalView.heading('#2',text="이름",anchor="center")
-        self.animalView.column('#3',width=80,anchor="center")
-        self.animalView.heading('#3',text="나이",anchor="center")
+        self.animalView.column('#0', width=70, anchor="center")  # 해당 속성이 차지하는 비율
+        self.animalView.heading('#0', text="등록번호", anchor="center")  # 해당속성의 번호
+        self.animalView.column('#1', width=120, anchor="center")
+        self.animalView.heading('#1', text="분류", anchor="center")
+        self.animalView.column('#2', width=180, anchor="center")
+        self.animalView.heading('#2', text="이름", anchor="center")
+        self.animalView.column('#3', width=80, anchor="center")
+        self.animalView.heading('#3', text="나이", anchor="center")
         self.animalView.column('#4', width=70, anchor="center")
         self.animalView.heading('#4', text="신청수", anchor="center")
 
@@ -55,15 +56,14 @@ class adieuMain():
         search = Label(self.root, image=photo_img, bg=self.BACKGROUND, cursor="hand2")
 
         # 전체 동물 보여주기
-        self.draw_animal_list(self.engein.show_animals())
+        self.draw_animal_list(self.engien.show_animals())
         search.bind('<ButtonRelease-1>', lambda x: self.draw_animal_list(self.engine.show_animals()))
-        
 
         # 오른쪽 위 로그아웃, 사용자
-        logout = Label(self.root,text="로그아웃",fg=self.TEXTCOLOR,bg=self.BACKGROUND,cursor="left_side")
-        user = Label(self.root, text='사용자',fg= self.TEXTCOLOR,bg=self.BACKGROUND,cursor="center_ptr")
-        logout.bind('<ButtonRelease-1>',self.logout_event)
-        user.bind('<ButtonRelease-1>',self.user_event)
+        logout = Label(self.root, text="로그아웃", fg=self.TEXTCOLOR, bg=self.BACKGROUND, cursor="left_side")
+        user = Label(self.root, text='사용자', fg=self.TEXTCOLOR, bg=self.BACKGROUND, cursor="center_ptr")
+        logout.bind('<ButtonRelease-1>', self.logout_event)
+        user.bind('<ButtonRelease-1>', self.user_event)
 
         # 화면 보여주기
         s_cat.pack()
@@ -71,60 +71,63 @@ class adieuMain():
         s_bird.pack()
         s_etc.pack()
         self.animalView.pack(side='left')
-        cartegoryFrame.pack(side='left',fill="y")
+        cartegoryFrame.pack(side='left', fill="y")
         animalList.place(x=200, y=90)
-        logout.place(x=600,y=15)
-        user.place(x=660,y=15)
-        cartegoryFrame.place(x=50,y=150)
+        logout.place(x=600, y=15)
+        user.place(x=660, y=15)
+        cartegoryFrame.place(x=50, y=150)
         search.place(x=15, y=90)
-        logo.place(x=10,y=5)
+        logo.place(x=10, y=5)
         self.play()
 
-    def draw_animal_list(self,treelist):    # 동물들 리스트 그리기
+    def draw_animal_list(self, treelist):  # 동물들 리스트 그리기
         x = self.animalView.get_children()
-        for item in x:      # 트리비우기
+        for item in x:  # 트리비우기
             self.animalView.delete(item)
-            
+
         for i in range(len(treelist)):  # 그리기
             # 번호, 종류, 이름, 나이 순으로 들어감
-            self.animalView.insert('', 'end', text=i+1, values=treelist[i])
+            self.animalView.insert('', 'end', text=i + 1, values=treelist[i])
 
     def show_message(self):
         for i, post in enumerate(self.user['pick_check']):
-            animal = self.self.engein.users(self.user['pick_list'][i])  # 분양 신청했던 동물 이름
+            print(post)
+            animal = self.engein.users(self.user['pick_list'][i])  # 분양 신청했던 동물 이름
 
             if post == 1:
-                user = self.engein.users(self.user['pick_list'][i]['user']) # 사용자 정보 가져오기
+                user = self.engien.users(self.user['pick_list'][i]['user'])  # 사용자 정보 가져오기
                 messagebox.showinfo('안내', f'{animal} 분양을 수락했습니다.\n {user["call_number"]}, {user["zip_code"]}')
 
             elif post == -1:
                 messagebox.showinfo('안내', f'{animal} 분양을 거절했습니다.')
 
+            self.engien.check_pick_isAccept(self.user)
 
-    def click_item(self,evnet): # item 클릭 시 선택한 게시물 가져와서 이름 매개변수로 동물 상세보기로 넘김
+
+    def click_item(self, evnet):  # item 클릭 시 선택한 게시물 가져와서 이름 매개변수로 동물 상세보기로 넘김
         selectedItem = self.animalView.focus()
         getValue = self.animalView.item(selectedItem).get('values')
         self.root.destroy()
         from parcel_infor import ParceAdieuInfor
-        ParceAdieuInfor('게시물 정보', getValue[1])    # 선택한 동물 이름 넘겨주기
+        ParceAdieuInfor('게시물 정보', getValue[1])  # 선택한 동물 이름 넘겨주기
 
-    def logout_event(self,evnet):   # 로그아웃 -> 첫화면
+    def logout_event(self, evnet):  # 로그아웃 -> 첫화면
         self.root.destroy()
         from start import StartAdieu
         StartAdieu("처음 화면")
 
-    def search_species(self,event):   # 동물 종류별 검색
+    def search_species(self, event):  # 동물 종류별 검색
         searchList = self.engein.search_animal(event['text'])
         self.draw_animal_list(searchList)
 
-    def user_event(self,event): # 사용자클릭햇을때 -> 사용자화면
+    def user_event(self, event):  # 사용자클릭햇을때 -> 사용자화면
         self.root.destroy()
         from user_info import UserInfo
         UserInfo('사용자 정보')
-        
+
     def play(self):
         self.root.mainloop()
 
+
 if __name__ == '__main__':
     adieuMain('메인')
-

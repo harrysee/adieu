@@ -74,7 +74,6 @@ class LoginAdieu():
 
         print(self.id.get())
 
-        self.engien.check_pick_isAccept()
 
         self.root.destroy()
         adieuMain("메인")

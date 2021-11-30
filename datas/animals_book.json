@@ -8,6 +8,15 @@
         "user": "jeon",
         "apply_users": []
     },
+    "\ud0c1\uad6c": {
+        "species": "\uc0c8",
+        "pat_age": "20",
+        "user": "jeon",
+        "pat_gender": "\uc218\ucef7",
+        "pat_etc": "\uc18c\ub9ac\uc798\uc9c0\ub974\ub294 \uc575\ubb34\uc0c8",
+        "place": "\uc131\ub0a8 \uc720\uae30\uc13c\ud130",
+        "apply_users": []
+    },
     "\ud589\ubcf5\uc774": {
         "species": "\uace0\uc591\uc774",
         "pat_age": "3",
@@ -15,17 +24,17 @@
         "pat_gender": "\uc218\ucef7",
         "pat_etc": "\uac80\uc815\uc0c9 \uace0\uc591\uc774, \ucf54\ub9ac\uc548\uc885",
         "place": "\ubd80\uc0b0\ubd84\uc591\uc13c\ud130",
-        "apply_users": []
+        "apply_users": [
+            "vip"
+        ]
     },
     "\uae40\ud0c1\uad6c": {
         "species": "\uc0c8",
         "pat_age": "20",
-        "user": "jeon",
+        "user" : "vip",
         "pat_gender": "\uc218\ucef7",
         "pat_etc": "\uc18c\ub9ac\uc798\uc9c0\ub974\ub294 \uc575\ubb34\uc0c8",
         "place": "\uc131\ub0a8 \uc720\uae30\uc13c\ud130",
-        "apply_users": [
-            "jeon"
-        ]
+        "apply_users": []
     }
 }

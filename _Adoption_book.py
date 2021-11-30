@@ -18,7 +18,7 @@ class Adoption_book:
         #로그인 한 이름과 비밀번호가 일치하면 로그인 성공
         if (name in self.users) and (self.users[name]['pw'] == pw):
             Adoption_book.NOWUSER = name   # 로그인 성공이면 true 리턴
-            print(Adoption_book.NOWUSER)
+            # pick_check에서 수락/거절 확인하기
             return 1
         return 0
 
@@ -78,6 +78,7 @@ class Adoption_book:
     def get_user_info(self, userid):    # 사용자 정보 반환 [이름, 나이, id,소개]
         return (self.users[Adoption_book.NOWUSER], Adoption_book.NOWUSER) if userid == 'nowuser' else self.users[userid]
 
+    # 분양 게시물 (동물들) 다루는 함수들 ---------------
     # 입양하고 싶은 동물 종류별 검색
     def search_animal(self, select_kind):  # 선택한 동물종류 가져와서 검색하기
         search_list = list()
@@ -166,11 +167,11 @@ class Adoption_book:
         self.users[self.NOWUSER]['up_list'].remove(animal)   # 해당 유저의 올린게시물에서 삭제
         for applyuser in self.animals[animal]['apply_users']:   # 이 펫에 분양신청한 사람들한테도 삭제
             applyuser['pick_list'].remove(animal)
+            # applyuser['pick_list'].find(animal) -- 해당 동물의 인덱스 가져오기
         del self.animals[animal]    # 게시물 자체를 삭제
         # 업데이트
         json.set_animals_json(self, self.animals)
         json.set_user_json(self, self.users)
-
 
 if __name__ == '__main__':
     Adoption_book()

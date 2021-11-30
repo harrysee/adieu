@@ -43,7 +43,7 @@ class ParcelUpdate():
         photo = Label(self.root, image=photo_img, bg=bg_color, anchor="w")  # 이미지 넣기 왼쪽 정렬
         # button 설정
         btn_update = Button(self.root, width=10, text='수정', bg='#F0AD48', command=self.updateEvent, relief='flat', bd=10, fg='#B96F00')
-        btn_back = Button(self.root, width=10, text='취소', bg='#F0AD48', command=self.cancelEvent, relief='flat', bd=10, fg='#B96F00')
+        btn_back = Button(self.root, width=10, text='삭제', bg='#F0AD48', command=self.deleteEvent, relief='flat', bd=10, fg='#B96F00')
 
         # 입력받기
         infoFrame1 = Frame(self.root, bg=bg_color, width=350, height=400)
@@ -170,7 +170,7 @@ class ParcelUpdate():
         self.root.destroy()
         adieuMain("메인화면")
 
-    def cancelEvent(self):
+    def deleteEvent(self):
         # 취소 클릭 시 사용자화면
         self.root.destroy()
         UserInfo("사용자정보")

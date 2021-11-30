@@ -6,10 +6,9 @@ from _Adoption_book import Adoption_book
 class SellerInfo():
     def __init__(self, title, userid, animalkey):
         self.engien = Adoption_book()
-        self.thisUserInfo = self.engien.get_user_info(userid)
-        self.userid = userid
-        self.animalkey = animalkey
-        self.userInfo = self.engien.get_user_info('nowuser')
+        self.thisUserInfo = self.engien.get_user_info(userid)   # 아이디를 이용해 값 가져오기
+        self.userid = userid        # 신청한 사용자 아이디
+        self.animalkey = animalkey  # 선택한 동물 이름
         self.sellerGUI(title)
 
     def sellerGUI(self, title):
@@ -90,14 +89,15 @@ class SellerInfo():
         # 분양 수락
         self.engien.check_pick(self.userid, self.animalkey, 1)
 
-        from parcel_update import ParcelUpdate
         self.root.destroy()
-        ParcelUpdate('분양수정 및 분양자 확인')
+        from adieu_main import adieuMain
+        adieuMain('메인')
 
     def noEvent(self):
         # 분양거절 - 사용자- 신청리스트 및 게시물-신청리스트에서 삭제 후 시작화면으로 이동
 
         # 분양 거절
+        messagebox.showinfo('분양자 정보', f'{self.animalkey}에 따른 {self.userid}의 분양신청을 거절했습니다.')
         self.engien.check_pick(self.userid, self.animalkey, -1)
 
         self.root.destroy()

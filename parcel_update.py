@@ -10,7 +10,7 @@ class ParcelUpdate():
     def __init__(self, title, selec):
         self.engien = Adoption_book()
         self.thisAnimal = self.engien.get_animal_info(selec)
-        self.animalkey = selec
+        self.animalkey = selec  # 선택한 동물 이름
         self.parcelUpdateGUI(title,selec)
         self.seller = []        # 분양자들 이름 리스트
 
@@ -142,6 +142,7 @@ class ParcelUpdate():
 
     # 클릭 시 분양자 정보 이동
     def sellerEvent(self, id):
+        print(id)
         self.root.destroy()
         SellerInfo("분양자 정보", userid=id, animalkey=self.animalkey)
 
@@ -158,6 +159,7 @@ class ParcelUpdate():
         # 수정 클릭 시 메인화면
         # 분양자 리스트 추가
         seller = self.thisAnimal[6]
+        print(seller)
 
         message = self.engien.update_animal(self.inputList, self.gender_ani, self.species_var, seller)
         if message != 'ok':
@@ -172,6 +174,7 @@ class ParcelUpdate():
     def deleteEvent(self):
         # 취소 클릭 시 사용자화면
         self.engien.delete_animal(self.animalkey)
+        messagebox.showinfo('삭제',f'{self.animalkey}가 삭제되었습니다.')
         self.root.destroy()
         UserInfo("사용자정보")
 

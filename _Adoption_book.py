@@ -123,18 +123,26 @@ class Adoption_book:
         json.set_user_json(self, self.users)
         return True
 
-    # 분양 수락, 거절 확인
-    def check_pick(self, sellerId, animalkey, check):   # 1:수락, -1:거절
-        index = self.users[sellerId]['pick_list'].find(animalkey)
-        self.users[sellerId]['pick_check'][index] = check
+    # 분양 수락, 거절 확인 - seller_info에서 수락/거절 버튼 눌렀을때 호출
+    def check_pick(self, sellerId, animalkey, check):   # 분양한 사용자 id, 동물이름, 거절인지 수락인지 1:수락, -1:거절
+        index = (self.users[sellerId]['pick_list']).index(animalkey)        # pick_list 값을 이용해서 해당 동물의 pick_check 위치를 가져옴
+        self.users[sellerId]['pick_check'][index] = check       # 가져온 값에다 수락인지 거절인지 넣기
 
-        if check == 1:
-            self.delete_animal(index)
-        elif check == -1:
-            user = self.users(self.users[sellerId]['pick_list'][index]['user'])     # 유저에서 분양자를 통해 pick_list에 있는 사용자 정보 가져옴
-            user['up_list'].remove(index)
-            self.users[sellerId]['pick_list'].remove(index)
-            self.users[sellerId]['pick_check'].pop(self.users['pick_list'].find(index))
+    def check_pick_isAccept(self):  # 로그인 했을때 신청한 동물들 중에 수락/거절있는지 확인하기
+        for index,check in enumerate(self.users[self.NOWUSER]['pick_check']):   # 픽체크 폴문 돌리기
+            if check == 1:  # 수락일경우
+                pass
+                # self.users[self.NOWUSER]['up_list'].remove(animal)  # 해당 유저의 올린게시물에서 삭제
+                # for applyuser in self.animals[animal]['apply_users']:  # 이 펫에 분양신청한 사람들한테도 삭제
+                #     applyuserdic = self.users[applyuser]  # 신청한 사용자 id로 정보 가져오기
+                #     applyuserdic['pick_check'].pop(applyuserdic['pick_list'].index(animal))  # 신청한 사용자의 신청리스트에서 삭제
+                #     applyuserdic['pick_list'].remove(animal)  # 신청한 사용자의 신청리스트에서 삭제
+                #     # applyuser['pick_list'].find(animal) -- 해당 동물의 인덱스 가져오기
+            elif check == -1:   # 거절일경우 신청한 사용자에게서만 삭제
+                pass
+        # 업데이트
+        json.set_animals_json(self, self.animals)
+        json.set_user_json(self, self.users)
 
     # 게시물 등록
     def up_animal(self, list, gender, species):  # 게시물 리스트
@@ -151,6 +159,7 @@ class Adoption_book:
             'place'   : new.place,
             'apply_users' : [],     # 분양신청한 사용자들
         }
+        self.users[Adoption_book.NOWUSER]['up_list'].append(new.pat_name)   # 사용자 등록 게시물에 추가
         json.set_animals_json(self,self.animals)
         json.set_user_json(self, self.users)
         return 'ok'
@@ -175,12 +184,13 @@ class Adoption_book:
         return 'ok'
 
     def delete_animal(self, animal):        # 해당 게시물 삭제하기
-        print(animal)
-        print(self.users[self.NOWUSER]['up_list'])
+        print('딜리트',animal)
+
         self.users[self.NOWUSER]['up_list'].remove(animal)   # 해당 유저의 올린게시물에서 삭제
         for applyuser in self.animals[animal]['apply_users']:   # 이 펫에 분양신청한 사람들한테도 삭제
-            applyuser['pick_list'].remove(animal)
-            applyuser['pick_check'].pop(applyuser['pick_list'].find(animal))
+            applyuserdic = self.users[applyuser]    # 신청한 사용자 id로 정보 가져오기
+            applyuserdic['pick_check'].pop(applyuserdic['pick_list'].index(animal)) # 신청한 사용자의 신청리스트에서 삭제
+            applyuserdic['pick_list'].remove(animal)   # 신청한 사용자의 신청리스트에서 삭제
             # applyuser['pick_list'].find(animal) -- 해당 동물의 인덱스 가져오기
         del self.animals[animal]    # 게시물 자체를 삭제
         # 업데이트

@@ -101,8 +101,6 @@ class adieuMain():
             elif post == -1:
                 messagebox.showinfo('안내', f'{animal} 분양을 거절했습니다.')
 
-            self.engien.check_pick_isAccept(self.user)
-
 
     def click_item(self, evnet):  # item 클릭 시 선택한 게시물 가져와서 이름 매개변수로 동물 상세보기로 넘김
         selectedItem = self.animalView.focus()

@@ -15,7 +15,7 @@
             "\ud589\ubcf5\uc774"
         ],
         "pick_check": [
-            1
+            0
         ]
     },
     "nndd": {
@@ -63,7 +63,11 @@
         "zip_code": "\uc131\ub0a8\uce74\ud398",
         "introduce": "\uace0\uc591\uc774 vip",
         "up_list": [],
-        "pick_list": [],
-        "pick_check": []
+        "pick_list": [
+            "\ud589\ubcf5\uc774"
+        ],
+        "pick_check": [
+            1
+        ]
     }
 }

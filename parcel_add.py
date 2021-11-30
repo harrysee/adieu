@@ -49,7 +49,7 @@ class ParceAdieuAdd():
         species_2 = Radiobutton(self.root, text="새", value=2, variable=self.species_var, bg=bg_color)
         species_3 = Radiobutton(self.root, text="기타", value=3, variable=self.species_var, bg=bg_color)
         species_0.select()
-        self.inputList = [name,  age, place, add_infor]  # 입력 받을 리스트
+        self.inputList = [name, age, place, add_infor]  # 입력 받을 리스트
 
         # hint
         self.inputList[0].insert(0, '이름')

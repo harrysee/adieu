@@ -14,7 +14,6 @@ class Adoption_book:
         # self.test()     # 테스트 코드
 
     # 로그인
-
     def login(self, name, pw):
         #로그인 한 이름과 비밀번호가 일치하면 로그인 성공
         if (name in self.users) and (self.users[name]['pw'] == pw):
@@ -28,7 +27,7 @@ class Adoption_book:
         # gender : 성별구분 라디오버튼 잇음 -> 1 = 여자 / 2 = 남자
         # 유저리스트 유저정보 넣기
         new = User()
-        check = new.check_all(user_input_list, gender)
+        check = new.check_all(user_input_list, gender,False)
 
         if check != True : return check     # 형식체크 / 메세지 반환
         self.users[new.id] = {
@@ -54,7 +53,7 @@ class Adoption_book:
         # gender : 성별구분 라디오버튼 잇음 -> 1 = 여자 / 2 = 남자
         # 유저리스트 유저정보 넣기
         new = User()
-        check = new.check_all(user_input_list, gender)
+        check = new.check_all(user_input_list, gender, True)
 
         if check != True : return check     # 형식체크 / 메세지 반환
 

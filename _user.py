@@ -13,22 +13,27 @@ class User:
         self.number = ''
         self.input_list = []
 
-    def check_all(self, input_list, gender):
+    def check_all(self, input_list, gender, isUpdate):
         # inputList : [name, age, id, pw, pw_check, zipcode, call_number, introduce]
         # gender : 성별구분 라디오버튼 잇음 -> 1 = 여자 / 2 = 남자
         # 각자 빈칸 & 형식체크 후 self변수에 값 넣기 / 체크에서 오류날경우 해당 메세지 반환/ 잘들어갔을경우 True반환
         self.input_list = input_list
         for info in self.input_list:
-            if info.get() == '':
+            if info != self.input_list[2] and info.get() == '' :
                 return '빈칸을 모두 입력하시오'
 
         # user 객체 보내기 :이름 입력받기
         check_result = []
+        if isUpdate:    # 업데이트일때 아이디 중복체크 안하기
+            self.id = self.input_list[2]['text']
+        else:
+            check_result.append(self.set_id())
+            if self.input_list[2].get() =='': return 'id 입력하시오'
+            
         check_result.append(self.set_name())
-        check_result.append(self.set_id())
         check_result.append(self.set_pw())
         check_result.append(self.set_age())
-        check_result.append(self.set_gender(gender))
+        check_result.append(self.set_gender(gender.get()))
         check_result.append(self.set_number())
         check_result.append(self.set_zip_code())
         check_result.append(self.set_introduce())
@@ -38,6 +43,8 @@ class User:
             if chk != True:
                 return chk
         return True
+
+
 
     def set_name(self):  # 매개변수로 이름
         self.name = self.input_list[0].get()
@@ -78,7 +85,7 @@ class User:
             self.gender = '여자'
         elif gender == 2:
             self.gender = '남자'
-        return 1
+        return True
 
     # 전화번호 입력
     def set_number(self):

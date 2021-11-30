@@ -124,7 +124,7 @@ class Adoption_book:
     def up_animal(self, list, gender, species):  # 게시물 리스트
         new = Parcel_out()
         check = new.set_pat(list, gender,species,False)   # [name, species, age, place, add_infor, user_infor]
-        if check != 'ok':
+        if check != 'ok':   # 게시물 형식 체크
             return check
         self.animals[new.pat_name] = {
             'species' : new.species,       # 종류
@@ -143,7 +143,7 @@ class Adoption_book:
     def update_animal(self, list, gender, species, seller):  # 게시물 리스트
         new = Parcel_out()
         check = new.set_pat(list, gender, species,True)  # [name, species, age, place, add_infor, user_infor]
-        if check != 'ok':
+        if check != 'ok':   # 게시물 수정 형식 체크
             return check
         self.animals[new.pat_name] = {
             'species': new.species,  # 종류
@@ -157,6 +157,18 @@ class Adoption_book:
         json.set_animals_json(self, self.animals)
         json.set_user_json(self, self.users)
         return 'ok'
+
+    def delete_animal(self, animal):        # 해당 게시물 삭제하기
+        print(animal)
+        print(self.users[self.NOWUSER]['up_list'])
+        self.users[self.NOWUSER]['up_list'].remove(animal)   # 해당 유저의 올린게시물에서 삭제
+        for applyuser in self.animals[animal]['apply_users']:   # 이 펫에 분양신청한 사람들한테도 삭제
+            applyuser['pick_list'].remove(animal)
+        del self.animals[animal]    # 게시물 자체를 삭제
+        # 업데이트
+        json.set_animals_json(self, self.animals)
+        json.set_user_json(self, self.users)
+
 
 if __name__ == '__main__':
     Adoption_book()

@@ -39,7 +39,8 @@ class Adoption_book:
             "zip_code": new.zip_code,
             "introduce": new.introduce,
             "up_list": [],
-            "pick_list": []
+            "pick_list": [],
+            'pick_check' : []
         }
         json.set_user_json(self, self.users)
         print('가입성공')
@@ -66,13 +67,13 @@ class Adoption_book:
             "zip_code": new.zip_code,
             "introduce": new.introduce,
             "up_list": up,
-            "pick_list": pick
+            "pick_list": pick,
+            'pick_check' : []
         }
         json.set_user_json(self, self.users)
 
         if new.id in self.users:
             return 1    # 정상적으로 들어가면 트루
-        return "회원가입 실패"
 
     def get_user_info(self, userid):    # 사용자 정보 반환 [이름, 나이, id,소개]
         return (self.users[Adoption_book.NOWUSER], Adoption_book.NOWUSER) if userid == 'nowuser' else self.users[userid]
@@ -115,7 +116,8 @@ class Adoption_book:
         apply_list = self.animals[animalname]['apply_users']
         apply_list.append(Adoption_book.NOWUSER)
         # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.
-        self.users[Adoption_book.NOWUSER]['pick_list'].append((animalname,0))   # 0:미정 / 1:수락/ -1:거절
+        self.users[Adoption_book.NOWUSER]['pick_list'].append(animalname)   # 0:미정 / 1:수락/ -1:거절
+        self.users[Adoption_book.NOWUSER]['pick_check'].append(0)
         json.set_animals_json(self, self.animals)
         json.set_user_json(self, self.users)
         return True

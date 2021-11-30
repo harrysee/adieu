@@ -102,6 +102,7 @@ class ParceAdieuInfor():
             messagebox.showerror('입양신청오류', '입양신청 실패')
             return
         messagebox.showinfo('신청완료', f'빈려동물 {self.thisAnimal} 입양신청되었습니다.')
+
         self.root.destroy()
         from adieu_main import adieuMain
         adieuMain("메인")       # 분양신청 후 페이지로 넘어감

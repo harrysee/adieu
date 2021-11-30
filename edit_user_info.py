@@ -44,7 +44,7 @@ class EditUserInfo():
         inputFrame = Frame(self.root, bg=bg_color, width=430, height=400)
         name = Entry(inputFrame, width=20, relief=bd_relief, bd=13, fg="gray")
         age = Entry(inputFrame, width=25, relief=bd_relief, bd=13, fg="gray")
-        id = Label(inputFrame, width=25, relief=bd_relief, bd=13, fg="gray", text=self.userId)
+        id = Entry(inputFrame, width=25, relief=bd_relief, bd=13, fg="gray")
         pw = Entry(inputFrame, width=30, relief=bd_relief, bd=13, fg="gray")
         pw_check = Entry(inputFrame, width=30, relief=bd_relief, bd=13, fg="gray")
         zipcode = Entry(inputFrame, width=30, relief=bd_relief, bd=13, fg="gray")
@@ -81,6 +81,7 @@ class EditUserInfo():
         self.inputList[5].bind('<FocusIn>', lambda x: self.hintEvent(event=zipcode))
         self.inputList[6].bind('<FocusIn>', lambda x: self.hintEvent(event=call_number))
         self.inputList[7].bind('<FocusIn>', lambda x: self.hintEvent(event=introduce))
+        print(self.inputList)
         # 화면넣기
         infoFrame.place(x=250, y=80)
         inputFrame.place(x=360, y=80)
@@ -118,7 +119,6 @@ class EditUserInfo():
         # 작성한 게시물, 신청한 게시물 가져오기
         up = self.userInfo['up_list']
         pick = self.userInfo['pick_list']
-        print(self.gender_var.get())
 
         message = self.engien.update_user(self.inputList, self.gender_var, up, pick)
         if message != True:

@@ -132,24 +132,23 @@ class Adoption_book:
 
     def check_pick_isAccept(self, user):  # 로그인 했을때 신청한 동물들 중에 수락/거절있는지 확인하기
         for index, check in enumerate(self.users[user]['pick_check']):  # 픽체크 폴문 돌리기
-            animal = str(self.users[user]['pick_list'])
-            animal = animal.replace("[", "").replace("'","").replace("]","")
-            print(animal)
-            print(user)
+            animal = str(self.users[user]['pick_list'])     # 분양할 동물 구하기
+            animal = animal.replace("[", "").replace("'","").replace("]","")    # 불필요한 문자 제거
+
             if check == 1:  # 수락일경우
                 self.users[user]['pick_list'].pop(self.users[user]['pick_list'].index(animal))  # nowuser pick_list 삭제
                 self.users[user]['pick_check'].pop(self.users[user]['pick_check'].index(check))  # nowuser pick_check 삭제
-                self.users[self.animals[animal]['user']]['up_list'].pop(self.users[self.animals[animal]['user']]['up_list'].index(animal))  # 게시물 삭제
+                del self.animals[animal]    # 게시물 삭제
 
             elif check == -1:  # 거절일경우 신청한 사용자에게서만 삭제
                 self.users[user]['pick_list'].pop(self.users[user]['pick_list'].index(animal))  # 신청한 사용자의 신청리스트에서 삭제
                 self.users[user]['pick_check'].pop(self.users[user]['pick_check'].index(check))  # nowuser pick_check 삭제
+                self.animals[animal]['apply_users'].pop(self.animals[animal]['apply_users'].index(animal))  # 분양자 리스트에서 삭제
 
         # 업데이트
         json.set_animals_json(self, self.animals)
         json.set_user_json(self, self.users)
 
-        # adieuMain.show_message()
 
     # 게시물 등록
     def up_animal(self, list, gender, species):  # 게시물 리스트

@@ -101,8 +101,8 @@ class SellerInfo():
         self.engien.check_pick(self.userid, self.animalkey, -1)
 
         self.root.destroy()
-        from parcel_update import ParcelUpdate
-        ParcelUpdate.sellerEvent('분양수정 및 분양자 확인', self.userid)
+        from adieu_main import adieuMain
+        adieuMain('메인')
 
     def writeItemEvent(self, event):
         # 등록한 게시물 클릭했을때

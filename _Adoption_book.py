@@ -118,7 +118,6 @@ class Adoption_book:
         apply_list.append(Adoption_book.NOWUSER)
         # 신청하는 사용자의 신청내역에 신청한 동물을 추가한다.
         self.users[Adoption_book.NOWUSER]['pick_list'].append(animalname)   # 0:미정 / 1:수락/ -1:거절
-        self.users[Adoption_book.NOWUSER]['pick_check'].append(0)
         json.set_animals_json(self, self.animals)
         json.set_user_json(self, self.users)
         return True
@@ -127,19 +126,21 @@ class Adoption_book:
     def check_pick(self, sellerId, animalkey, check):   # 분양한 사용자 id, 동물이름, 거절인지 수락인지 1:수락, -1:거절
         index = (self.users[sellerId]['pick_list']).index(animalkey)        # pick_list 값을 이용해서 해당 동물의 pick_check 위치를 가져옴
         self.users[sellerId]['pick_check'][index] = check       # 가져온 값에다 수락인지 거절인지 넣기
+        json.set_user_json(self, self.users)
 
     def check_pick_isAccept(self):  # 로그인 했을때 신청한 동물들 중에 수락/거절있는지 확인하기
-        for index,check in enumerate(self.users[self.NOWUSER]['pick_check']):   # 픽체크 폴문 돌리기
+        for index, check in enumerate(self.users[self.NOWUSER]['pick_check']):   # 픽체크 폴문 돌리기
             if check == 1:  # 수락일경우
-                pass
-                # self.users[self.NOWUSER]['up_list'].remove(animal)  # 해당 유저의 올린게시물에서 삭제
-                # for applyuser in self.animals[animal]['apply_users']:  # 이 펫에 분양신청한 사람들한테도 삭제
-                #     applyuserdic = self.users[applyuser]  # 신청한 사용자 id로 정보 가져오기
-                #     applyuserdic['pick_check'].pop(applyuserdic['pick_list'].index(animal))  # 신청한 사용자의 신청리스트에서 삭제
-                #     applyuserdic['pick_list'].remove(animal)  # 신청한 사용자의 신청리스트에서 삭제
-                #     # applyuser['pick_list'].find(animal) -- 해당 동물의 인덱스 가져오기
-            elif check == -1:   # 거절일경우 신청한 사용자에게서만 삭제
-                pass
+                self.users[self.NOWUSER]['pick_check'].pop(self.users['up_list'].index(self.users['pick_list'].find(self.animals)))  # 신청한 사용자의 신청리스트에서 삭제
+
+                # self.users[self.animals[index]['apply_list']]['pick_check'].pop(self.users[self.animals[index]['pick_list'].index(index)])
+
+                self.users[self.NOWUSER]['pick_list'].remove(index)  # nowuser pick_list 삭제
+                self.users[self.NOWUSER]['pick_check'].remove(index)  # nowuser pick_check 삭제
+
+            elif check == -1:  # 거절일경우 신청한 사용자에게서만 삭제
+                self.users[self.NOWUSER]['pick_check'].pop(self.users[self.NOWUSER]['up_list'].index((self.animals)))  # 신청한 사용자의 신청리스트에서 삭제
+
         # 업데이트
         json.set_animals_json(self, self.animals)
         json.set_user_json(self, self.users)

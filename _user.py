@@ -40,7 +40,7 @@ class User:
         return True
 
     def set_name(self):  # 매개변수로 이름
-        self.name = self.input_list[1].get()
+        self.name = self.input_list[0].get()
         return True  # 이름 없으면 이름 인덱스 반환
 
     # 중복체크

@@ -88,6 +88,7 @@ class ParceAdieuInfor():
     def draw_info(self, list):  # gui 정보넣을 라벨 리스트
         # 정보가져오기
         # [name, species, age, gender, add_infor, user_infor] 순서대로
+        print(self.thisAnimal)
         info = self.engien.get_animal_info(self.thisAnimal)
         list[0].configure(text=self.thisAnimal)     # 처음엔 이름넣기
 

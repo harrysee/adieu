@@ -50,7 +50,7 @@ class ParcelUpdate():
         infoFrame2 = Frame(self.root, bg=bg_color, width=100, height=200)
         inputFrame1 = Frame(self.root, bg=bg_color, width=330, height=400)
         inputFrame2 = Frame(self.root, bg=bg_color, width=100, height=200)
-        name = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
+        name = Label(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
         age = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
         place = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
         add_infor = Entry(inputFrame2, width=52, relief="flat", bd=13, fg="gray")
@@ -68,13 +68,11 @@ class ParcelUpdate():
         # 미리 힌트로 데이터 세팅
         self.draw_info(self.inputList, spacelist,selec)
 
-        self.inputList[0].bind('<Button-1>', lambda x: self.hintEvent(event=name))
         self.inputList[1].bind('<Button-1>', lambda x: self.hintEvent(event=age))
         self.inputList[2].bind('<Button-1>', lambda x: self.hintEvent(event=place))
         self.inputList[3].bind('<Button-1>', lambda x: self.hintEvent(event=add_infor))
 
         # tab 이벤트
-        self.inputList[0].bind('<FocusIn>', lambda x: self.hintEvent(event=name))
         self.inputList[1].bind('<FocusIn>', lambda x: self.hintEvent(event=age))
         self.inputList[2].bind('<FocusIn>', lambda x: self.hintEvent(event=place))
         self.inputList[3].bind('<FocusIn>', lambda x: self.hintEvent(event=add_infor))
@@ -120,11 +118,12 @@ class ParcelUpdate():
         # 정보가져오기
         # [name, species, age, gender, add_infor, user_infor] 순서대로
         info = self.engien.get_animal_info(selec)
-        list[0].insert(0,selec) # 처음엔 이름넣기
+        list[0].configure(text=selec) # 처음엔 이름넣기
 
         # 뿌리기
         for i in range(1, len(list)):
             list[i].insert(0, info[i])
+
         field[0][0 if info[5]=='고양이' else 1 if info[5]=='강아지' else 2 if info[5]=='새' else 3].select()   # 동물 종류 따라서
         field[1][0 if info[0]=='암컷' else 1].select()   # 동물 성별 따라서
 

@@ -1,47 +1,4 @@
 {
-    "vi1234": {
-        "name": "vina",
-        "pw": "1234",
-        "age": "4",
-        "gender": "w",
-        "call_number": "01012374568",
-        "zip_code": "\uac15\ub0a8",
-        "introduce": "\uace0\uc591\uc774 \uc88b\uc544\ud574\uc694",
-        "up_list": [],
-        "pick_list": []
-    },
-    "d": {
-        "pw": "new.pw",
-        "age": 0,
-        "gender": "new.gender",
-        "call_number": "000000000",
-        "up_list": [],
-        "pick_list": []
-    },
-    "": {
-        "name": "jeon",
-        "pw": "jj1234",
-        "age": "18",
-        "gender": "w",
-        "call_number": "46046464621",
-        "zip_code": "\ubd80\uc0b0",
-        "introduce": "\ub098\ub2e4",
-        "up_list": [],
-        "pick_list": [
-            [
-                "dd",
-                0
-            ],
-            [
-                "dd",
-                0
-            ],
-            [
-                "dd",
-                0
-            ]
-        ]
-    },
     "jeon": {
         "name": "18",
         "pw": "jj1234",
@@ -51,7 +8,9 @@
         "zip_code": "\ubd80\uc0b0",
         "introduce": "\ub098\ub2e4",
         "up_list": [
-            "dfs0"
+            "\ud770\ub465",
+            "\ud0c1\uad6c",
+            "\ud589\ubcf5\uc774"
         ],
         "pick_list": []
     },
@@ -66,17 +25,6 @@
         "up_list": [],
         "pick_list": []
     },
-    "hi": {
-        "name": "12",
-        "pw": "44444",
-        "age": "12",
-        "gender": "w",
-        "call_number": "010213246497",
-        "zip_code": "\ud574\ubcc0",
-        "introduce": "\ubc29\uac00",
-        "up_list": [],
-        "pick_list": []
-    },
     "ga1234": {
         "name": "18",
         "pw": "g1234",
@@ -85,6 +33,17 @@
         "call_number": "01012341234",
         "zip_code": "\uc11c\uc6b8",
         "introduce": "\ubc18\uac00\uc6cc",
+        "up_list": [],
+        "pick_list": []
+    },
+    "love": {
+        "name": "18",
+        "pw": "jyuri",
+        "age": "18",
+        "gender": "w",
+        "call_number": "01012345678",
+        "zip_code": "\uc800\uae30",
+        "introduce": "\ud558\uc774",
         "up_list": [],
         "pick_list": []
     }

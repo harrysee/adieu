@@ -11,9 +11,13 @@ class Parcel_out:
         self.etc =''
         self.pat_gender = ''
 
-    def set_pat(self, input_list, gender,species):    # [name, age, place, add_infor]
+    def set_pat(self, input_list, gender,species, isupdate):    # [name, age, place, add_infor]
         self.input_list = input_list
-        self.pat_name = self.name_check(self.input_list[0].get())
+        if isupdate==True:  # 수정인경우 이름 수정 안함
+            self.pat_name = self.input_list[0]['text']
+        else:
+            self.pat_name = self.name_check(self.input_list[0].get())
+
         self.species = self.species_check(species)
         self.place = self.input_list[2].get()
         self.etc = self.input_list[3].get()
@@ -31,12 +35,11 @@ class Parcel_out:
         animals = js.get_animals_json()
         for key in animals.keys():
             if name in key:     # 이미 이름이 있다면
-                if key[-1].isdecimal():
-                    name += str(int(key[-1])+1)
+                if key[-1].isdecimal(): # 마지막에 숫자있는지 확인
+                    name += ' ('+str(int(key[-1])+1)+')'
                     break
-                name += '1'
+                name += ' (1)'
         return name
-
 
     def set_pat_age(self):
         age = self.input_list[1].get()

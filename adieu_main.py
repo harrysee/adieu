@@ -89,20 +89,6 @@ class adieuMain():
             # 번호, 종류, 이름, 나이 순으로 들어감
             self.animalView.insert('', 'end', text=i + 1, values=treelist[i])
 
-        self.show_message()
-
-    def show_message(self):
-        for i, post in enumerate(self.user['pick_check']):
-            animal = self.user['pick_list']  # 분양 신청했던 동물 이름
-
-            if post == 1:
-                messagebox.showinfo('안내', f'{animal} 분양을 수락했습니다.\n {self.user["call_number"]}, {self.user["zip_code"]}')
-
-            elif post == -1:
-                messagebox.showinfo('안내', f'{animal} 분양을 거절했습니다.')
-
-        self.engien.check_pick_isAccept(self.id)
-
 
     def click_item(self, evnet):  # item 클릭 시 선택한 게시물 가져와서 이름 매개변수로 동물 상세보기로 넘김
         selectedItem = self.animalView.focus()

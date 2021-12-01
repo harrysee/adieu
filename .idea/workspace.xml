@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="3280202c-45a1-40c4-8514-ed098625ed27" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Adoption_book.py" beforeDir="false" afterPath="$PROJECT_DIR$/_Adoption_book.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adieu_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/adieu_main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datas/users_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/datas/users_data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/login.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +235,7 @@
       <workItem from="1638099617216" duration="50000" />
       <workItem from="1638153764365" duration="2192000" />
       <workItem from="1638313152370" duration="325000" />
-      <workItem from="1638313512443" duration="2242000" />
+      <workItem from="1638313512443" duration="7431000" />
     </task>
     <task id="LOCAL-00001" summary="예외처리">
       <created>1623840946595</created>
@@ -374,7 +377,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638315792241</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="분양자 수락, 거절 시 메시지 출력">
+      <created>1638315892561</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1638315892561</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -419,7 +429,7 @@
     <SUITE FILE_PATH="coverage/adieu$adieu_main.coverage" NAME="adieu_main Coverage Results" MODIFIED="1638314691735" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/adieu$login__1_.coverage" NAME="login (1) Coverage Results" MODIFIED="1636462708731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/adieu$edit_user_info__1_.coverage" NAME="edit_user_info (1) Coverage Results" MODIFIED="1636550874901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/adieu$login.coverage" NAME="login Coverage Results" MODIFIED="1638315593932" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/adieu$login.coverage" NAME="login Coverage Results" MODIFIED="1638331574924" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/adieu$parcel_out.coverage" NAME="parcel_out Coverage Results" MODIFIED="1636682057664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/adieu$text.coverage" NAME="text Coverage Results" MODIFIED="1637852542966" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/adieu$_user.coverage" NAME="_user Coverage Results" MODIFIED="1636897110217" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

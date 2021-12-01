@@ -8,7 +8,8 @@
         "zip_code": "\uc11c\uc6b8",
         "introduce": "\ub098\ub2e4",
         "up_list": [
-            "\ud0c1\uad6c"
+            "\ud0c1\uad6c",
+            "\ud589\ubcf5\uc774"
         ],
         "pick_list": [],
         "pick_check": [
@@ -52,7 +53,9 @@
         "zip_code": "\uc800\uae30",
         "introduce": "\ud558\uc774",
         "up_list": [],
-        "pick_list": [],
+        "pick_list": [
+            "\ud589\ubcf5\uc774"
+        ],
         "pick_check": [
             0
         ]
@@ -66,7 +69,11 @@
         "zip_code": "\uc131\ub0a8\uce74\ud398",
         "introduce": "\uace0\uc591\uc774 vip",
         "up_list": [],
-        "pick_list": [],
-        "pick_check": []
+        "pick_list": [
+            "\ud589\ubcf5\uc774"
+        ],
+        "pick_check": [
+            1
+        ]
     }
 }

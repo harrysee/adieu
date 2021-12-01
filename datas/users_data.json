@@ -7,9 +7,7 @@
         "call_number": "4046546161",
         "zip_code": "\uc11c\uc6b8",
         "introduce": "\ub098\ub2e4",
-        "up_list": [
-            "\ud0c1\uad6c"
-        ],
+        "up_list": [],
         "pick_list": [],
         "pick_check": []
     },
@@ -58,12 +56,8 @@
         "zip_code": "\uc131\ub0a8\uce74\ud398",
         "introduce": "\uace0\uc591\uc774 vip",
         "up_list": [],
-        "pick_list": [
-            "\ud0c1\uad6c"
-        ],
-        "pick_check": [
-            0
-        ]
+        "pick_list": [],
+        "pick_check": []
     },
     "bio": {
         "name": "b5",

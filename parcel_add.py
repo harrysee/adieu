@@ -102,7 +102,7 @@ class ParceAdieuAdd():
         age.pack(padx=15, pady=10, anchor='w')
         place.pack(padx=15, pady=5, anchor='w')
         add_infor.pack(padx=10, pady=5, anchor='w')
-        species_0.p드lace(x=150, y=420, anchor='w')
+        species_0.place(x=150, y=420, anchor='w')
         species_1.place(x=220, y=420, anchor='w')
         species_2.place(x=290, y=420, anchor='w')
         species_3.place(x=340, y=420, anchor='w')

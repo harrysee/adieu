@@ -6,7 +6,9 @@
         "pat_gender": "\uc218\ucef7",
         "pat_etc": "\uc18c\ub9ac\uc798\uc9c0\ub974\ub294 \uc575\ubb34\uc0c8",
         "place": "\uc131\ub0a8 \uc720\uae30\uc13c\ud130",
-        "apply_users": ["vip"]
+        "apply_users": [
+            "vip"
+        ]
     },
     "\uae40\ud0c1\uad6c": {
         "species": "\uc0c8",
@@ -15,6 +17,15 @@
         "pat_gender": "\uc218\ucef7",
         "pat_etc": "\uc18c\ub9ac\uc798\uc9c0\ub974\ub294 \uc575\ubb34\uc0c8",
         "place": "\uc131\ub0a8 \uc720\uae30\uc13c\ud130",
+        "apply_users": []
+    },
+    "\ucb49\ube75": {
+        "species": "\uac15\uc544\uc9c0",
+        "pat_age": "5",
+        "user": "bio",
+        "pat_gender": "\uc218\ucef7",
+        "pat_etc": "\ub9d0\ud2f0\uc988",
+        "place": "\ud574\uc6b4\ub300\ubd84\uc591\uc13c\ud130",
         "apply_users": []
     }
 }

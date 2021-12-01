@@ -58,7 +58,25 @@
         "zip_code": "\uc131\ub0a8\uce74\ud398",
         "introduce": "\uace0\uc591\uc774 vip",
         "up_list": [],
-        "pick_list": ["\ud0c1\uad6c"],
-        "pick_check": [0]
+        "pick_list": [
+            "\ud0c1\uad6c"
+        ],
+        "pick_check": [
+            0
+        ]
+    },
+    "bio": {
+        "name": "b5",
+        "pw": "bio12",
+        "age": "18",
+        "gender": "\ub0a8\uc790",
+        "call_number": "01012345678",
+        "zip_code": "\ud558\uc774\ub9c8\ud2b8",
+        "introduce": "dfsdfsd",
+        "up_list": [
+            "\ucb49\ube75"
+        ],
+        "pick_list": [],
+        "pick_check": []
     }
 }

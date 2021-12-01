@@ -21,6 +21,10 @@ class ParceAdieuAdd():
         self.mainFrame = Frame(self.root, bg=bg_color)
         self.mainFrame.pack(expand=True)
 
+        # input 박스 타이틀
+        info1 = ['이름', '성별', '나이', '장소']
+        info2 = ['세부설명', '게시물 작성자', '종류']
+
         # logo 설정
         logo_img = PhotoImage(file='img/Adieu.png', width=200, height=87)
         logo = Label(self.root, bg=bg_color, image=logo_img)
@@ -33,7 +37,9 @@ class ParceAdieuAdd():
         btn_back = Button(self.root, width=10, text='취소', bg='#F0AD48', command=self.cancelbtnEvent, relief='flat', bd=10, fg='#B96F00')
 
         # 입력받기
-        inputFrame1 = Frame(self.root, bg=bg_color, width=330, height=400)
+        infoFrame1 = Frame(self.root, bg=bg_color, width=350, height=400)
+        infoFrame2 = Frame(self.root, bg=bg_color, width=100, height=200)
+        inputFrame1 = Frame(self.root, bg=bg_color, width=430, height=400)
         inputFrame2 = Frame(self.root, bg=bg_color, width=100, height=200)
         name = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
         age = Entry(inputFrame1, width=15, relief="flat", bd=13, fg="gray")
@@ -69,23 +75,37 @@ class ParceAdieuAdd():
         self.inputList[2].bind('<FocusIn>', lambda x: self.hintEvent(event=place))
         self.inputList[3].bind('<FocusIn>', lambda x: self.hintEvent(event=add_infor))
 
-        # 화면에 출력
-        inputFrame1.place(x=400, y=80)
-        inputFrame2.place(x=90, y=340)
+        # 화면에 출력    ----------------------
+        infoFrame1.place(x=380, y=80)
+        inputFrame1.place(x=460, y=80)
+        infoFrame2.place(x=50, y=340)
+        inputFrame2.place(x=150, y=340)
         logo.place(x=10, y=5)
         photo.place(x=100, y=90)
         btn_edit.place(x=470, y=500)
         btn_back.place(x=590, y=500)
+        # input 박스 타이틀
+        info1 = ['이름', '나이', '장소', '성별']
+        info2 = ['세부설명','종류']
+
+        for i, d in enumerate(info1):  # 왼쪽 수직 타이틀 텍스트 보여주기
+            text = Label(infoFrame1, bg=bg_color, width=10, text=d, fg='#333')
+            text.pack(padx=10, pady=20)
+
+        for i, d in enumerate(info2):  # 하단 수평 타이틀 텍스트 보여주기
+            text = Label(infoFrame2, bg=bg_color, width=10, text=d, fg='#333')
+            text.pack(padx=10, pady=15)
+
         name.pack(padx=15, pady=10, anchor='w')
-        gender_w.place(x=410, y=290, anchor='w')
-        gender_m.place(x=470, y=290, anchor='w')
+        gender_w.place(x=470, y=295, anchor='w')
+        gender_m.place(x=535, y=295, anchor='w')
         age.pack(padx=15, pady=10, anchor='w')
         place.pack(padx=15, pady=5, anchor='w')
         add_infor.pack(padx=10, pady=5, anchor='w')
-        species_0.place(x=100, y=420, anchor='w')
-        species_1.place(x=180, y=420, anchor='w')
-        species_2.place(x=250, y=420, anchor='w')
-        species_3.place(x=300, y=420, anchor='w')
+        species_0.p드lace(x=150, y=420, anchor='w')
+        species_1.place(x=220, y=420, anchor='w')
+        species_2.place(x=290, y=420, anchor='w')
+        species_3.place(x=340, y=420, anchor='w')
         self.play()
 
     def cancelbtnEvent(self,event):   # 취소

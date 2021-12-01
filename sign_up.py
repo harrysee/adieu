@@ -27,6 +27,7 @@ class SignUp():
                             fg='#B96F00')  # 취소 버튼
 
         # 입력받기
+        infoFrame = Frame(self.root, bg=bg_color, width=100, height=400)
         inputFrame = Frame(self.root, bg=bg_color, width=430, height=400)
         name = Entry(inputFrame, width=20, relief="flat", bd=13, fg="gray")
         age = Entry(inputFrame, width=25, relief="flat", bd=13, fg="gray")
@@ -72,7 +73,15 @@ class SignUp():
         self.inputList[7].bind('<FocusIn>', lambda x: self.hintEvent(event=introduce))
 
         # 화면넣기
-        inputFrame.place(x=290, y=80)
+        infoFrame.place(x=250, y=80)
+        inputFrame.place(x=360, y=80)
+        # 객체 이름 설명
+        info = ['이름', '나이', 'id', 'pw', 'pw확인', '주소', '전화번호', '소개', '성별']
+
+        for i, d in enumerate(info):
+            text = Label(infoFrame, bg=bg_color, width=10, text=d, fg='#333')
+            text.pack(padx=10, pady=16)
+
         self.inputList[0].pack(pady=5, anchor='w')
         self.inputList[1].pack(pady=5, anchor='w')
         self.inputList[2].pack(pady=5, anchor='w')

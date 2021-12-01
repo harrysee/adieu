@@ -23,9 +23,6 @@ class EditUserInfo():
         # 기존 정보 가져오기
         self.inputList = self.userInfo
 
-        # 객체 설명
-        info = ['이름', '나이', 'id', 'pw', 'pw확인', '주소', '전화번호', '소개', '성별']
-
         # 왼쪽 사이드
         logo_img = PhotoImage(file='img/Adieu.png', width=182, height=87)
         logo = Label(self.root, bg=bg_color, image=logo_img, cursor='hand2')  # 로고
@@ -44,7 +41,7 @@ class EditUserInfo():
         inputFrame = Frame(self.root, bg=bg_color, width=430, height=400)
         name = Entry(inputFrame, width=20, relief=bd_relief, bd=13, fg="gray")
         age = Entry(inputFrame, width=25, relief=bd_relief, bd=13, fg="gray")
-        id = Entry(inputFrame, width=25, relief=bd_relief, bd=13, fg="gray")
+        id = Label(inputFrame, width=25, relief=bd_relief, bd=13, fg="gray",text=self.userId)
         pw = Entry(inputFrame, width=30, relief=bd_relief, bd=13, fg="gray")
         pw_check = Entry(inputFrame, width=30, relief=bd_relief, bd=13, fg="gray")
         zipcode = Entry(inputFrame, width=30, relief=bd_relief, bd=13, fg="gray")
@@ -85,6 +82,8 @@ class EditUserInfo():
         # 화면넣기
         infoFrame.place(x=250, y=80)
         inputFrame.place(x=360, y=80)
+        # 객체 이름 설명
+        info = ['이름', '나이', 'id', 'pw', 'pw확인', '주소', '전화번호', '소개', '성별']
 
         for i, d in enumerate(info):
             text = Label(infoFrame, bg=bg_color, width=10, text=d, fg='#333')

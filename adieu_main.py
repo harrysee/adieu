@@ -7,8 +7,8 @@ from _Adoption_book import Adoption_book
 
 class adieuMain():
     def __init__(self, title):
-        self.engien = Adoption_book()
-        self.user, self.id = self.engien.get_user_info('nowuser')
+        self.engein = Adoption_book()
+        self.user, self.id = self.engein.get_user_info('nowuser')   # 현재유저 받아오기
         self.mainGUI(title)
 
     def mainGUI(self, title):
@@ -56,8 +56,8 @@ class adieuMain():
         search = Label(self.root, image=photo_img, bg=self.BACKGROUND, cursor="hand2")
 
         # 전체 동물 보여주기
-        self.draw_animal_list(self.engien.show_animals())
-        search.bind('<ButtonRelease-1>', lambda x: self.draw_animal_list(self.engine.show_animals()))
+        self.draw_animal_list(self.engein.show_animals())
+        search.bind('<ButtonRelease-1>', lambda x: self.draw_animal_list(self.engein.show_animals()))
 
         # 오른쪽 위 로그아웃, 사용자
         logout = Label(self.root, text="로그아웃", fg=self.TEXTCOLOR, bg=self.BACKGROUND, cursor="left_side")

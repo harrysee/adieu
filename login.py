@@ -74,19 +74,15 @@ class LoginAdieu():
         self.show_message(self.id.get())
 
     def show_message(self, id):
-        self.user, self.id = self.engien.get_user_info('nowuser')
+        self.user, id = self.engien.get_user_info('nowuser')
 
         for i, post in enumerate(self.user['pick_check']):
             animal = self.user['pick_list']  # 분양 신청했던 동물 이름
-
             if post == 1:
                 messagebox.showinfo('안내', f'{animal} 분양을 수락했습니다.\n {self.user["call_number"]}, {self.user["zip_code"]}')
-
             elif post == -1:
                 messagebox.showinfo('안내', f'{animal} 분양을 거절했습니다.')
-
         self.engien.check_pick_isAccept(id)
-
         self.root.destroy()
         adieuMain("메인")
 

@@ -84,9 +84,8 @@ class SellerInfo():
 
     def okEvent(self):
         # 분양수락 - 사용자-신청리스트 및 게시물-신청리스트에서 삭제
-        # 작성자에게 분양자 전화번호 전달
-        messagebox.showinfo('분양자 정보', f"분양자 전화번호 : {self.thisUserInfo['call_number']}")
         # 분양 수락
+        messagebox.showinfo('분양자 정보', f"분양자 전화번호 : {self.thisUserInfo['call_number']}")
         self.engien.check_pick(self.userid, self.animalkey, 1)
 
         self.root.destroy()
@@ -95,7 +94,6 @@ class SellerInfo():
 
     def noEvent(self):
         # 분양거절 - 사용자- 신청리스트 및 게시물-신청리스트에서 삭제 후 시작화면으로 이동
-
         # 분양 거절
         messagebox.showinfo('분양자 정보', f'{self.animalkey}에 따른 {self.userid}의 분양신청을 거절했습니다.')
         self.engien.check_pick(self.userid, self.animalkey, -1)

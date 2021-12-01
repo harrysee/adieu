@@ -137,13 +137,11 @@ class Adoption_book:
 
             if check == 1:  # 수락일경우
                 writer = self.animals[animal]['user']   # 작성자 가져오기
-                self.users[user]['pick_list'].pop(self.users[user]['pick_list'].index(animal))  # nowuser pick_list 삭제
                 self.users[user]['pick_check'].pop(self.users[user]['pick_check'].index(check))  # nowuser pick_check 삭제
                 self.users[writer]['up_list'].pop(self.users[writer]['up_list'].index(animal))  # 분양자 up_list 삭제
 
                 for applyuser in self.animals[animal]['apply_users']:  # 이 펫에 분양신청한 사람들한테도 삭제
                     applyuserdic = self.users[applyuser]  # 신청한 사용자 id로 정보 가져오기
-                    applyuserdic['pick_check'].pop(applyuserdic['pick_list'].index(animal))  # 신청한 사용자의 신청리스트에서 삭제
                     applyuserdic['pick_list'].remove(animal)  # 신청한 사용자의 신청리스트에서 삭제
 
                 del self.animals[animal]
